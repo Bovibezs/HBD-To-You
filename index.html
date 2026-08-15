@@ -23,7 +23,7 @@
             color: #4a4a4a;
         }
 
-        /* หน้าแรกสุด (Overlay) */
+        /* Overlay หน้าแรกสุดเพื่อเปิดเพลง */
         #start-overlay {
             position: fixed;
             top: 0;
@@ -40,7 +40,6 @@
             padding: 20px;
         }
 
-        /* ตกแต่งกรอบ GIF หน้าแรก */
         .gif-wrapper {
             width: 260px;
             max-width: 85vw;
@@ -163,7 +162,7 @@
         .btn-secondary { background: #a4b0be; font-size: 1em; }
         .btn-secondary:hover { background: #747d8c; }
 
-        /* ปุ่มเล่นเพลงแบบซ่อนความยาวสไลเดอร์ */
+        /* ปุ่มเล่นเพลง ซ่อนสไลเดอร์เสียง */
         .music-controls {
             position: absolute;
             top: 15px;
@@ -219,16 +218,16 @@
 
 <body>
 
-    <!-- ลิงก์เพลงโรแมนติกแบบ Direct Audio Stream (ดังชัวร์ 100%) -->
+    <!-- เปลี่ยน src เป็น song.mp3 (ไฟล์ในเครื่อง/โฟลเดอร์เดียวกัน) -->
     <audio id="bg-music" loop preload="auto">
-        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sun-683.mp3" type="audio/mpeg">
+        <source src="song.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/rafaelreis-hotmart/Audio-Sample/main/sample.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- หน้าแรกพร้อม GIF Horimiya Hug จาก Tenor แบบ Direct CDN -->
+    <!-- หน้าแรกพร้อม GIF Horimiya -->
     <div id="start-overlay">
         <div class="gif-wrapper">
-            <img id="horimiya-gif" 
-                 src="https://c.tenor.com/20848980/horimiya-hug-anime.gif" 
+            <img src="https://media.tenor.com/7YV9oWfD2rUAAAAC/horimiya-hug-anime-miyamura-hori.gif" 
                  alt="Horimiya Hug"
                  onerror="this.onerror=null; this.src='https://media.giphy.com/media/l2QDM9Jnim1YV55YA/giphy.gif';">
         </div>
@@ -294,13 +293,19 @@
         
         audio.volume = 0.5;
 
-        // เมื่อกดปุ่มหน้าแรก เพลงจะเล่นทันที
+        // ฟังก์ชันบังคับโหลดและสั่งเล่นเพลง
         function initWebsite() {
-            audio.play().then(() => {
-                console.log("Music started successfully");
-            }).catch(error => {
-                console.log("Audio play failed: ", error);
-            });
+            audio.load();
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log("Audio playing perfectly!");
+                }).catch(error => {
+                    console.log("Audio error: ", error);
+                });
+            }
+            
             document.getElementById('start-overlay').style.display = 'none';
         }
 
