@@ -78,7 +78,7 @@
             color: #ff4757;
             font-weight: 700;
             font-size: 2.5em;
-            margin: 10px 0;
+            margin: 5px 0 15px 0;
             text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
         }
 
@@ -145,19 +145,29 @@
         .btn-secondary { background: #a4b0be; font-size: 1em; }
         .btn-secondary:hover { background: #747d8c; }
 
-        /* ส่วนควบคุมเพลงและปรับความดัง */
+        /* แถบเพลงแบบกลมมินิมอล - ซ่อนความยาวเสียงไว้ จะขยายเมื่อเอาเมาส์ชี้/กด */
         .music-controls {
             position: absolute;
             top: 15px;
             right: 15px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(255,255,255,0.85);
-            padding: 4px 8px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px;
+            border-radius: 30px;
             border: 1px solid #ff80ab;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             z-index: 10;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            width: 36px; /* ขนาดเริ่มต้นเท่าปุ่มกลม */
+            height: 36px;
+        }
+
+        /* เมื่อ Hover หรือเอาเมาส์ชี้ แถบปรับเสียงจะสไลด์ออกมา */
+        .music-controls:hover, .music-controls.active {
+            width: 125px;
+            padding: 6px 10px;
         }
 
         .music-btn {
@@ -168,21 +178,33 @@
             padding: 0;
             display: flex;
             align-items: center;
+            justify-content: center;
+            min-width: 24px;
         }
 
         .volume-slider {
-            width: 60px;
+            width: 0;
             height: 4px;
             accent-color: #ff6b81;
             cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            margin-left: 6px;
+        }
+
+        .music-controls:hover .volume-slider, 
+        .music-controls.active .volume-slider {
+            width: 65px;
+            opacity: 1;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- ไฟล์เสียงเพลง That's What I Like - Bruno Mars -->
+    <!-- ใช้ลิงก์ CDN Fast Stream ป้องกันปัญหาเพลงดีเลย์ -->
     <audio id="bg-music" loop preload="auto">
-        <source src="https://archive.org/download/cloud0218popsongs2019/Thats%20What%20I%20Like%20-%20Bruno%20Mar.mp3" type="audio/mpeg">
+        <source src="https://cdns-preview-d.dzcdn.net/stream/c-d3807d9f75fb146db7bbdbdcf1b3bb88-6.mp3" type="audio/mpeg">
     </audio>
 
     <!-- หน้ากดเพื่อเริ่มเล่นเพลง -->
@@ -195,8 +217,8 @@
     </div>
 
     <div class="card">
-        <!-- แถบควบคุมเสียงเพลง (ปุ่ม 🎵 + สไลเดอร์ความดัง) -->
-        <div class="music-controls">
+        <!-- แถบควบคุมเสียงเพลง (ซ่อนสไลเดอร์ ปรากฏเมื่อชี้) -->
+        <div class="music-controls" id="music-controls">
             <button class="music-btn" onclick="toggleMusic(event)" title="เปิด/ปิดเพลง">🎵</button>
             <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.3" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
         </div>
@@ -247,14 +269,15 @@
 
     <script>
         const audio = document.getElementById('bg-music');
+        const musicControls = document.getElementById('music-controls');
         
-        // ตั้งค่าความดังเริ่มต้นที่ 30% (0.3)
+        // ความดังเริ่มต้นที่ 30%
         audio.volume = 0.3;
 
-        // ฟังก์ชันเริ่มเล่นเพลง
+        // เริ่มเล่นเพลงแบบ Fast Stream
         function initWebsite() {
             audio.play().then(() => {
-                console.log("Music started successfully");
+                console.log("Music playing fast");
             }).catch(error => {
                 console.log("Playback error:", error);
             });
@@ -262,20 +285,31 @@
             document.getElementById('start-overlay').style.display = 'none';
         }
 
-        // ฟังก์ชันปรับความดังเสียง
+        // ปรับระดับเสียง
         function changeVolume(val) {
             audio.volume = val;
         }
 
-        // ปุ่มควบคุม 🎵
+        // ปุ่ม 🎵 เปิด/ปิด และสลับโหมดเปิดซ่อนแถบเสียงบนมือถือ
         function toggleMusic(event) {
             if (event) event.stopPropagation();
+            
+            // Toggle แสดง/ซ่อน แถบปรับเสียง
+            musicControls.classList.toggle('active');
+
             if (audio.paused) {
                 audio.play();
             } else {
                 audio.pause();
             }
         }
+
+        // ซ่อนแถบปรับเสียงเมื่อแตะที่อื่นบนหน้าจอ
+        document.addEventListener('click', (e) => {
+            if (!musicControls.contains(e.target)) {
+                musicControls.classList.remove('active');
+            }
+        });
 
         // ระบบเปลี่ยนหน้า
         function nextPage(pageNumber) {
