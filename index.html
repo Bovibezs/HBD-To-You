@@ -40,6 +40,7 @@
             padding: 20px;
         }
 
+        /* กรอบ GIF หน้าแรก */
         .gif-wrapper {
             width: 260px;
             max-width: 85vw;
@@ -162,7 +163,7 @@
         .btn-secondary { background: #a4b0be; font-size: 1em; }
         .btn-secondary:hover { background: #747d8c; }
 
-        /* ปุ่มเล่นเพลง ซ่อนสไลเดอร์เสียง */
+        /* ปุ่มเล่นเพลงแบบมินิมอล ซ่อนสไลเดอร์เสียง */
         .music-controls {
             position: absolute;
             top: 15px;
@@ -218,10 +219,9 @@
 
 <body>
 
-    <!-- เปลี่ยน src เป็น song.mp3 (ไฟล์ในเครื่อง/โฟลเดอร์เดียวกัน) -->
+    <!-- ดึงไฟล์เพลง song.mp3 จากใน GitHub Repository ของคุณ -->
     <audio id="bg-music" loop preload="auto">
         <source src="song.mp3" type="audio/mpeg">
-        <source src="https://raw.githubusercontent.com/rafaelreis-hotmart/Audio-Sample/main/sample.mp3" type="audio/mpeg">
     </audio>
 
     <!-- หน้าแรกพร้อม GIF Horimiya -->
@@ -240,7 +240,7 @@
     <div class="card">
         <div class="music-controls" id="music-controls">
             <button class="music-btn" onclick="toggleMusic(event)" title="เปิด/ปิดเพลง">🎵</button>
-            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.5" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
+            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
         </div>
 
         <!-- หน้าที่ 1 -->
@@ -291,20 +291,15 @@
         const audio = document.getElementById('bg-music');
         const musicControls = document.getElementById('music-controls');
         
-        audio.volume = 0.5;
+        audio.volume = 0.6;
 
-        // ฟังก์ชันบังคับโหลดและสั่งเล่นเพลง
         function initWebsite() {
             audio.load();
-            const playPromise = audio.play();
-
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log("Audio playing perfectly!");
-                }).catch(error => {
-                    console.log("Audio error: ", error);
-                });
-            }
+            audio.play().then(() => {
+                console.log("Audio is playing!");
+            }).catch(error => {
+                console.log("Audio play error:", error);
+            });
             
             document.getElementById('start-overlay').style.display = 'none';
         }
