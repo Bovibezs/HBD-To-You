@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday na ka💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -22,6 +22,24 @@
             justify-content: center;
             color: #4a4a4a;
         }
+
+        /* Overlay หน้าแรกเพื่อปลดล็อกเสียง */
+        #start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
         .card {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
@@ -37,7 +55,6 @@
             justify-content: space-between;
         }
         
-        /* สไตล์สำหรับจัดการหน้า */
         .page {
             display: none;
             animation: fadeIn 0.5s ease-in-out;
@@ -56,6 +73,14 @@
 
         h1 { color: #ff6b81; font-size: 1.8em; margin: 10px 0; }
         p { font-size: 1em; line-height: 1.6; color: #666; }
+
+        .name-title {
+            color: #ff4757;
+            font-weight: 700;
+            font-size: 2.5em; /* ปรับขนาด Ploy ให้ใหญ่จุใจตรงนี้ */
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
+        }
 
         .img-container {
             width: 100%;
@@ -108,15 +133,16 @@
             background: #ff6b81;
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 1em;
+            padding: 12px 25px;
+            font-size: 1.1em;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 107, 129, 0.3);
             transition: all 0.2s;
+            font-weight: 600;
         }
         .btn:hover { transform: scale(1.05); background: #ff4757; }
-        .btn-secondary { background: #a4b0be; }
+        .btn-secondary { background: #a4b0be; font-size: 1em; }
         .btn-secondary:hover { background: #747d8c; }
 
         .music-btn {
@@ -136,26 +162,34 @@
 </head>
 <body>
 
-    <!-- เพลงประกอบ: Bruno Mars - That's What I Like (MP3 Audio) -->
+    <!-- ไฟล์เสียงเพลง That's What I Like - Bruno Mars -->
     <audio id="bg-music" loop preload="auto">
-        <source src="https://ia801503.us.archive.org/15/items/BrunoMarsThatsWhatILike_201705/Bruno%20Mars%20-%20That%27s%20What%20I%20Like.mp3" type="audio/mpeg">
+        <source src="https://archive.org/download/cloud0218popsongs2019/Thats%20What%20I%20Like%20-%20Bruno%20Mar.mp3" type="audio/mpeg">
     </audio>
+
+    <!-- หน้ากดเพื่อเริ่มเล่นเพลง (ป้องกันเบราว์เซอร์บล็อกเสียง) -->
+    <div id="start-overlay">
+        <div style="font-size: 5em; margin-bottom: 20px;">🎁</div>
+        <h2 style="color: white; margin-bottom: 20px;">มีของขวัญวันเกิดรออยู่นะ...</h2>
+        <button class="btn" style="background: white; color: #ff4757;" onclick="initWebsite()">
+            กดเพื่อเปิดของขวัญ 💖🎵
+        </button>
+    </div>
 
     <div class="card">
         <button class="music-btn" onclick="toggleMusic(event)">🎵</button>
 
-        <!-- หน้าที่ 1: หน้าแรก/เปิดการ์ด -->
+        <!-- หน้าที่ 1 -->
         <div class="page active" id="page1">
             <h1>🎁 Happy Birthday</h1>
-<p style="color: #ff4757; font-weight: bold; font-size: 2.2em; margin: 10px 0;">
-   To Ploy 💖
-</p>
+            <!-- ปรับขนาดคำว่า Ploy ใหญ่ขึ้นเรียบร้อยครับ -->
+            <div class="name-title">To Ploy 💖</div>
             <p>I have a message and a surprise for you...</p>
             <div style="font-size: 4em; margin: 20px 0;">💌</div>
-            <button class="btn" onclick="nextPage(2); playMusic();">กดเปิดการ์ดตรงนี้สิ ✨</button>
+            <button class="btn" onclick="nextPage(2)">กดเปิดการ์ดตรงนี้สิ ✨</button>
         </div>
 
-        <!-- หน้าที่ 2: นับวันคบกัน + รูปภาพ -->
+        <!-- หน้าที่ 2 -->
         <div class="page" id="page2">
             <h1>Our Memories 📸</h1>
             <div class="img-container">
@@ -174,7 +208,7 @@
             </div>
         </div>
 
-        <!-- หน้าที่ 3: คำอวยพร + ปุ่มฉลอง -->
+        <!-- หน้าที่ 3 -->
         <div class="page" id="page3">
             <h1>🎂 Happy Birthday!</h1>
             <div class="message-box">
@@ -188,40 +222,26 @@
 
     </div>
 
-    <!-- เอฟเฟกต์พลุ -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <script>
         const audio = document.getElementById('bg-music');
-        let hasInteracted = false;
 
-        // ฟังก์ชันสั่งเล่นเพลง
-        function playMusic() {
-            audio.play().catch(error => {
-                console.log("Autoplay was prevented by browser:", error);
+        // ฟังก์ชันสั่งเริ่มเว็บและเปิดเพลง
+        function initWebsite() {
+            audio.play().then(() => {
+                console.log("Music started successfully");
+            }).catch(error => {
+                console.log("Playback error:", error);
             });
+            
+            // ซ่อนหน้า Overlay
+            document.getElementById('start-overlay').style.display = 'none';
         }
 
-        // ลองสั่งเล่นตั้งแต่โหลดหน้า (ทำงานได้ในเบราว์เซอร์ที่ยอมให้ Autoplay)
-        window.addEventListener('DOMContentLoaded', () => {
-            playMusic();
-        });
-
-        // หากเบราว์เซอร์ล็อก Autoplay ไว้ แค่แตะหรือคลิกส่วนไหนก็ได้บนหน้าจอ เพลงจะเริ่มเล่นทันที
-        function enableAudioOnUserInteraction() {
-            if (!hasInteracted) {
-                playMusic();
-                hasInteracted = true;
-                document.removeEventListener('click', enableAudioOnUserInteraction);
-                document.removeEventListener('touchstart', enableAudioOnUserInteraction);
-            }
-        }
-        document.addEventListener('click', enableAudioOnUserInteraction);
-        document.addEventListener('touchstart', enableAudioOnUserInteraction);
-
-        // ควบคุมปุ่มเปิด/ปิดเพลง 🎵
+        // ปุ่มควบคุม 🎵
         function toggleMusic(event) {
-            if (event) event.stopPropagation(); // ไม่ให้ตีกับ event แตะหน้าจอ
+            if (event) event.stopPropagation();
             if (audio.paused) {
                 audio.play();
             } else {
@@ -229,13 +249,13 @@
             }
         }
 
-        // 1. ระบบเปลี่ยนหน้า
+        // ระบบเปลี่ยนหน้า
         function nextPage(pageNumber) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById('page' + pageNumber).classList.add('active');
         }
 
-        // 2. ตัวนับเวลา (เปลี่ยนวันเริ่มคบตรงนี้: ปี, เดือน-1, วัน)
+        // ตัวนับเวลา
         const startDate = new Date(2024, 0, 1);
         function updateTimer() {
             const now = new Date();
@@ -248,7 +268,7 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // 3. เอฟเฟกต์พลุกระดาษฉลอง
+        // เอฟเฟกต์พลุ
         function celebrate() {
             confetti({
                 particleCount: 120,
