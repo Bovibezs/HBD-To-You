@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love 💖</title>
+    <!-- Font น่ารักๆ จาก Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Mali', cursive;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #4a4a4a;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 107, 129, 0.2);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        h1 {
+            color: #ff6b81;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        .img-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .timer-title {
+            font-weight: 600;
+            color: #ff4757;
+            margin-top: 15px;
+        }
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .time-box {
+            background: #ffeaa7;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            color: #d63031;
+            font-size: 0.9em;
+        }
+        .message-box {
+            background: #fff5f5;
+            border: 2px dashed #ff80ab;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .btn {
+            background: #ff6b81;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            background: #ff4757;
+        }
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- เพลงประกอบ (เปลี่ยนลิงก์เพลงตรง src ได้ตามต้องการ) -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card">
+        <h1>🎂 Happy Birthday 🎂</h1>
+        <p style="margin:0; color:#888;">สุขสันต์วันเกิดนะคนเก่งของเค้า 💖</p>
+        
+        <!-- ลิงก์รูปภาพ (เปลี่ยนเป็นรูปตัวคุณเองในภายหลังได้) -->
+        <div class="img-container">
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Our Moment">
+        </div>
+
+        <div class="timer-title">เรารักกันมาแล้ว... 💕</div>
+        <div class="timer">
+            <div class="time-box"><span id="days">0</span> วัน</div>
+            <div class="time-box"><span id="hours">0</span> ชม.</div>
+            <div class="time-box"><span id="mins">0</span> นาที</div>
+            <div class="time-box"><span id="secs">0</span> วิ</div>
+        </div>
+
+        <div class="message-box">
+            ขอบคุณที่เข้ามาเป็นความสุขในทุกๆ วันนะ ขอให้มีความสุขมากๆ สมหวังทุกเรื่อง รอยยิ้มของเธอคือสิ่งที่ดีที่สุดเลย รักแฟนที่สุดในโลกเลยนะ! 💌
+        </div>
+
+        <button class="btn" onclick="celebrate()">กดเพื่อรับความรัก 🎁✨</button>
+    </div>
+
+    <!-- เอฟเฟกต์พลุกระดาษ -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        // 📌 ตั้งค่าวันที่เริ่มคบกัน (ปี, เดือน-1, วัน)
+        // หมายเหตุ: เดือนต้องลบออก 1 (เช่น ม.ค.= 0, ก.พ.= 1, ..., ธ.ค.= 11)
+        // ตัวอย่างข้างล่างนี้คือ 1 มกราคม 2024
+        const startDate = new Date(2024, 0, 1); 
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / 1000 / 60) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('mins').innerText = mins;
+            document.getElementById('secs').innerText = secs;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // ฟังก์ชันกดปุ่มเปิดเพลง + พลุหัวใจ
+        function celebrate() {
+            const music = document.getElementById('bg-music');
+            music.play();
+
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    </script>
+</body>
+</html>
