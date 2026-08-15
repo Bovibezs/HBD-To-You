@@ -126,16 +126,16 @@
 
         @keyframes riseAndFade {
             0% {
-                opacity: 0.8;
+                opacity: 0.85;
                 transform: translateY(0) scale(0.6);
             }
             50% {
                 opacity: 0.6;
-                transform: translateY(-18px) scale(1.1) translateX(-3px);
+                transform: translateY(-20px) scale(1.1) translateX(-4px);
             }
             100% {
                 opacity: 0;
-                transform: translateY(-38px) scale(1.6) translateX(5px);
+                transform: translateY(-42px) scale(1.6) translateX(6px);
             }
         }
 
@@ -392,7 +392,7 @@
                     </g>
 
                     <!-- Bunny (Top Left) -->
-                    <g transform="translate(125, 96) scale(0.8)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
+                    <g transform="translate(125, 106) scale(0.8)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
                         <ellipse cx="-6" cy="-14" rx="4" ry="10" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
                         <ellipse cx="-6" cy="-14" rx="2" ry="6" fill="#ffccd5" />
                         <ellipse cx="6" cy="-14" rx="4" ry="10" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
@@ -404,7 +404,7 @@
                     </g>
 
                     <!-- Puppy (Top Right) -->
-                    <g transform="translate(195, 96) scale(0.8)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
+                    <g transform="translate(195, 106) scale(0.8)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
                         <ellipse cx="-11" cy="-2" rx="5" ry="9" fill="#c7a75c" />
                         <ellipse cx="11" cy="-2" rx="5" ry="9" fill="#c7a75c" />
                         <circle cx="0" cy="0" r="11" fill="#fffdfa" />
@@ -413,15 +413,13 @@
                         <ellipse cx="0" cy="1" rx="2" ry="1.5" fill="#333" />
                     </g>
 
-                    <!-- Top Bow Accent -->
-                    <g transform="translate(160, 78) scale(1)" filter="drop-shadow(0px 2px 3px rgba(0,0,0,0.15))">
-                        <path d="M -25 -8 C -42 -28, -45 8, -20 2 C -30 16, -12 20, -6 4" fill="#ff758c" />
-                        <path d="M 25 -8 C 42 -28, 45 8, 20 2 C 30 16, 12 20, 6 4" fill="#ff758c" />
-                        <rect x="-8" y="-6" width="16" height="13" rx="4" fill="#ff4757" />
-                    </g>
+                    <!-- CANDLE ANCHORED INSIDE CAKE TOP -->
+                    <!-- Candle Base Shadow & Cream Ring -->
+                    <ellipse cx="160" cy="114" rx="9" ry="3.5" fill="rgba(0,0,0,0.12)" />
+                    <ellipse cx="160" cy="113" rx="7" ry="2.5" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
 
                     <!-- SINGLE CANDLE WITH FLAME & SMOKE VFX -->
-                    <g class="candle" id="candle-1" transform="translate(160, 26)">
+                    <g class="candle" id="candle-1" transform="translate(160, 68)">
                         <!-- Smoke VFX (Active when candle is out) -->
                         <g class="smoke-group">
                             <circle cx="0" cy="10" r="4" fill="#e0e0e0" />
@@ -430,17 +428,24 @@
                             <path d="M -3 10 Q -8 -5 2 -18 T -2 -35" fill="none" stroke="#e0e0e0" stroke-width="4" stroke-linecap="round" />
                         </g>
 
-                        <!-- Candle Body -->
-                        <rect x="-6" y="22" width="12" height="36" rx="3" fill="url(#candle-body)" stroke="#ffb6c1" stroke-width="1" />
+                        <!-- Candle Body (Lowered Y-position so it sits inside cream) -->
+                        <rect x="-6" y="10" width="12" height="35" rx="3" fill="url(#candle-body)" stroke="#ffb6c1" stroke-width="1" />
                         <!-- Wick -->
-                        <line x1="0" y1="22" x2="0" y2="13" stroke="#333333" stroke-width="2" stroke-linecap="round" />
+                        <line x1="0" y1="10" x2="0" y2="1" stroke="#333333" stroke-width="2" stroke-linecap="round" />
                         
                         <!-- Flame -->
                         <g class="flame-group" filter="drop-shadow(0px 0px 6px #ff9800)">
-                            <ellipse cx="0" cy="3" rx="7" ry="12" fill="#ff9800" />
-                            <ellipse cx="0" cy="5" rx="4" ry="8" fill="#ffeb3b" />
-                            <ellipse cx="0" cy="7" rx="2" ry="4" fill="#ffffff" />
+                            <ellipse cx="0" cy="-9" rx="7" ry="12" fill="#ff9800" />
+                            <ellipse cx="0" cy="-7" rx="4" ry="8" fill="#ffeb3b" />
+                            <ellipse cx="0" cy="-5" rx="2" ry="4" fill="#ffffff" />
                         </g>
+                    </g>
+
+                    <!-- Top Bow Accent Over Candle Base -->
+                    <g transform="translate(160, 114) scale(0.95)" filter="drop-shadow(0px 2px 3px rgba(0,0,0,0.15))">
+                        <path d="M -25 -8 C -42 -28, -45 8, -20 2 C -30 16, -12 20, -6 4" fill="#ff758c" />
+                        <path d="M 25 -8 C 42 -28, 45 8, 20 2 C 30 16, 12 20, 6 4" fill="#ff758c" />
+                        <rect x="-8" y="-6" width="16" height="13" rx="4" fill="#ff4757" />
                     </g>
 
                     <!-- TILTED "18" BADGE ON RIGHT -->
