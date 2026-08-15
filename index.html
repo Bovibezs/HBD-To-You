@@ -98,26 +98,29 @@
             text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
         }
 
-        /* SVG Cake Wrapper */
         .svg-cake-wrapper {
-            width: 280px;
+            width: 290px;
             height: 250px;
             margin: 0 auto;
         }
 
-        /* แอนิเมชันไฟพริ้วไหว */
-        .flame-element {
-            transform-origin: center bottom;
-            animation: flicker 0.35s infinite alternate ease-in-out;
+        /* เทียนและแอนิเมชันไฟ */
+        .candle {
             transition: all 0.3s ease;
         }
 
-        @keyframes flicker {
-            0% { transform: scale(1) rotate(-2deg); opacity: 0.95; }
-            100% { transform: scale(1.15) rotate(2deg); opacity: 1; }
+        .flame {
+            transform-origin: center bottom;
+            animation: flicker 0.3s infinite alternate ease-in-out;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .flame-element.out {
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.15) rotate(2deg); }
+        }
+
+        .candle.out .flame {
             opacity: 0 !important;
             transform: scale(0) !important;
         }
@@ -241,73 +244,95 @@
             <button class="btn" onclick="nextPage(2)">กดเปิดการ์ดตรงนี้สิ ✨</button>
         </div>
 
-        <!-- หน้าที่ 2 (SVG Cake เป๊ะเวอร์ 100%) -->
+        <!-- หน้าที่ 2 (เค้กใหม่ สีเด่น ตัดกับพื้นหลัง 100%) -->
         <div class="page" id="page2">
             <h1>Make a Wish! 🎂</h1>
             
             <div class="svg-cake-wrapper">
-                <svg viewBox="0 0 300 260" width="100%" height="100%">
+                <svg viewBox="0 0 300 250" width="100%" height="100%">
                     <!-- จานรองเค้ก -->
-                    <ellipse cx="150" cy="235" rx="120" ry="15" fill="#e0e0e0" />
-                    <ellipse cx="150" cy="232" rx="115" ry="12" fill="#ffffff" />
+                    <ellipse cx="150" cy="225" rx="125" ry="14" fill="#dcdde1" />
+                    <ellipse cx="150" cy="221" rx="118" ry="11" fill="#ffffff" stroke="#f1f2f6" stroke-width="2" />
 
-                    <!-- ตัวเค้กชั้นล่าง -->
-                    <path d="M 50 170 Q 150 195 250 170 L 250 220 Q 150 245 50 220 Z" fill="#ffb8b8" />
-                    <path d="M 50 170 Q 150 195 250 170 L 250 180 Q 150 205 50 180 Z" fill="#ff9999" />
+                    <!-- ตัวเค้กชั้นล่าง (สีช็อกโกแลตพรีเมียม ตัดกับสีพื้นหลัง) -->
+                    <path d="M 45 155 Q 150 180 255 155 L 255 210 Q 150 235 45 210 Z" fill="#6c5ce7" />
+                    <path d="M 45 155 Q 150 180 255 155 L 255 165 Q 150 190 45 165 Z" fill="#574b90" />
 
-                    <!-- ตัวเค้กชั้นบน -->
-                    <path d="M 70 120 Q 150 140 230 120 L 230 175 Q 150 195 70 175 Z" fill="#ffeaa7" />
+                    <!-- ตัวเค้กชั้นบน (สีครีมวนิลาเข้มข้น) -->
+                    <path d="M 65 110 Q 150 130 235 110 L 235 160 Q 150 180 65 160 Z" fill="#fbc531" />
                     
-                    <!-- ครีมย้อย -->
-                    <path d="M 70 120 
-                             Q 80 140 90 125 
-                             Q 100 145 110 125 
-                             Q 130 150 150 125 
-                             Q 170 145 190 125 
-                             Q 210 140 230 120 
-                             Q 150 100 70 120 Z" fill="#ffffff" />
+                    <!-- ครีมย้อยข้างบน (สีขาวบริสุทธิ์หนานุ่ม) -->
+                    <path d="M 65 110 
+                             Q 80 132 95 115 
+                             Q 110 135 125 115 
+                             Q 150 140 175 115 
+                             Q 195 132 210 115 
+                             Q 225 128 235 110 
+                             Q 150 90 65 110 Z" fill="#ffffff" />
 
-                    <!-- สตรอว์เบอร์รี -->
-                    <circle cx="85" cy="118" r="10" fill="#ff4757" />
-                    <circle cx="115" cy="122" r="10" fill="#ff4757" />
-                    <circle cx="185" cy="122" r="10" fill="#ff4757" />
-                    <circle cx="215" cy="118" r="10" fill="#ff4757" />
+                    <!-- สตรอว์เบอร์รีลูกโต -->
+                    <g fill="#e84118">
+                        <circle cx="80" cy="108" r="9" />
+                        <circle cx="110" cy="112" r="9" />
+                        <circle cx="190" cy="112" r="9" />
+                        <circle cx="220" cy="108" r="9" />
+                    </g>
 
-                    <!-- ป้ายเลข 18 ปักตรงกลาง -->
-                    <rect x="135" y="70" width="30" height="45" rx="8" fill="#ff4757" stroke="#ffffff" stroke-width="3" />
-                    <text x="150" y="100" font-family="'Mali', cursive" font-weight="bold" font-size="20" fill="#ffffff" text-anchor="middle">18</text>
-                    <line x1="150" y1="115" x2="150" y2="130" stroke="#d63031" stroke-width="3" />
+                    <!-- ป้ายเลข 18 ปักเค้ก -->
+                    <rect x="135" y="65" width="30" height="38" rx="8" fill="#e84118" stroke="#ffffff" stroke-width="3" />
+                    <text x="150" y="91" font-family="'Mali', cursive" font-weight="bold" font-size="18" fill="#ffffff" text-anchor="middle">18</text>
+                    <line x1="150" y1="103" x2="150" y2="118" stroke="#718093" stroke-width="3" />
 
-                    <!-- เทียน 5 เล่ม -->
+                    <!-- เทียน 5 เล่ม (จัด Group ล็อกไฟไว้กับหัวเทียน) -->
                     <!-- เล่มที่ 1 -->
-                    <rect x="75" y="75" width="8" height="35" rx="3" fill="#74b9ff" />
-                    <line x1="79" y1="75" x2="79" y2="68" stroke="#2d3436" stroke-width="2" />
-                    <path class="flame-element" d="M 79 50 C 73 60 75 68 79 68 C 83 68 85 60 79 50 Z" fill="#ff9f43" />
-                    <path class="flame-element" d="M 79 56 C 76 62 77 68 79 68 C 81 68 82 62 79 56 Z" fill="#fffa65" />
+                    <g class="candle" id="candle-1">
+                        <rect x="75" y="65" width="9" height="35" rx="3" fill="#00a8ff" />
+                        <line x1="79.5" y1="65" x2="79.5" y2="58" stroke="#2f3640" stroke-width="2" />
+                        <g class="flame">
+                            <ellipse cx="79.5" cy="50" rx="5" ry="9" fill="#fbc531" />
+                            <ellipse cx="79.5" cy="52" rx="2.5" ry="5" fill="#e84118" />
+                        </g>
+                    </g>
 
                     <!-- เล่มที่ 2 -->
-                    <rect x="105" y="80" width="8" height="35" rx="3" fill="#a29bfe" />
-                    <line x1="109" y1="80" x2="109" y2="73" stroke="#2d3436" stroke-width="2" />
-                    <path class="flame-element" d="M 109 55 C 103 65 105 73 109 73 C 113 73 115 65 109 55 Z" fill="#ff9f43" />
-                    <path class="flame-element" d="M 109 61 C 106 67 107 73 109 73 C 111 73 112 67 109 61 Z" fill="#fffa65" />
+                    <g class="candle" id="candle-2">
+                        <rect x="105" y="70" width="9" height="35" rx="3" fill="#9c88ff" />
+                        <line x1="109.5" y1="70" x2="109.5" y2="63" stroke="#2f3640" stroke-width="2" />
+                        <g class="flame">
+                            <ellipse cx="109.5" cy="55" rx="5" ry="9" fill="#fbc531" />
+                            <ellipse cx="109.5" cy="57" rx="2.5" ry="5" fill="#e84118" />
+                        </g>
+                    </g>
 
-                    <!-- เล่มที่ 3 (หลังป้าย) -->
-                    <rect x="146" y="40" width="8" height="35" rx="3" fill="#fd79a8" />
-                    <line x1="150" y1="40" x2="150" y2="33" stroke="#2d3436" stroke-width="2" />
-                    <path class="flame-element" d="M 150 15 C 144 25 146 33 150 33 C 154 33 156 25 150 15 Z" fill="#ff9f43" />
-                    <path class="flame-element" d="M 150 21 C 147 27 148 33 150 33 C 152 33 153 27 150 21 Z" fill="#fffa65" />
+                    <!-- เล่มที่ 3 (กลาง) -->
+                    <g class="candle" id="candle-3">
+                        <rect x="145.5" y="25" width="9" height="35" rx="3" fill="#e84118" />
+                        <line x1="150" y1="25" x2="150" y2="18" stroke="#2f3640" stroke-width="2" />
+                        <g class="flame">
+                            <ellipse cx="150" cy="10" rx="5" ry="9" fill="#fbc531" />
+                            <ellipse cx="150" cy="12" rx="2.5" ry="5" fill="#e84118" />
+                        </g>
+                    </g>
 
                     <!-- เล่มที่ 4 -->
-                    <rect x="187" y="80" width="8" height="35" rx="3" fill="#55efc4" />
-                    <line x1="191" y1="80" x2="191" y2="73" stroke="#2d3436" stroke-width="2" />
-                    <path class="flame-element" d="M 191 55 C 185 65 187 73 191 73 C 195 73 197 65 191 55 Z" fill="#ff9f43" />
-                    <path class="flame-element" d="M 191 61 C 188 67 189 73 191 73 C 193 73 194 67 191 61 Z" fill="#fffa65" />
+                    <g class="candle" id="candle-4">
+                        <rect x="185" y="70" width="9" height="35" rx="3" fill="#4cd137" />
+                        <line x1="189.5" y1="70" x2="189.5" y2="63" stroke="#2f3640" stroke-width="2" />
+                        <g class="flame">
+                            <ellipse cx="189.5" cy="55" rx="5" ry="9" fill="#fbc531" />
+                            <ellipse cx="189.5" cy="57" rx="2.5" ry="5" fill="#e84118" />
+                        </g>
+                    </g>
 
                     <!-- เล่มที่ 5 -->
-                    <rect x="217" y="75" width="8" height="35" rx="3" fill="#ffeaa7" />
-                    <line x1="221" y1="75" x2="221" y2="68" stroke="#2d3436" stroke-width="2" />
-                    <path class="flame-element" d="M 221 50 C 215 60 217 68 221 68 C 225 68 227 60 221 50 Z" fill="#ff9f43" />
-                    <path class="flame-element" d="M 221 56 C 218 62 219 68 221 68 C 223 68 224 62 221 56 Z" fill="#fffa65" />
+                    <g class="candle" id="candle-5">
+                        <rect x="215" y="65" width="9" height="35" rx="3" fill="#fbc531" />
+                        <line x1="219.5" y1="65" x2="219.5" y2="58" stroke="#2f3640" stroke-width="2" />
+                        <g class="flame">
+                            <ellipse cx="219.5" cy="50" rx="5" ry="9" fill="#fbc531" />
+                            <ellipse cx="219.5" cy="52" rx="2.5" ry="5" fill="#e84118" />
+                        </g>
+                    </g>
                 </svg>
             </div>
 
@@ -383,29 +408,23 @@
             document.getElementById('page' + pageNumber).classList.add('active');
         }
 
-        /* ฟังก์ชันเป่าเทียน SVG ดับสุ่มทีละ 1-2 เล่ม */
+        /* ฟังก์ชันเป่าเทียนสุ่มทีละ 1-2 เล่ม */
         function blowCandleStepByStep() {
-            // ดึงกลุ่มไฟเทียน SVG (จับคู่ดวงละ 2 element ส้ม/เหลือง)
-            const allFlames = Array.from(document.querySelectorAll('.flame-element:not(.out)'));
+            const activeCandles = Array.from(document.querySelectorAll('.candle:not(.out)'));
             const wishText = document.getElementById('wish-text');
             const blowBtn = document.getElementById('blow-btn');
             const nextBtn = document.getElementById('next-btn-page2');
 
-            // มีเทียน 5 เล่ม = มีชิ้นส่วนไฟ 10 ชิ้น (คู่ละ 2)
-            if (allFlames.length > 0) {
-                const totalActiveCandles = allFlames.length / 2;
-                const countToExtinguish = Math.min(Math.floor(Math.random() * 2) + 1, totalActiveCandles);
+            if (activeCandles.length > 0) {
+                const countToExtinguish = Math.min(Math.floor(Math.random() * 2) + 1, activeCandles.length);
 
                 for (let i = 0; i < countToExtinguish; i++) {
-                    const currentActive = Array.from(document.querySelectorAll('.flame-element:not(.out)'));
-                    if (currentActive.length === 0) break;
-
-                    const randomIndex = Math.floor(Math.random() * (currentActive.length / 2)) * 2;
-                    currentActive[randomIndex].classList.add('out');
-                    currentActive[randomIndex + 1].classList.add('out');
+                    const randomIndex = Math.floor(Math.random() * activeCandles.length);
+                    activeCandles[randomIndex].classList.add('out');
+                    activeCandles.splice(randomIndex, 1);
                 }
 
-                const remaining = document.querySelectorAll('.flame-element:not(.out)').length;
+                const remaining = document.querySelectorAll('.candle:not(.out)').length;
 
                 if (remaining > 0) {
                     const statusMessages = [
