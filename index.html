@@ -130,22 +130,25 @@
             height: 35px;
             cursor: pointer;
             font-size: 1.1em;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
 
-    <!-- เพลงประกอบ: Bruno Mars - That's What I Like -->
-    <iframe id="youtube-player" src="https://www.youtube.com/embed/h6kQSxZL_3k?enablejsapi=1&autoplay=0&loop=1" style="display:none;"></iframe>
+    <!-- เพลงประกอบ: Bruno Mars - That's What I Like (MP3 Audio) -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://ia801503.us.archive.org/15/items/BrunoMarsThatsWhatILike_201705/Bruno%20Mars%20-%20That%27s%20What%20I%20Like.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="card">
-        <button class="music-btn" onclick="toggleMusic()">🎵</button>
+        <button class="music-btn" onclick="toggleMusic(event)">🎵</button>
 
         <!-- หน้าที่ 1: หน้าแรก/เปิดการ์ด -->
         <div class="page active" id="page1">
-            <h1>🎁 Happy Birthday To</h1>
-            <p style="color: #ff4757; font-weight: bold; font-size: 1.1em;">
-    Ploy 💖
+            <h1>🎁 Happy Birthday</h1>
+<p style="color: #ff4757; font-weight: bold; font-size: 2.2em; margin: 10px 0;">
+   To Ploy 💖
 </p>
             <p>I have a message and a surprise for you...</p>
             <div style="font-size: 4em; margin: 20px 0;">💌</div>
@@ -189,6 +192,43 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <script>
+        const audio = document.getElementById('bg-music');
+        let hasInteracted = false;
+
+        // ฟังก์ชันสั่งเล่นเพลง
+        function playMusic() {
+            audio.play().catch(error => {
+                console.log("Autoplay was prevented by browser:", error);
+            });
+        }
+
+        // ลองสั่งเล่นตั้งแต่โหลดหน้า (ทำงานได้ในเบราว์เซอร์ที่ยอมให้ Autoplay)
+        window.addEventListener('DOMContentLoaded', () => {
+            playMusic();
+        });
+
+        // หากเบราว์เซอร์ล็อก Autoplay ไว้ แค่แตะหรือคลิกส่วนไหนก็ได้บนหน้าจอ เพลงจะเริ่มเล่นทันที
+        function enableAudioOnUserInteraction() {
+            if (!hasInteracted) {
+                playMusic();
+                hasInteracted = true;
+                document.removeEventListener('click', enableAudioOnUserInteraction);
+                document.removeEventListener('touchstart', enableAudioOnUserInteraction);
+            }
+        }
+        document.addEventListener('click', enableAudioOnUserInteraction);
+        document.addEventListener('touchstart', enableAudioOnUserInteraction);
+
+        // ควบคุมปุ่มเปิด/ปิดเพลง 🎵
+        function toggleMusic(event) {
+            if (event) event.stopPropagation(); // ไม่ให้ตีกับ event แตะหน้าจอ
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
         // 1. ระบบเปลี่ยนหน้า
         function nextPage(pageNumber) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
@@ -208,25 +248,7 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // 3. ควบคุมเพลง YouTube
-        let isPlaying = false;
-        function playMusic() {
-            const iframe = document.getElementById('youtube-player');
-            iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            isPlaying = true;
-        }
-        function toggleMusic() {
-            const iframe = document.getElementById('youtube-player');
-            if (isPlaying) {
-                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                isPlaying = false;
-            } else {
-                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                isPlaying = true;
-            }
-        }
-
-        // 4. เอฟเฟกต์พลุกระดาษฉลอง
+        // 3. เอฟเฟกต์พลุกระดาษฉลอง
         function celebrate() {
             confetti({
                 particleCount: 120,
