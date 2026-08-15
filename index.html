@@ -77,7 +77,7 @@
         .name-title {
             color: #ff4757;
             font-weight: 700;
-            font-size: 2.5em; /* ปรับขนาด Ploy ให้ใหญ่จุใจตรงนี้ */
+            font-size: 2.5em;
             margin: 10px 0;
             text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
         }
@@ -145,18 +145,36 @@
         .btn-secondary { background: #a4b0be; font-size: 1em; }
         .btn-secondary:hover { background: #747d8c; }
 
-        .music-btn {
+        /* ส่วนควบคุมเพลงและปรับความดัง */
+        .music-controls {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: rgba(255,255,255,0.8);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.85);
+            padding: 4px 8px;
+            border-radius: 20px;
             border: 1px solid #ff80ab;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
+            z-index: 10;
+        }
+
+        .music-btn {
+            background: none;
+            border: none;
             cursor: pointer;
             font-size: 1.1em;
-            z-index: 10;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .volume-slider {
+            width: 60px;
+            height: 4px;
+            accent-color: #ff6b81;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -167,23 +185,26 @@
         <source src="https://archive.org/download/cloud0218popsongs2019/Thats%20What%20I%20Like%20-%20Bruno%20Mar.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- หน้ากดเพื่อเริ่มเล่นเพลง (ป้องกันเบราว์เซอร์บล็อกเสียง) -->
+    <!-- หน้ากดเพื่อเริ่มเล่นเพลง -->
     <div id="start-overlay">
         <div style="font-size: 5em; margin-bottom: 20px;">🎁</div>
         <h2 style="color: white; margin-bottom: 20px;">มีของขวัญวันเกิดรออยู่นะ...</h2>
         <button class="btn" style="background: white; color: #ff4757;" onclick="initWebsite()">
-            กดเพื่อเปิดของขวัญ 💖
+            กดเพื่อเปิดของขวัญ 💖🎵
         </button>
     </div>
 
     <div class="card">
-        <button class="music-btn" onclick="toggleMusic(event)">🎵</button>
+        <!-- แถบควบคุมเสียงเพลง (ปุ่ม 🎵 + สไลเดอร์ความดัง) -->
+        <div class="music-controls">
+            <button class="music-btn" onclick="toggleMusic(event)" title="เปิด/ปิดเพลง">🎵</button>
+            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.3" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
+        </div>
 
         <!-- หน้าที่ 1 -->
         <div class="page active" id="page1">
-            <h1>🎁 Happy Birthday</h1>
-            <!-- ปรับขนาดคำว่า Ploy ใหญ่ขึ้นเรียบร้อยครับ -->
-            <div class="name-title">To Ploy 💖</div>
+            <h1>🎁 Happy Birthday To</h1>
+            <div class="name-title">Ploy 💖</div>
             <p>I have a message and a surprise for you...</p>
             <div style="font-size: 4em; margin: 20px 0;">💌</div>
             <button class="btn" onclick="nextPage(2)">กดเปิดการ์ดตรงนี้สิ ✨</button>
@@ -226,8 +247,11 @@
 
     <script>
         const audio = document.getElementById('bg-music');
+        
+        // ตั้งค่าความดังเริ่มต้นที่ 30% (0.3)
+        audio.volume = 0.3;
 
-        // ฟังก์ชันสั่งเริ่มเว็บและเปิดเพลง
+        // ฟังก์ชันเริ่มเล่นเพลง
         function initWebsite() {
             audio.play().then(() => {
                 console.log("Music started successfully");
@@ -235,8 +259,12 @@
                 console.log("Playback error:", error);
             });
             
-            // ซ่อนหน้า Overlay
             document.getElementById('start-overlay').style.display = 'none';
+        }
+
+        // ฟังก์ชันปรับความดังเสียง
+        function changeVolume(val) {
+            audio.volume = val;
         }
 
         // ปุ่มควบคุม 🎵
