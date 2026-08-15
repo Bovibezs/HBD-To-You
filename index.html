@@ -40,7 +40,7 @@
             padding: 20px;
         }
 
-        /* กรอบ GIF หน้าแรก (ปรับขยายใหญ่ขึ้นเป็น 320px) */
+        /* กรอบ GIF หน้าแรก */
         .gif-wrapper {
             width: 320px;
             max-width: 90vw;
@@ -53,6 +53,24 @@
         }
 
         .gif-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* กรอบ GIF หน้าการ์ดที่ 1 */
+        .page-gif-wrapper {
+            width: 180px;
+            max-width: 80vw;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.2);
+            border: 3px solid #ff80ab;
+            margin: 15px 0;
+            background: #fff;
+        }
+
+        .page-gif-wrapper img {
             width: 100%;
             height: auto;
             display: block;
@@ -229,7 +247,7 @@
         </div>
         <h2 style="color: white; margin-bottom: 20px; font-size: 1.4em;">There’s a birthday gift waiting for you... 💖</h2>
         <button class="btn" style="background: white; color: #ff4757;" onclick="initWebsite()">
-           Click to open the gift. 🎁🎵
+            Click to open the gift. 🎁🎵
         </button>
     </div>
 
@@ -239,12 +257,14 @@
             <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
         </div>
 
-        <!-- หน้าที่ 1 -->
+        <!-- หน้าที่ 1 (เปลี่ยนจดหมายเป็น horimiya1.gif) -->
         <div class="page active" id="page1">
             <h1>🎁 Happy Birthday</h1>
             <div class="name-title">To Ploy 💖</div>
             <p>I have a message and a surprise for you...</p>
-            <div style="font-size: 4em; margin: 20px 0;">💌</div>
+            <div class="page-gif-wrapper">
+                <img src="horimiya1.gif" alt="Horimiya Surprise">
+            </div>
             <button class="btn" onclick="nextPage(2)">กดเปิดการ์ดตรงนี้สิ ✨</button>
         </div>
 
