@@ -40,10 +40,10 @@
             padding: 20px;
         }
 
-        /* กรอบ GIF หน้าแรก */
+        /* กรอบ GIF หน้าแรก (ปรับขยายใหญ่ขึ้นเป็น 320px) */
         .gif-wrapper {
-            width: 260px;
-            max-width: 85vw;
+            width: 320px;
+            max-width: 90vw;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(255, 107, 129, 0.4);
@@ -219,12 +219,10 @@
 
 <body>
 
-    <!-- ดึงไฟล์เพลง song.mp3 จากใน Repository -->
     <audio id="bg-music" loop preload="auto">
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- หน้าแรกดึงไฟล์ horimiya.gif จากใน Repository -->
     <div id="start-overlay">
         <div class="gif-wrapper">
             <img src="horimiya.gif" alt="Horimiya Hug">
