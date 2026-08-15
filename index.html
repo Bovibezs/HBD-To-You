@@ -99,12 +99,12 @@
         }
 
         .svg-cake-wrapper {
-            width: 310px;
-            height: 270px;
+            width: 330px;
+            height: 300px;
             margin: 0 auto;
         }
 
-        /* Candle Standard Fix - No Floating, No Animation */
+        /* Candle Standard Fix */
         .candle {
             transition: opacity 0.3s ease;
         }
@@ -237,79 +237,176 @@
             <h1>Make a Wish! 🎂</h1>
             
             <div class="svg-cake-wrapper">
-                <svg viewBox="0 0 300 250" width="100%" height="100%">
-                    <!-- Plate -->
-                    <ellipse cx="150" cy="235" rx="125" ry="12" fill="#dcdde1" />
-                    <ellipse cx="150" cy="232" rx="118" ry="10" fill="#ffffff" stroke="#ffb6c1" stroke-width="2" />
+                <svg viewBox="0 0 320 300" width="100%" height="100%">
+                    <!-- Plate Base -->
+                    <ellipse cx="160" cy="270" rx="140" ry="16" fill="#eaeaea" />
+                    <ellipse cx="160" cy="266" rx="135" ry="13" fill="#ffffff" stroke="#ffb6c1" stroke-width="2" />
 
-                    <!-- Tier 1: Bottom Tier (Large) -->
-                    <path d="M 45 160 Q 150 185 255 160 L 255 220 Q 150 245 45 220 Z" fill="#ffe4e8" stroke="#ffb6c1" stroke-width="1.5" />
-                    <path d="M 45 160 Q 150 185 255 160 
-                             C 255 160, 240 180, 225 170 
-                             C 210 160, 195 188, 180 172 
-                             C 165 156, 150 188, 135 172 
-                             C 120 156, 105 182, 90 170 
-                             C 75 158, 45 160, 45 160 Z" fill="#ff94a8" />
+                    <!-- Bottom Tier (Layer 1) -->
+                    <path d="M 40 170 Q 160 195 280 170 L 280 250 Q 160 275 40 250 Z" fill="#ffccd5" stroke="#ff94a8" stroke-width="1.5" />
+                    <path d="M 40 170 Q 160 195 280 170 
+                             C 280 170, 265 198, 245 185 
+                             C 225 172, 210 205, 190 188 
+                             C 170 171, 150 205, 130 188 
+                             C 110 171, 95 200, 75 185 
+                             C 55 170, 40 170, 40 170 Z" fill="#ffb3c6" />
 
-                    <!-- Bow on Tier 1 -->
-                    <g transform="translate(150, 202)">
-                        <path d="M -18 -4 C -28 -14, -32 4, -16 2 C -24 12, -12 16, -8 4" fill="#ff4757" />
-                        <path d="M 18 -4 C 28 -14, 32 4, 16 2 C 24 12, 12 16, 8 4" fill="#ff4757" />
-                        <circle cx="0" cy="0" r="5" fill="#ff6b81" />
+                    <!-- Main Ribbon & Bow on Bottom Tier -->
+                    <g transform="translate(160, 235)">
+                        <path d="M -35 -5 C -55 -25, -60 10, -30 5 C -45 20, -20 28, -12 8" fill="#ff758c" />
+                        <path d="M 35 -5 C 55 -25, 60 10, 30 5 C 45 20, 20 28, 12 8" fill="#ff758c" />
+                        <rect x="-12" y="-6" width="24" height="18" rx="6" fill="#ff4d6d" />
+                    </g>
+                    <!-- Side Bows -->
+                    <g transform="translate(65, 205) scale(0.6)">
+                        <path d="M -30 -5 C -50 -25, -55 10, -25 5 C -40 20, -15 28, -8 8" fill="#ff758c" />
+                        <path d="M 30 -5 C 50 -25, 55 10, 25 5 C 40 20, 15 28, 8 8" fill="#ff758c" />
+                        <circle cx="0" cy="0" r="8" fill="#ff4d6d" />
+                    </g>
+                    <g transform="translate(255, 205) scale(0.6)">
+                        <path d="M -30 -5 C -50 -25, -55 10, -25 5 C -40 20, -15 28, -8 8" fill="#ff758c" />
+                        <path d="M 30 -5 C 50 -25, 55 10, 25 5 C 40 20, 15 28, 8 8" fill="#ff758c" />
+                        <circle cx="0" cy="0" r="8" fill="#ff4d6d" />
                     </g>
 
-                    <!-- Tier 2: Top Tier (Small) -->
-                    <path d="M 80 105 Q 150 125 220 105 L 220 160 Q 150 180 80 160 Z" fill="#ffffff" stroke="#ffb6c1" stroke-width="1.5" />
-                    <path d="M 80 105 Q 150 125 220 105 
-                             C 220 105, 208 122, 195 112 
-                             C 182 102, 170 125, 155 114 
-                             C 140 103, 128 124, 115 112 
-                             C 102 100, 80 105, 80 105 Z" fill="#ffb6c1" />
-
-                    <!-- Top Strawberries & Whipped Cream -->
+                    <!-- Cream Puffs Bottom Tier Edge -->
                     <g fill="#ffffff" stroke="#ffccd5" stroke-width="0.8">
-                        <circle cx="92" cy="107" r="6" />
-                        <circle cx="120" cy="113" r="6" />
-                        <circle cx="150" cy="115" r="6" />
-                        <circle cx="180" cy="113" r="6" />
-                        <circle cx="208" cy="107" r="6" />
-                    </g>
-                    <!-- Strawberries -->
-                    <g fill="#ff3838">
-                        <path d="M 90 102 C 87 95, 95 90, 97 95 C 100 90, 107 95, 104 102 C 101 106, 93 106, 90 102 Z" />
-                        <path d="M 196 102 C 193 95, 201 90, 203 95 C 206 90, 213 95, 210 102 C 207 106, 199 106, 196 102 Z" />
+                        <circle cx="48" cy="250" r="7" /><circle cx="68" cy="256" r="7" /><circle cx="90" cy="261" r="7" />
+                        <circle cx="114" cy="264" r="7" /><circle cx="138" cy="265" r="7" /><circle cx="160" cy="265" r="7" />
+                        <circle cx="182" cy="265" r="7" /><circle cx="206" cy="264" r="7" /><circle cx="230" cy="261" r="7" />
+                        <circle cx="252" cy="256" r="7" /><circle cx="272" cy="250" r="7" />
                     </g>
 
-                    <!-- Bunny Decoration on Top -->
-                    <g transform="translate(110, 75)">
-                        <ellipse cx="0" cy="16" rx="9" ry="7" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
-                        <ellipse cx="-5" cy="0" rx="3" ry="8" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
-                        <ellipse cx="5" cy="0" rx="3" ry="8" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
-                        <circle cx="0" cy="11" r="8" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
-                        <circle cx="-3" cy="10" r="1" fill="#4a4a4a" />
-                        <circle cx="3" cy="10" r="1" fill="#4a4a4a" />
-                        <path d="M 0 15 C -2 12, -6 14, -4 18 L 0 21 L 4 18 C 6 14, 2 12, 0 15 Z" fill="#ff4757" />
+                    <!-- Top Tier (Layer 2) -->
+                    <path d="M 85 110 Q 160 130 235 110 L 235 172 Q 160 192 85 172 Z" fill="#fff5f6" stroke="#ffb6c1" stroke-width="1.5" />
+                    <path d="M 85 110 Q 160 130 235 110 
+                             C 235 110, 222 130, 208 118 
+                             C 194 106, 180 133, 165 120 
+                             C 150 107, 136 132, 122 119 
+                             C 108 106, 85 110, 85 110 Z" fill="#ffb3c6" />
+
+                    <!-- Cream Puffs Top Tier Edge -->
+                    <g fill="#ffffff" stroke="#ffccd5" stroke-width="0.8">
+                        <circle cx="95" cy="112" r="6" /><circle cx="118" cy="118" r="6" /><circle cx="140" cy="121" r="6" />
+                        <circle cx="160" cy="122" r="6" /><circle cx="180" cy="121" r="6" /><circle cx="202" cy="118" r="6" />
+                        <circle cx="225" cy="112" r="6" />
                     </g>
 
-                    <!-- SINGLE CANDLE WITH COMBINED "18" BADGE -->
-                    <g class="candle" id="candle-1" transform="translate(165, 30)">
-                        <!-- Candle Pin Stick -->
-                        <line x1="0" y1="45" x2="0" y2="75" stroke="#795548" stroke-width="3" stroke-linecap="round" />
-                        
-                        <!-- Combined Number 18 Plate (ติดกันสมบูรณ์ ไม่แยกเล่ม) -->
-                        <rect x="-24" y="15" width="48" height="30" rx="10" fill="#ff758c" stroke="#ffffff" stroke-width="2" />
-                        <text x="0" y="36" font-family="'Mali', cursive" font-weight="700" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="1">18</text>
-                        
-                        <!-- Single Wick (ไส้เทียนเล่มเดียว) -->
-                        <line x1="0" y1="15" x2="0" y2="6" stroke="#212121" stroke-width="2" stroke-linecap="round" />
-                        
-                        <!-- Single Flame (เปลวไฟล็อกติดแน่น ไม่ขยับ/สั่น) -->
+                    <!-- Bear Face in Center -->
+                    <g transform="translate(160, 142)">
+                        <!-- Ears -->
+                        <circle cx="-20" cy="-18" r="10" fill="#e6c2a0" stroke="#cfa57b" stroke-width="1" />
+                        <circle cx="-20" cy="-18" r="6" fill="#ffb3c6" />
+                        <circle cx="20" cy="-18" r="10" fill="#e6c2a0" stroke="#cfa57b" stroke-width="1" />
+                        <circle cx="20" cy="-18" r="6" fill="#ffb3c6" />
+                        <!-- Head -->
+                        <ellipse cx="0" cy="-3" rx="27" ry="21" fill="#e6c2a0" stroke="#cfa57b" stroke-width="1" />
+                        <!-- Snout -->
+                        <ellipse cx="0" cy="2" rx="10" ry="7" fill="#ffffff" />
+                        <ellipse cx="0" cy="-1" rx="3" ry="2" fill="#5a3d28" />
+                        <path d="M -2 2 Q 0 5 2 2" stroke="#5a3d28" stroke-width="1.2" fill="none" />
+                        <!-- Eyes & Cheeks -->
+                        <circle cx="-10" cy="-4" r="2.5" fill="#3a2312" />
+                        <circle cx="10" cy="-4" r="2.5" fill="#3a2312" />
+                        <ellipse cx="-15" cy="2" rx="4" ry="2.5" fill="#ff80ab" opacity="0.6" />
+                        <ellipse cx="15" cy="2" rx="4" ry="2.5" fill="#ff80ab" opacity="0.6" />
+                        <!-- Pink Bow on Ear -->
+                        <path d="M 12 -23 C 6 -28, 6 -15, 12 -18 C 18 -28, 18 -15, 12 -18" fill="#ff4d6d" />
+                        <circle cx="12" cy="-18" r="2.5" fill="#ff80ab" />
+                    </g>
+
+                    <!-- Top Characters (Bunny & Puppy) -->
+                    <!-- Bunny Left -->
+                    <g transform="translate(130, 96) scale(0.85)">
+                        <ellipse cx="-7" cy="-14" rx="4" ry="10" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
+                        <ellipse cx="-7" cy="-14" rx="2" ry="6" fill="#ffccd5" />
+                        <ellipse cx="7" cy="-14" rx="4" ry="10" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
+                        <ellipse cx="7" cy="-14" rx="2" ry="6" fill="#ffccd5" />
+                        <circle cx="0" cy="0" r="11" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
+                        <circle cx="-4" cy="-2" r="1.5" fill="#4a4a4a" />
+                        <circle cx="4" cy="-2" r="1.5" fill="#4a4a4a" />
+                        <polygon points="-1.5,1 1.5,1 0,3" fill="#ff6b81" />
+                    </g>
+                    <!-- Puppy Right -->
+                    <g transform="translate(190, 97) scale(0.85)">
+                        <ellipse cx="-11" cy="-2" rx="5" ry="9" fill="#d7ccc8" stroke="#a1887f" stroke-width="1" />
+                        <ellipse cx="11" cy="-2" rx="5" ry="9" fill="#d7ccc8" stroke="#a1887f" stroke-width="1" />
+                        <circle cx="0" cy="0" r="11" fill="#ffffff" stroke="#e0e0e0" stroke-width="1" />
+                        <circle cx="-4" cy="-2" r="1.5" fill="#4a4a4a" />
+                        <circle cx="4" cy="-2" r="1.5" fill="#4a4a4a" />
+                        <ellipse cx="0" cy="1" rx="2" ry="1.5" fill="#4a4a4a" />
+                    </g>
+
+                    <!-- Large Top Bow -->
+                    <g transform="translate(160, 75) scale(1.1)">
+                        <path d="M -28 -8 C -45 -30, -50 10, -22 3 C -35 18, -15 22, -8 5" fill="#ffb3c6" stroke="#ff80ab" stroke-width="1" />
+                        <path d="M 28 -8 C 45 -30, 50 10, 22 3 C 35 18, 15 22, 8 5" fill="#ffb3c6" stroke="#ff80ab" stroke-width="1" />
+                        <rect x="-9" y="-7" width="18" height="15" rx="5" fill="#ff80ab" />
+                    </g>
+
+                    <!-- SINGLE CANDLE IN THE CENTER (เป่าดับได้) -->
+                    <g class="candle" id="candle-1" transform="translate(160, 25)">
+                        <!-- Candle Body -->
+                        <rect x="-6" y="25" width="12" height="35" rx="3" fill="url(#candle-grad)" stroke="#ffb6c1" stroke-width="1" />
+                        <!-- Wick -->
+                        <line x1="0" y1="25" x2="0" y2="15" stroke="#333333" stroke-width="2" stroke-linecap="round" />
+                        <!-- Flame -->
                         <g class="flame-group">
-                            <ellipse cx="0" cy="-3" rx="6" ry="10" fill="#ff9f43" />
-                            <ellipse cx="0" cy="-1" rx="3" ry="6" fill="#feca57" />
+                            <ellipse cx="0" cy="5" rx="7" ry="12" fill="#ff9800" />
+                            <ellipse cx="0" cy="7" rx="4" ry="8" fill="#ffeb3b" />
+                            <ellipse cx="0" cy="9" rx="2" ry="4" fill="#ffffff" />
                         </g>
                     </g>
 
+                    <!-- TILTED "18" BADGE ON THE RIGHT SIDE (ป้ายเลข 18 ปักเอียงๆ ข้างๆ) -->
+                    <g transform="translate(245, 95) rotate(15) scale(0.95)">
+                        <!-- Stick Base -->
+                        <line x1="-15" y1="25" x2="-35" y2="85" stroke="#d7ccc8" stroke-width="3" stroke-linecap="round" />
+                        <!-- Ribbon Bow on Stick -->
+                        <g transform="translate(-22, 45) scale(0.7)">
+                            <path d="M -15 -5 C -25 -15, -28 5, -12 2 C -20 10, -10 14, -6 3" fill="#ffe082" />
+                            <path d="M 15 -5 C 25 -15, 28 5, 12 2 C 20 10, 10 14, 6 3" fill="#ffe082" />
+                            <circle cx="0" cy="0" r="4" fill="#ffd54f" />
+                        </g>
+                        <!-- Number 18 Badge Frame -->
+                        <rect x="-42" y="-30" width="64" height="52" rx="22" fill="#fff0f3" stroke="#ff80ab" stroke-width="3" />
+                        <rect x="-38" y="-26" width="56" height="44" rx="18" fill="#ffffff" stroke="#ffccd5" stroke-width="1.5" stroke-dasharray="3,2" />
+                        <!-- Text 18 -->
+                        <text x="-10" y="8" font-family="'Mali', cursive" font-weight="700" font-size="30" fill="#ff4d6d" text-anchor="middle">18</text>
+                    </g>
+
+                    <!-- Extra Side Decorations (Heart Sign Left & Rainbow Bottom) -->
+                    <!-- Heart Sign Left -->
+                    <g transform="translate(42, 185) rotate(-12) scale(0.85)">
+                        <line x1="0" y1="20" x2="0" y2="70" stroke="#d7ccc8" stroke-width="2.5" />
+                        <path d="M 0 -18 C -15 -35, -35 -10, 0 15 C 35 -10, 15 -35, 0 -18 Z" fill="#ff80ab" stroke="#ffffff" stroke-width="2" />
+                        <text x="0" y="-5" font-family="'Mali', cursive" font-weight="700" font-size="8" fill="#ffffff" text-anchor="middle">HAPPY</text>
+                        <text x="0" y="4" font-family="'Mali', cursive" font-weight="700" font-size="7" fill="#ffffff" text-anchor="middle">BIRTHDAY</text>
+                    </g>
+                    <!-- Rainbow & Cloud Bottom Left -->
+                    <g transform="translate(45, 255) scale(0.65)">
+                        <path d="M -20 0 A 20 20 0 0 1 20 0" fill="none" stroke="#ff80ab" stroke-width="4" />
+                        <path d="M -16 0 A 16 16 0 0 1 16 0" fill="none" stroke="#ffe082" stroke-width="4" />
+                        <path d="M -12 0 A 12 12 0 0 1 12 0" fill="none" stroke="#b2dfdb" stroke-width="4" />
+                        <circle cx="-18" cy="2" r="8" fill="#ffffff" />
+                        <circle cx="-10" cy="-2" r="9" fill="#ffffff" />
+                        <circle cx="0" cy="2" r="7" fill="#ffffff" />
+                    </g>
+                    <!-- Lighter right side -->
+                    <g transform="translate(265, 260) scale(0.7)">
+                        <rect x="0" y="0" width="35" height="16" rx="4" fill="#d7ccc8" />
+                        <rect x="-8" y="3" width="10" height="10" rx="2" fill="#cfd8dc" />
+                        <circle cx="-3" cy="8" r="3" fill="#90a4ae" />
+                    </g>
+
+                    <!-- Gradients -->
+                    <defs>
+                        <linearGradient id="candle-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ff4d6d" />
+                            <stop offset="50%" stop-color="#ffffff" />
+                            <stop offset="100%" stop-color="#ff80ab" />
+                        </linearGradient>
+                    </defs>
                 </svg>
             </div>
 
