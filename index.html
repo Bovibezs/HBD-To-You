@@ -163,7 +163,7 @@
         .btn-secondary { background: #a4b0be; font-size: 1em; }
         .btn-secondary:hover { background: #747d8c; }
 
-        /* ปุ่มเล่นเพลงแบบมินิมอล ซ่อนสไลเดอร์เสียง */
+        /* ปุ่มเล่นเพลงแบบมินิมอล */
         .music-controls {
             position: absolute;
             top: 15px;
@@ -219,12 +219,12 @@
 
 <body>
 
-    <!-- ดึงไฟล์เพลง song.mp3 จากใน GitHub Repository ของคุณ -->
+    <!-- ดึงไฟล์เพลง song.mp3 จากใน Repository -->
     <audio id="bg-music" loop preload="auto">
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- หน้าแรกพร้อม GIF Horimiya -->
+    <!-- หน้าแรกดึงไฟล์ horimiya.gif จากใน Repository -->
     <div id="start-overlay">
         <div class="gif-wrapper">
             <img src="horimiya.gif" alt="Horimiya Hug">
@@ -294,7 +294,7 @@
         function initWebsite() {
             audio.load();
             audio.play().then(() => {
-                console.log("Audio is playing!");
+                console.log("Audio playing perfectly!");
             }).catch(error => {
                 console.log("Audio play error:", error);
             });
