@@ -105,48 +105,101 @@
         }
 
         /* Candle & Smoke VFX Styles */
-        .candle {
-            transition: opacity 0.3s ease;
-        }
-
-        .candle.out .flame-group {
-            display: none !important;
-        }
-
-        .smoke-group {
-            display: none;
-            opacity: 0;
-            transform-origin: center bottom;
-        }
-
-        .candle.out .smoke-group {
-            display: block;
-            animation: riseAndFade 2.2s ease-out forwards;
-        }
+        .candle { transition: opacity 0.3s ease; }
+        .candle.out .flame-group { display: none !important; }
+        .smoke-group { display: none; opacity: 0; transform-origin: center bottom; }
+        .candle.out .smoke-group { display: block; animation: riseAndFade 2.2s ease-out forwards; }
 
         @keyframes riseAndFade {
-            0% {
-                opacity: 0.85;
-                transform: translateY(0) scale(0.6);
-            }
-            50% {
-                opacity: 0.6;
-                transform: translateY(-20px) scale(1.1) translateX(-4px);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-42px) scale(1.6) translateX(6px);
-            }
+            0% { opacity: 0.85; transform: translateY(0) scale(0.6); }
+            50% { opacity: 0.6; transform: translateY(-20px) scale(1.1) translateX(-4px); }
+            100% { opacity: 0; transform: translateY(-42px) scale(1.6) translateX(6px); }
         }
 
-        .message-box {
-            background: #fff5f5;
+        /* Menu Buttons for Page 3 */
+        .topic-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .topic-btn {
+            background: #ffffff;
+            color: #ff4757;
+            border: 2px solid #ffccd5;
+            padding: 16px 20px;
+            font-size: 1.1em;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 107, 129, 0.12);
+            transition: all 0.25s ease;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topic-btn:hover {
+            background: #fff0f3;
+            border-color: #ff6b81;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 107, 129, 0.2);
+        }
+
+        /* Modal / Popup Box */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(3px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border-radius: 25px;
+            padding: 25px 20px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border: 3px solid #ffccd5;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-title {
+            color: #ff4757;
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .modal-body {
+            background: #fff5f7;
             border: 2px dashed #ff80ab;
             border-radius: 15px;
             padding: 15px;
-            margin: 10px 0;
-            font-size: 0.95em;
+            font-size: 1em;
             line-height: 1.6;
+            color: #4a4a4a;
+            margin-bottom: 15px;
+            text-align: center;
+            max-height: 250px;
+            overflow-y: auto;
         }
 
         .btn-group {
@@ -156,6 +209,7 @@
             width: 100%;
             margin-top: 10px;
         }
+
         .btn {
             background: #ff6b81;
             color: white;
@@ -265,7 +319,6 @@
             <div class="svg-cake-wrapper">
                 <svg viewBox="0 0 320 310" width="100%" height="100%">
                     <defs>
-                        <!-- Gradients for Realism -->
                         <radialGradient id="plate-shadow" cx="50%" cy="50%" r="50%">
                             <stop offset="0%" stop-color="rgba(0,0,0,0.15)" />
                             <stop offset="100%" stop-color="rgba(0,0,0,0)" />
@@ -299,27 +352,18 @@
                     <!-- Shadow under Plate -->
                     <ellipse cx="160" cy="278" rx="142" ry="18" fill="url(#plate-shadow)" />
 
-                    <!-- Plate (3D Rim) -->
+                    <!-- Plate -->
                     <ellipse cx="160" cy="272" rx="138" ry="15" fill="#e2e2e2" />
                     <ellipse cx="160" cy="269" rx="135" ry="14" fill="#ffffff" stroke="#f0b6c1" stroke-width="2" />
 
-                    <!-- Bottom Tier Side Wall (Real 3D Volume) -->
+                    <!-- Bottom Tier -->
                     <path d="M 45 175 C 45 175 45 250 45 250 C 45 268 275 268 275 250 L 275 175 Z" fill="url(#cake-layer1)" />
                     <ellipse cx="160" cy="175" rx="115" ry="20" fill="#fff3ee" stroke="#f7d4c8" stroke-width="1" />
 
-                    <!-- Strawberry Drips on Bottom Tier -->
-                    <path d="M 45 176 
-                             Q 60 195 70 176 
-                             Q 85 205 95 176 
-                             Q 115 210 130 176 
-                             Q 150 200 165 176 
-                             Q 185 212 200 176 
-                             Q 220 198 235 176 
-                             Q 255 208 265 176 
-                             Q 272 188 275 176
-                             Q 160 198 45 176 Z" fill="url(#strawberry-drip)" opacity="0.9" />
+                    <!-- Drips Bottom Tier -->
+                    <path d="M 45 176 Q 60 195 70 176 Q 85 205 95 176 Q 115 210 130 176 Q 150 200 165 176 Q 185 212 200 176 Q 220 198 235 176 Q 255 208 265 176 Q 272 188 275 176 Q 160 198 45 176 Z" fill="url(#strawberry-drip)" opacity="0.9" />
 
-                    <!-- Cream Swirls at Bottom Rim -->
+                    <!-- Cream Swirls -->
                     <g fill="#ffffff" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
                         <circle cx="55" cy="254" r="8" /><circle cx="75" cy="259" r="8" /><circle cx="97" cy="263" r="8" />
                         <circle cx="120" cy="265" r="8" /><circle cx="142" cy="266" r="8" /><circle cx="160" cy="266" r="8" />
@@ -327,39 +371,31 @@
                         <circle cx="245" cy="259" r="8" /><circle cx="265" cy="254" r="8" />
                     </g>
 
-                    <!-- Big Pink Bow on Bottom Tier -->
+                    <!-- Big Bow -->
                     <g transform="translate(160, 230)" filter="drop-shadow(0px 3px 3px rgba(0,0,0,0.15))">
                         <path d="M -38 -8 C -60 -30, -65 15, -32 8 C -50 25, -20 32, -12 10" fill="#ff4d6d" />
                         <path d="M 38 -8 C 60 -30, 65 15, 32 8 C 50 25, 20 32, 12 10" fill="#ff4d6d" />
                         <rect x="-12" y="-6" width="24" height="18" rx="6" fill="#c9184a" />
                         <circle cx="0" cy="3" r="4" fill="#ff80ab" />
                     </g>
-                    <!-- Side Bow Left -->
+                    <!-- Side Bow Left & Right -->
                     <g transform="translate(68, 208) scale(0.65)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.15))">
                         <path d="M -30 -5 C -50 -25, -55 10, -25 5 C -40 20, -15 28, -8 8" fill="#ff758c" />
                         <path d="M 30 -5 C 50 -25, 55 10, 25 5 C 40 20, 15 28, 8 8" fill="#ff758c" />
                         <circle cx="0" cy="0" r="8" fill="#ff4d6d" />
                     </g>
-                    <!-- Side Bow Right -->
                     <g transform="translate(252, 208) scale(0.65)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.15))">
                         <path d="M -30 -5 C -50 -25, -55 10, -25 5 C -40 20, -15 28, -8 8" fill="#ff758c" />
                         <path d="M 30 -5 C 50 -25, 55 10, 25 5 C 40 20, 15 28, 8 8" fill="#ff758c" />
                         <circle cx="0" cy="0" r="8" fill="#ff4d6d" />
                     </g>
 
-                    <!-- Top Tier Side Wall -->
+                    <!-- Top Tier -->
                     <path d="M 90 115 C 90 115 90 172 90 172 C 90 188 230 188 230 172 L 230 115 Z" fill="url(#cake-layer2)" />
                     <ellipse cx="160" cy="115" rx="70" ry="14" fill="#ffffff" stroke="#ffccd5" stroke-width="1" />
 
-                    <!-- Top Tier Strawberry Drips -->
-                    <path d="M 90 116 
-                             Q 102 135 110 116 
-                             Q 125 142 138 116 
-                             Q 152 136 160 116 
-                             Q 172 140 182 116 
-                             Q 198 138 210 116 
-                             Q 222 130 230 116
-                             Q 160 130 90 116 Z" fill="#ff6b81" opacity="0.85" />
+                    <!-- Drips Top Tier -->
+                    <path d="M 90 116 Q 102 135 110 116 Q 125 142 138 116 Q 152 136 160 116 Q 172 140 182 116 Q 198 138 210 116 Q 222 130 230 116 Q 160 130 90 116 Z" fill="#ff6b81" opacity="0.85" />
 
                     <!-- Top Rim Cream Dots -->
                     <g fill="#ffffff" filter="drop-shadow(0px 1px 2px rgba(0,0,0,0.1))">
@@ -368,72 +404,54 @@
                         <circle cx="224" cy="117" r="6" />
                     </g>
 
-                    <!-- Teddy Bear in Center -->
+                    <!-- Teddy Bear -->
                     <g transform="translate(160, 148)" filter="drop-shadow(0px 3px 3px rgba(0,0,0,0.12))">
-                        <!-- Ears -->
-                        <circle cx="-19" cy="-17" r="9" fill="#d7a15c" />
-                        <circle cx="-19" cy="-17" r="5" fill="#ffb3c6" />
-                        <circle cx="19" cy="-17" r="9" fill="#d7a15c" />
-                        <circle cx="19" cy="-17" r="5" fill="#ffb3c6" />
-                        <!-- Head -->
+                        <circle cx="-19" cy="-17" r="9" fill="#d7a15c" /><circle cx="-19" cy="-17" r="5" fill="#ffb3c6" />
+                        <circle cx="19" cy="-17" r="9" fill="#d7a15c" /><circle cx="19" cy="-17" r="5" fill="#ffb3c6" />
                         <ellipse cx="0" cy="-2" rx="25" ry="19" fill="#e4b06e" />
-                        <!-- Snout -->
                         <ellipse cx="0" cy="3" rx="9" ry="6" fill="#ffffff" />
                         <ellipse cx="0" cy="0" r="2.5" fill="#4a2e16" />
                         <path d="M -2 3 Q 0 6 2 3" stroke="#4a2e16" stroke-width="1.2" fill="none" />
-                        <!-- Eyes & Pink Cheeks -->
-                        <circle cx="-9" cy="-4" r="2.2" fill="#2c1a0c" />
-                        <circle cx="9" cy="-4" r="2.2" fill="#2c1a0c" />
+                        <circle cx="-9" cy="-4" r="2.2" fill="#2c1a0c" /><circle cx="9" cy="-4" r="2.2" fill="#2c1a0c" />
                         <ellipse cx="-14" cy="2" rx="4" ry="2" fill="#ff6b81" opacity="0.7" />
                         <ellipse cx="14" cy="2" rx="4" ry="2" fill="#ff6b81" opacity="0.7" />
-                        <!-- Head Ribbon -->
                         <path d="M 10 -20 C 5 -24, 5 -13, 10 -16 C 15 -24, 15 -13, 10 -16" fill="#ff4757" />
                         <circle cx="10" cy="-16" r="2" fill="#ffffff" />
                     </g>
 
-                    <!-- Bunny (Top Left) -->
+                    <!-- Bunny -->
                     <g transform="translate(125, 106) scale(0.8)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
                         <ellipse cx="-6" cy="-14" rx="4" ry="10" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
                         <ellipse cx="-6" cy="-14" rx="2" ry="6" fill="#ffccd5" />
                         <ellipse cx="6" cy="-14" rx="4" ry="10" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
                         <ellipse cx="6" cy="-14" rx="2" ry="6" fill="#ffccd5" />
                         <circle cx="0" cy="0" r="11" fill="#ffffff" stroke="#f0b6c1" stroke-width="1" />
-                        <circle cx="-4" cy="-2" r="1.3" fill="#4a4a4a" />
-                        <circle cx="4" cy="-2" r="1.3" fill="#4a4a4a" />
+                        <circle cx="-4" cy="-2" r="1.3" fill="#4a4a4a" /><circle cx="4" cy="-2" r="1.3" fill="#4a4a4a" />
                         <polygon points="-1,1 1,1 0,3" fill="#ff6b81" />
                     </g>
 
-                    <!-- Puppy (Top Right) -->
+                    <!-- Puppy -->
                     <g transform="translate(195, 106) scale(0.8)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
-                        <ellipse cx="-11" cy="-2" rx="5" ry="9" fill="#c7a75c" />
-                        <ellipse cx="11" cy="-2" rx="5" ry="9" fill="#c7a75c" />
+                        <ellipse cx="-11" cy="-2" rx="5" ry="9" fill="#c7a75c" /><ellipse cx="11" cy="-2" rx="5" ry="9" fill="#c7a75c" />
                         <circle cx="0" cy="0" r="11" fill="#fffdfa" />
-                        <circle cx="-4" cy="-2" r="1.3" fill="#333" />
-                        <circle cx="4" cy="-2" r="1.3" fill="#333" />
+                        <circle cx="-4" cy="-2" r="1.3" fill="#333" /><circle cx="4" cy="-2" r="1.3" fill="#333" />
                         <ellipse cx="0" cy="1" rx="2" ry="1.5" fill="#333" />
                     </g>
 
-                    <!-- CANDLE ANCHORED INSIDE CAKE TOP -->
-                    <!-- Candle Base Shadow & Cream Ring -->
+                    <!-- Candle Base -->
                     <ellipse cx="160" cy="114" rx="9" ry="3.5" fill="rgba(0,0,0,0.12)" />
                     <ellipse cx="160" cy="113" rx="7" ry="2.5" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
 
-                    <!-- SINGLE CANDLE WITH FLAME & SMOKE VFX -->
+                    <!-- Candle -->
                     <g class="candle" id="candle-1" transform="translate(160, 68)">
-                        <!-- Smoke VFX (Active when candle is out) -->
                         <g class="smoke-group">
                             <circle cx="0" cy="10" r="4" fill="#e0e0e0" />
                             <circle cx="-4" cy="0" r="6" fill="#d6d6d6" />
                             <circle cx="3" cy="-10" r="8" fill="#cccccc" />
                             <path d="M -3 10 Q -8 -5 2 -18 T -2 -35" fill="none" stroke="#e0e0e0" stroke-width="4" stroke-linecap="round" />
                         </g>
-
-                        <!-- Candle Body (Lowered Y-position so it sits inside cream) -->
                         <rect x="-6" y="10" width="12" height="35" rx="3" fill="url(#candle-body)" stroke="#ffb6c1" stroke-width="1" />
-                        <!-- Wick -->
                         <line x1="0" y1="10" x2="0" y2="1" stroke="#333333" stroke-width="2" stroke-linecap="round" />
-                        
-                        <!-- Flame -->
                         <g class="flame-group" filter="drop-shadow(0px 0px 6px #ff9800)">
                             <ellipse cx="0" cy="-9" rx="7" ry="12" fill="#ff9800" />
                             <ellipse cx="0" cy="-7" rx="4" ry="8" fill="#ffeb3b" />
@@ -441,27 +459,23 @@
                         </g>
                     </g>
 
-                    <!-- Top Bow Accent Over Candle Base -->
+                    <!-- Bow Over Candle Base -->
                     <g transform="translate(160, 114) scale(0.95)" filter="drop-shadow(0px 2px 3px rgba(0,0,0,0.15))">
                         <path d="M -25 -8 C -42 -28, -45 8, -20 2 C -30 16, -12 20, -6 4" fill="#ff758c" />
                         <path d="M 25 -8 C 42 -28, 45 8, 20 2 C 30 16, 12 20, 6 4" fill="#ff758c" />
                         <rect x="-8" y="-6" width="16" height="13" rx="4" fill="#ff4757" />
                     </g>
 
-                    <!-- TILTED "18" BADGE ON RIGHT -->
+                    <!-- "18" Badge -->
                     <g transform="translate(242, 98) rotate(14) scale(0.95)" filter="drop-shadow(2px 3px 4px rgba(0,0,0,0.15))">
-                        <!-- Stick -->
                         <line x1="-15" y1="25" x2="-35" y2="85" stroke="#d7ccc8" stroke-width="3" stroke-linecap="round" />
-                        <!-- Ribbon Bow on Stick -->
                         <g transform="translate(-22, 45) scale(0.7)">
                             <path d="M -15 -5 C -25 -15, -28 5, -12 2 C -20 10, -10 14, -6 3" fill="#ffe082" />
                             <path d="M 15 -5 C 25 -15, 28 5, 12 2 C 20 10, 10 14, 6 3" fill="#ffe082" />
                             <circle cx="0" cy="0" r="4" fill="#ffd54f" />
                         </g>
-                        <!-- Badge Frame -->
                         <rect x="-42" y="-30" width="64" height="52" rx="22" fill="#fff0f3" stroke="#ff80ab" stroke-width="3" />
                         <rect x="-38" y="-26" width="56" height="44" rx="18" fill="#ffffff" stroke="#ffccd5" stroke-width="1.5" stroke-dasharray="3,2" />
-                        <!-- Number 18 Text -->
                         <text x="-10" y="8" font-family="'Mali', cursive" font-weight="700" font-size="30" fill="#ff4d6d" text-anchor="middle">18</text>
                     </g>
 
@@ -473,7 +487,7 @@
                         <text x="0" y="4" font-family="'Mali', cursive" font-weight="700" font-size="7" fill="#ffffff" text-anchor="middle">BIRTHDAY</text>
                     </g>
 
-                    <!-- Rainbow & Cloud Bottom Left -->
+                    <!-- Rainbow & Cloud -->
                     <g transform="translate(48, 258) scale(0.65)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
                         <path d="M -20 0 A 20 20 0 0 1 20 0" fill="none" stroke="#ff80ab" stroke-width="4" />
                         <path d="M -16 0 A 16 16 0 0 1 16 0" fill="none" stroke="#ffe082" stroke-width="4" />
@@ -483,7 +497,7 @@
                         <circle cx="0" cy="2" r="7" fill="#ffffff" />
                     </g>
 
-                    <!-- Lighter right side -->
+                    <!-- Lighter -->
                     <g transform="translate(262, 260) scale(0.7)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
                         <rect x="0" y="0" width="35" height="16" rx="4" fill="#d7ccc8" />
                         <rect x="-8" y="3" width="10" height="10" rx="2" fill="#cfd8dc" />
@@ -506,18 +520,42 @@
             </div>
         </div>
 
-        <!-- Page 3 -->
+        <!-- Page 3 (NO CELEBRATE BUTTON) -->
         <div class="page" id="page3">
             <h1>🎂 Happy Birthday!</h1>
-            <div class="message-box">
-                สุขสันต์วันเกิดนะคนเก่ง! ขอบคุณที่เข้ามาเป็นความสุขในทุกๆ วัน ขอให้เธอมีความสุขมากๆ ยิ้มเยอะๆ ในทุกวัน รอยยิ้มของเธอคือสิ่งที่ดีที่สุดเลย รักแฟนที่สุดในโลก! 💕✨
+            <p style="margin-top: 0; color: #ff758c; font-size: 0.95em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะ 💕</p>
+            
+            <div class="topic-menu">
+                <button class="topic-btn" onclick="openModal('gift')">
+                    <span>🎁 ของขวัญวันเกิด</span>
+                    <span>✨</span>
+                </button>
+                <button class="topic-btn" onclick="openModal('wish')">
+                    <span>💌 คำอวยพร</span>
+                    <span>✨</span>
+                </button>
+                <button class="topic-btn" onclick="openModal('thought')">
+                    <span>💬 ความคิดเห็นถึงเจ้าของ</span>
+                    <span>✨</span>
+                </button>
             </div>
-            <button class="btn" onclick="celebrate()">กดเพื่อฉลอง! 🎉💖</button>
-            <div class="btn-group" style="margin-top: 15px;">
+
+            <div class="btn-group" style="margin-top: 20px;">
                 <button class="btn btn-secondary" onclick="nextPage(2)">⬅️ ถอยกลับ</button>
             </div>
         </div>
 
+    </div>
+
+    <!-- POPUP MODAL CONTAINER -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-title" id="modal-title">หัวข้อ</div>
+            <div class="modal-body" id="modal-body">
+                ข้อความเนื้อหา...
+            </div>
+            <button class="btn" onclick="closeModal()">ปิดหน้าต่าง 💖</button>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
@@ -584,12 +622,32 @@
             }
         }
 
-        function celebrate() {
-            confetti({
-                particleCount: 150,
-                spread: 90,
-                origin: { y: 0.6 }
-            });
+        /* MODAL POPUP FUNCTIONS */
+        const modalData = {
+            gift: {
+                title: "🎁 ของขวัญวันเกิด",
+                content: "ของขวัญวันเกิดชิ้นนี้ตั้งใจทำให้อยากเห็นเธอยิ้มได้นะ! มีทั้งความรัก ความใส่ใจ และความทรงจำดีๆ มอบให้เธอหมดเลย ขอให้ชอบนะครับคนเก่ง 💕✨"
+            },
+            wish: {
+                title: "💌 คำอวยพร",
+                content: "สุขสันต์วันเกิดนะคนเก่ง! ขอบคุณที่เข้ามาเป็นความสุขในทุกๆ วัน ขอให้เธอมีความสุขมากๆ ยิ้มเยอะๆ ในทุกวัน เจอแต่เรื่องน่ารักและคนที่ใจดีด้วยนะ รักแฟนที่สุดในโลก! 💕✨"
+            },
+            thought: {
+                title: "💬 ความคิดเห็นถึงเจ้าของ",
+                content: "เธอเป็นคนที่เก่ง น่ารัก แล้วก็สดใสที่สุดในโลกเลย ขอบคุณที่เติบโตมาอย่างดีนะ ดีใจมากๆ ที่ได้อยู่ข้างๆ คอยยินดีกับเธอทุกเรื่อง จะคอยเป็นกำลังใจและสนับสนุนเธอตรงนี้เสมอนะครับ 🥰💖"
+            }
+        };
+
+        function openModal(type) {
+            if (modalData[type]) {
+                document.getElementById('modal-title').innerText = modalData[type].title;
+                document.getElementById('modal-body').innerText = modalData[type].content;
+                document.getElementById('modal-overlay').style.display = 'flex';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').style.display = 'none';
         }
     </script>
 </body>
