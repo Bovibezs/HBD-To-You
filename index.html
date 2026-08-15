@@ -98,194 +98,30 @@
             text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
         }
 
-        /* ================= DESIGN CAKE (CSS CUSTOM) ================= */
-        .cake-container {
-            position: relative;
-            width: 250px;
-            height: 220px;
-            margin: 15px auto 5px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
+        /* SVG Cake Wrapper */
+        .svg-cake-wrapper {
+            width: 280px;
+            height: 250px;
+            margin: 0 auto;
         }
 
-        .plate {
-            position: absolute;
-            bottom: 0;
-            width: 240px;
-            height: 18px;
-            background: #f1f2f6;
-            border-radius: 10px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1), inset 0 -3px 0 #dfe4ea;
-        }
-
-        .cake-body {
-            position: absolute;
-            bottom: 12px;
-            width: 190px;
-            height: 100px;
-            background: linear-gradient(to bottom, #ff9ff3, #feca57);
-            border-radius: 20px 20px 10px 10px;
-            box-shadow: inset 0 -10px 0 rgba(0,0,0,0.08);
-        }
-
-        /* ครีมย้อยบนเค้ก */
-        .drips {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 30px;
-            background: #ffffff;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .drips::after {
-            content: '';
-            position: absolute;
-            top: 25px;
-            left: 0;
-            width: 100%;
-            height: 15px;
-            background: radial-gradient(circle, #fff 60%, transparent 65%);
-            background-size: 30px 30px;
-            background-position: 0 -15px;
-        }
-
-        /* สตรอว์เบอร์รีตกแต่งหน้าเค้ก */
-        .strawberries {
-            position: absolute;
-            top: -15px;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            padding: 0 15px;
-            z-index: 2;
-        }
-
-        .berry {
-            width: 20px;
-            height: 24px;
-            background: #ff4757;
-            border-radius: 50% 50% 30% 30%;
-            position: relative;
-            box-shadow: inset -2px -2px 0 rgba(0,0,0,0.2);
-        }
-        .berry::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: 5px;
-            width: 10px;
-            height: 4px;
-            background: #2ed573;
-            border-radius: 3px;
-        }
-
-        /* ป้ายเลข 18 */
-        .badge-18 {
-            position: absolute;
-            top: -65px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #ff7675, #d63031);
-            color: white;
-            font-size: 1.4em;
-            font-weight: 700;
-            padding: 4px 14px;
-            border-radius: 12px;
-            border: 3px solid #fff;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-            z-index: 4;
-        }
-        .badge-18::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 15px;
-            background: #b2bec3;
-        }
-
-        /* เทียน 5 เล่ม */
-        .candles-layer {
-            position: absolute;
-            top: -45px;
-            width: 160px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 3;
-        }
-
-        .candle-stick {
-            position: relative;
-            width: 10px;
-            height: 45px;
-            background: repeating-linear-gradient(45deg, #74b9ff, #74b9ff 5px, #ffffff 5px, #ffffff 10px);
-            border-radius: 4px 4px 0 0;
-            box-shadow: inset -1px 0 2px rgba(0,0,0,0.1);
-        }
-
-        .wick {
-            position: absolute;
-            top: -6px;
-            left: 4px;
-            width: 2px;
-            height: 6px;
-            background: #2d3436;
-        }
-
-        /* เปลวไฟ CSS */
-        .flame {
-            position: absolute;
-            top: -20px;
-            left: -3px;
-            width: 16px;
-            height: 22px;
-            background: radial-gradient(ellipse at bottom, #ffffff 15%, #fffa65 40%, #ff7675 75%, transparent 100%);
-            border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 12px #fffa65, 0 0 20px #ff7675;
-            animation: glowPulse 0.4s infinite alternate ease-in-out;
+        /* แอนิเมชันไฟพริ้วไหว */
+        .flame-element {
+            transform-origin: center bottom;
+            animation: flicker 0.35s infinite alternate ease-in-out;
             transition: all 0.3s ease;
         }
 
-        @keyframes glowPulse {
-            0% { transform: scale(1) rotate(-2deg); }
-            100% { transform: scale(1.1) rotate(2deg); }
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); opacity: 0.95; }
+            100% { transform: scale(1.15) rotate(2deg); opacity: 1; }
         }
 
-        /* ควันตอนดับ */
-        .flame.out {
+        .flame-element.out {
             opacity: 0 !important;
             transform: scale(0) !important;
-            box-shadow: none !important;
         }
 
-        .smoke {
-            position: absolute;
-            top: -20px;
-            left: 1px;
-            width: 8px;
-            height: 8px;
-            background: rgba(150, 150, 150, 0.7);
-            border-radius: 50%;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .flame.out + .smoke {
-            animation: smokeRise 1.2s ease-out forwards;
-        }
-
-        @keyframes smokeRise {
-            0% { opacity: 0.8; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-25px) scale(2.5); }
-        }
-
-        /* ================= BUTTONS & OTHERS ================= */
         .message-box {
             background: #fff5f5;
             border: 2px dashed #ff80ab;
@@ -405,32 +241,74 @@
             <button class="btn" onclick="nextPage(2)">กดเปิดการ์ดตรงนี้สิ ✨</button>
         </div>
 
-        <!-- หน้าที่ 2 (เค้ก CSS 100% สวยเป๊ะ ไฟไม่ลอย) -->
+        <!-- หน้าที่ 2 (SVG Cake เป๊ะเวอร์ 100%) -->
         <div class="page" id="page2">
             <h1>Make a Wish! 🎂</h1>
             
-            <div class="cake-container">
-                <div class="badge-18">18</div>
+            <div class="svg-cake-wrapper">
+                <svg viewBox="0 0 300 260" width="100%" height="100%">
+                    <!-- จานรองเค้ก -->
+                    <ellipse cx="150" cy="235" rx="120" ry="15" fill="#e0e0e0" />
+                    <ellipse cx="150" cy="232" rx="115" ry="12" fill="#ffffff" />
 
-                <div class="candles-layer">
-                    <div class="candle-stick"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
-                    <div class="candle-stick"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
-                    <div class="candle-stick"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
-                    <div class="candle-stick"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
-                    <div class="candle-stick"><div class="wick"></div><div class="flame"></div><div class="smoke"></div></div>
-                </div>
+                    <!-- ตัวเค้กชั้นล่าง -->
+                    <path d="M 50 170 Q 150 195 250 170 L 250 220 Q 150 245 50 220 Z" fill="#ffb8b8" />
+                    <path d="M 50 170 Q 150 195 250 170 L 250 180 Q 150 205 50 180 Z" fill="#ff9999" />
 
-                <div class="strawberries">
-                    <div class="berry"></div>
-                    <div class="berry"></div>
-                    <div class="berry"></div>
-                    <div class="berry"></div>
-                </div>
+                    <!-- ตัวเค้กชั้นบน -->
+                    <path d="M 70 120 Q 150 140 230 120 L 230 175 Q 150 195 70 175 Z" fill="#ffeaa7" />
+                    
+                    <!-- ครีมย้อย -->
+                    <path d="M 70 120 
+                             Q 80 140 90 125 
+                             Q 100 145 110 125 
+                             Q 130 150 150 125 
+                             Q 170 145 190 125 
+                             Q 210 140 230 120 
+                             Q 150 100 70 120 Z" fill="#ffffff" />
 
-                <div class="cake-body">
-                    <div class="drips"></div>
-                </div>
-                <div class="plate"></div>
+                    <!-- สตรอว์เบอร์รี -->
+                    <circle cx="85" cy="118" r="10" fill="#ff4757" />
+                    <circle cx="115" cy="122" r="10" fill="#ff4757" />
+                    <circle cx="185" cy="122" r="10" fill="#ff4757" />
+                    <circle cx="215" cy="118" r="10" fill="#ff4757" />
+
+                    <!-- ป้ายเลข 18 ปักตรงกลาง -->
+                    <rect x="135" y="70" width="30" height="45" rx="8" fill="#ff4757" stroke="#ffffff" stroke-width="3" />
+                    <text x="150" y="100" font-family="'Mali', cursive" font-weight="bold" font-size="20" fill="#ffffff" text-anchor="middle">18</text>
+                    <line x1="150" y1="115" x2="150" y2="130" stroke="#d63031" stroke-width="3" />
+
+                    <!-- เทียน 5 เล่ม -->
+                    <!-- เล่มที่ 1 -->
+                    <rect x="75" y="75" width="8" height="35" rx="3" fill="#74b9ff" />
+                    <line x1="79" y1="75" x2="79" y2="68" stroke="#2d3436" stroke-width="2" />
+                    <path class="flame-element" d="M 79 50 C 73 60 75 68 79 68 C 83 68 85 60 79 50 Z" fill="#ff9f43" />
+                    <path class="flame-element" d="M 79 56 C 76 62 77 68 79 68 C 81 68 82 62 79 56 Z" fill="#fffa65" />
+
+                    <!-- เล่มที่ 2 -->
+                    <rect x="105" y="80" width="8" height="35" rx="3" fill="#a29bfe" />
+                    <line x1="109" y1="80" x2="109" y2="73" stroke="#2d3436" stroke-width="2" />
+                    <path class="flame-element" d="M 109 55 C 103 65 105 73 109 73 C 113 73 115 65 109 55 Z" fill="#ff9f43" />
+                    <path class="flame-element" d="M 109 61 C 106 67 107 73 109 73 C 111 73 112 67 109 61 Z" fill="#fffa65" />
+
+                    <!-- เล่มที่ 3 (หลังป้าย) -->
+                    <rect x="146" y="40" width="8" height="35" rx="3" fill="#fd79a8" />
+                    <line x1="150" y1="40" x2="150" y2="33" stroke="#2d3436" stroke-width="2" />
+                    <path class="flame-element" d="M 150 15 C 144 25 146 33 150 33 C 154 33 156 25 150 15 Z" fill="#ff9f43" />
+                    <path class="flame-element" d="M 150 21 C 147 27 148 33 150 33 C 152 33 153 27 150 21 Z" fill="#fffa65" />
+
+                    <!-- เล่มที่ 4 -->
+                    <rect x="187" y="80" width="8" height="35" rx="3" fill="#55efc4" />
+                    <line x1="191" y1="80" x2="191" y2="73" stroke="#2d3436" stroke-width="2" />
+                    <path class="flame-element" d="M 191 55 C 185 65 187 73 191 73 C 195 73 197 65 191 55 Z" fill="#ff9f43" />
+                    <path class="flame-element" d="M 191 61 C 188 67 189 73 191 73 C 193 73 194 67 191 61 Z" fill="#fffa65" />
+
+                    <!-- เล่มที่ 5 -->
+                    <rect x="217" y="75" width="8" height="35" rx="3" fill="#ffeaa7" />
+                    <line x1="221" y1="75" x2="221" y2="68" stroke="#2d3436" stroke-width="2" />
+                    <path class="flame-element" d="M 221 50 C 215 60 217 68 221 68 C 225 68 227 60 221 50 Z" fill="#ff9f43" />
+                    <path class="flame-element" d="M 221 56 C 218 62 219 68 221 68 C 223 68 224 62 221 56 Z" fill="#fffa65" />
+                </svg>
             </div>
 
             <p id="wish-text" style="font-weight: 600; color: #ff4757; margin: 10px 0 10px;">
@@ -505,29 +383,35 @@
             document.getElementById('page' + pageNumber).classList.add('active');
         }
 
-        /* ฟังก์ชันเป่าเทียนสุ่มทีละ 1-2 เล่ม */
+        /* ฟังก์ชันเป่าเทียน SVG ดับสุ่มทีละ 1-2 เล่ม */
         function blowCandleStepByStep() {
-            const activeFlames = Array.from(document.querySelectorAll('.flame:not(.out)'));
+            // ดึงกลุ่มไฟเทียน SVG (จับคู่ดวงละ 2 element ส้ม/เหลือง)
+            const allFlames = Array.from(document.querySelectorAll('.flame-element:not(.out)'));
             const wishText = document.getElementById('wish-text');
             const blowBtn = document.getElementById('blow-btn');
             const nextBtn = document.getElementById('next-btn-page2');
 
-            if (activeFlames.length > 0) {
-                const countToExtinguish = Math.min(Math.floor(Math.random() * 2) + 1, activeFlames.length);
-                
+            // มีเทียน 5 เล่ม = มีชิ้นส่วนไฟ 10 ชิ้น (คู่ละ 2)
+            if (allFlames.length > 0) {
+                const totalActiveCandles = allFlames.length / 2;
+                const countToExtinguish = Math.min(Math.floor(Math.random() * 2) + 1, totalActiveCandles);
+
                 for (let i = 0; i < countToExtinguish; i++) {
-                    const randomIndex = Math.floor(Math.random() * activeFlames.length);
-                    activeFlames[randomIndex].classList.add('out');
-                    activeFlames.splice(randomIndex, 1);
+                    const currentActive = Array.from(document.querySelectorAll('.flame-element:not(.out)'));
+                    if (currentActive.length === 0) break;
+
+                    const randomIndex = Math.floor(Math.random() * (currentActive.length / 2)) * 2;
+                    currentActive[randomIndex].classList.add('out');
+                    currentActive[randomIndex + 1].classList.add('out');
                 }
 
-                const remaining = document.querySelectorAll('.flame:not(.out)').length;
+                const remaining = document.querySelectorAll('.flame-element:not(.out)').length;
 
                 if (remaining > 0) {
                     const statusMessages = [
                         "ฟู่ๆ~ ไฟดับไปบางเล่มแล้ว! เป่าอีกรอบสิ 🌬️",
                         "ฮึบอีกนิด! เทียนใกล้จะดับหมดแล้ว 💖",
-                        "แรงอีกนิดนึงเร็วแฟน! 💨"
+                        "ออกแรงอีกนิดนึงเร็วแฟน! 💨"
                     ];
                     wishText.innerText = statusMessages[Math.floor(Math.random() * statusMessages.length)];
                 } else {
