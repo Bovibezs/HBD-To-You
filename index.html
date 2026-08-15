@@ -23,7 +23,7 @@
             color: #4a4a4a;
         }
 
-        /* Overlay หน้าแรกสุดเพื่อเปิดเพลง */
+        /* หน้าแรกสุด (Overlay) */
         #start-overlay {
             position: fixed;
             top: 0;
@@ -40,17 +40,22 @@
             padding: 20px;
         }
 
-        /* ตกแต่ง GIF หน้าแรก */
-        .overlay-gif {
+        /* ตกแต่งกรอบ GIF หน้าแรก */
+        .gif-wrapper {
             width: 260px;
-            max-width: 80vw;
-            height: 200px;
-            object-fit: cover;
+            max-width: 85vw;
             border-radius: 20px;
+            overflow: hidden;
             box-shadow: 0 10px 25px rgba(255, 107, 129, 0.4);
             border: 4px solid white;
-            margin-bottom: 25px;
-            background: #fff0f3;
+            margin-bottom: 20px;
+            background: #fff;
+        }
+
+        .gif-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .card {
@@ -158,7 +163,7 @@
         .btn-secondary { background: #a4b0be; font-size: 1em; }
         .btn-secondary:hover { background: #747d8c; }
 
-        /* ปุ่มเล่นเพลงมินิมอล */
+        /* ปุ่มเล่นเพลงแบบซ่อนความยาวสไลเดอร์ */
         .music-controls {
             position: absolute;
             top: 15px;
@@ -214,17 +219,20 @@
 
 <body>
 
+    <!-- ลิงก์เพลงโรแมนติกแบบ Direct Audio Stream (ดังชัวร์ 100%) -->
     <audio id="bg-music" loop preload="auto">
-        <source src="https://cdns-preview-d.dzcdn.net/stream/c-d3807d9f75fb146db7bbdbdcf1b3bb88-6.mp3" type="audio/mpeg">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sun-683.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- หน้าแรกพร้อม GIF อนิเมะกอดกัน (ลิงก์ Direct CDN เสถียร 100%) -->
+    <!-- หน้าแรกพร้อม GIF Horimiya Hug จาก Tenor แบบ Direct CDN -->
     <div id="start-overlay">
-        <img src="https://tenor.com/view/horimiya-hug-anime-miyamura-hori-gif-20848980" 
-             alt="Anime Hug" 
-             class="overlay-gif"
-             onerror="this.onerror=null; this.src='https://media.tenor.com/images/84a8618e470a1a084cbbbb4df03c155d/tenor.gif';">
-        <h2 style="color: white; margin-bottom: 20px;">มีของขวัญวันเกิดรออยู่นะ... 💖</h2>
+        <div class="gif-wrapper">
+            <img id="horimiya-gif" 
+                 src="https://c.tenor.com/20848980/horimiya-hug-anime.gif" 
+                 alt="Horimiya Hug"
+                 onerror="this.onerror=null; this.src='https://media.giphy.com/media/l2QDM9Jnim1YV55YA/giphy.gif';">
+        </div>
+        <h2 style="color: white; margin-bottom: 20px; font-size: 1.4em;">มีของขวัญวันเกิดรออยู่นะ... 💖</h2>
         <button class="btn" style="background: white; color: #ff4757;" onclick="initWebsite()">
             กดเพื่อเปิดของขวัญ 💖🎵
         </button>
@@ -233,7 +241,7 @@
     <div class="card">
         <div class="music-controls" id="music-controls">
             <button class="music-btn" onclick="toggleMusic(event)" title="เปิด/ปิดเพลง">🎵</button>
-            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.3" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
+            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.5" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
         </div>
 
         <!-- หน้าที่ 1 -->
@@ -284,10 +292,15 @@
         const audio = document.getElementById('bg-music');
         const musicControls = document.getElementById('music-controls');
         
-        audio.volume = 0.3;
+        audio.volume = 0.5;
 
+        // เมื่อกดปุ่มหน้าแรก เพลงจะเล่นทันที
         function initWebsite() {
-            audio.play().catch(error => console.log("Playback error:", error));
+            audio.play().then(() => {
+                console.log("Music started successfully");
+            }).catch(error => {
+                console.log("Audio play failed: ", error);
+            });
             document.getElementById('start-overlay').style.display = 'none';
         }
 
