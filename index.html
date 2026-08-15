@@ -23,7 +23,6 @@
             color: #4a4a4a;
         }
 
-        /* Overlay หน้าแรกสุดเพื่อเปิดเพลง */
         #start-overlay {
             position: fixed;
             top: 0;
@@ -83,7 +82,7 @@
             width: 100%;
             text-align: center;
             position: relative;
-            min-height: 520px;
+            min-height: 540px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -116,117 +115,74 @@
             text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
         }
 
-        /* --- โครงสร้างเค้ก 3 มิติ --- */
-        .cake-3d-wrapper {
+        /* --- กรอบภาพเค้กอลังการ + เปลวไฟ Canvas --- */
+        .cake-wrapper {
             position: relative;
-            width: 220px;
-            height: 180px;
-            margin: 20px auto 10px;
+            width: 260px;
+            height: 260px;
+            margin: 10px auto;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
+            align-items: center;
         }
 
-        .cake-plate {
-            position: absolute;
-            bottom: -5px;
-            width: 210px;
-            height: 40px;
-            background: #e0e0e0;
-            border-radius: 50%;
-            box-shadow: 0 10px 15px rgba(0,0,0,0.15), inset 0 3px 0 #fff;
+        .cake-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
         }
 
-        .cake-bottom {
+        /* เปลวไฟ CSS บนปลายเทียน 5 เล่ม */
+        .flames-container {
             position: absolute;
-            bottom: 10px;
-            width: 170px;
-            height: 70px;
-            background: linear-gradient(to right, #ff9ff3, #feca57, #ff9ff3);
-            border-radius: 15px 15px 25px 25px;
-            box-shadow: inset 0 -12px 0 rgba(0,0,0,0.1), inset 0 12px 0 #fff;
-            border: 2px solid #ff6b81;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
 
-        .cake-top {
+        .flame-dot {
             position: absolute;
-            bottom: 65px;
-            width: 120px;
-            height: 55px;
-            background: linear-gradient(to right, #ff6b81, #ff8e53, #ff6b81);
-            border-radius: 12px 12px 20px 20px;
-            box-shadow: inset 0 -8px 0 rgba(0,0,0,0.1), inset 0 10px 0 #fff;
-            border: 2px solid #ff4757;
-        }
-
-        /* ป้ายเลข 18 */
-        .number-18 {
-            position: absolute;
-            bottom: 115px;
-            font-size: 2.2em;
-            font-weight: 800;
-            color: #ff4757;
-            background: #fff;
-            padding: 2px 12px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            border: 3px solid #ffeaa7;
-            z-index: 5;
-            text-shadow: 1px 1px 0px #ffeaa7;
-        }
-        .number-18::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 12px;
-            background: #ffeaa7;
-        }
-
-        /* เทียน 4 เล่ม */
-        .candles-group {
-            position: absolute;
-            bottom: 115px;
-            width: 130px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 4;
-            padding: 0 5px;
-        }
-
-        .candle-item {
-            position: relative;
-            width: 8px;
-            height: 30px;
-            background: linear-gradient(to bottom, #74b9ff, #0984e3);
-            border-radius: 3px;
-        }
-
-        .flame-3d {
-            position: absolute;
-            top: -16px;
-            left: 50%;
-            transform: translateX(-50%);
             width: 12px;
             height: 18px;
-            background: orange;
+            background: radial-gradient(circle, #fff 20%, #fffa65 40%, #ff4757 80%);
             border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 8px orange, 0 0 15px yellow;
-            animation: flicker3d 0.5s infinite alternate ease-in-out;
-            transition: all 0.3s ease;
+            box-shadow: 0 0 10px #fffa65, 0 0 20px #ff4757;
+            transform: translate(-50%, -100%);
+            animation: flameWiggle 0.4s infinite alternate ease-in-out;
+            transition: all 0.4s ease;
         }
 
-        @keyframes flicker3d {
-            0% { transform: translateX(-50%) scale(1) rotate(-3deg); opacity: 0.9; }
-            100% { transform: translateX(-50%) scale(1.15) rotate(3deg); opacity: 1; }
+        @keyframes flameWiggle {
+            0% { transform: translate(-50%, -100%) scale(1) rotate(-3deg); }
+            100% { transform: translate(-50%, -100%) scale(1.15) rotate(3deg); }
         }
 
-        .flame-3d.out {
+        .flame-dot.out {
             opacity: 0 !important;
-            transform: translateX(-50%) scale(0) !important;
+            transform: translate(-50%, -100%) scale(0) !important;
             box-shadow: none !important;
+        }
+
+        .smoke-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(180, 180, 180, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .flame-dot.out + .smoke-particle {
+            animation: smokeRise 1.5s ease-out forwards;
+        }
+
+        @keyframes smokeRise {
+            0% { opacity: 0.8; transform: translate(-50%, -100%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -200%) scale(3); }
         }
 
         .message-box {
@@ -262,7 +218,6 @@
         .btn-secondary { background: #a4b0be; font-size: 1em; }
         .btn-secondary:hover { background: #747d8c; }
 
-        /* ปุ่มเล่นเพลงแบบมินิมอล */
         .music-controls {
             position: absolute;
             top: 15px;
@@ -349,28 +304,38 @@
             <button class="btn" onclick="nextPage(2)">กดเปิดการ์ดตรงนี้สิ ✨</button>
         </div>
 
-        <!-- หน้าที่ 2 (หน้าเป่าเทียนเค้ก 3D ป้าย 18 + เทียน 4 เล่ม + ล็อกปุ่มถัดไป) -->
+        <!-- หน้าที่ 2 (เค้กการ์ตูนอลังการ + เทียน 5 เล่ม + ล็อกปุ่มถัดไป) -->
         <div class="page" id="page2">
             <h1>Make a Wish! 🎂</h1>
             
-            <div class="cake-3d-wrapper">
-                <div class="number-18">18</div>
-                <div class="candles-group">
-                    <div class="candle-item"><div class="flame-3d"></div></div>
-                    <div class="candle-item"><div class="flame-3d"></div></div>
-                    <div class="candle-item"><div class="flame-3d"></div></div>
-                    <div class="candle-item"><div class="flame-3d"></div></div>
+            <div class="cake-wrapper">
+                <!-- ภาพเค้กการ์ตูน 3D สวยงามพร้อมป้าย 18 -->
+                <img src="https://api.iconify.design/noto:birthday-cake.svg" class="cake-img" alt="Birthday Cake 18" id="cake-image">
+                
+                <!-- เปลวไฟบนหัวเทียน 5 ตำแหน่ง -->
+                <div class="flames-container">
+                    <div class="flame-dot" style="top: 25%; left: 32%;"></div>
+                    <div class="smoke-particle" style="top: 25%; left: 32%;"></div>
+
+                    <div class="flame-dot" style="top: 20%; left: 41%;"></div>
+                    <div class="smoke-particle" style="top: 20%; left: 41%;"></div>
+
+                    <div class="flame-dot" style="top: 18%; left: 50%;"></div>
+                    <div class="smoke-particle" style="top: 18%; left: 50%;"></div>
+
+                    <div class="flame-dot" style="top: 20%; left: 59%;"></div>
+                    <div class="smoke-particle" style="top: 20%; left: 59%;"></div>
+
+                    <div class="flame-dot" style="top: 25%; left: 68%;"></div>
+                    <div class="smoke-particle" style="top: 25%; left: 68%;"></div>
                 </div>
-                <div class="cake-top"></div>
-                <div class="cake-bottom"></div>
-                <div class="cake-plate"></div>
             </div>
 
-            <p id="wish-text" style="font-weight: 600; color: #ff4757; margin: 15px 0 10px;">
-                ตั้งจิตอธิษฐานแล้วกดเป่าเทียนก่อนนะ 💖
+            <p id="wish-text" style="font-weight: 600; color: #ff4757; margin: 5px 0 10px;">
+                ตั้งจิตอธิษฐานแล้วกดเป่าเทียนนะคนเก่ง ✨💖
             </p>
 
-            <button class="btn" id="blow-btn" style="background: #ffeaa7; color: #d63031; margin-bottom: 10px;" onclick="blowCandle()">
+            <button class="btn" id="blow-btn" style="background: #ffeaa7; color: #d63031; margin-bottom: 5px;" onclick="blowCandle()">
                 กดเพื่อเป่าเทียน! 🌬️
             </button>
 
@@ -439,22 +404,21 @@
             document.getElementById('page' + pageNumber).classList.add('active');
         }
 
-        /* ฟังก์ชันเป่าเทียนแบบดับทั้งหมด + แสดงปุ่มหน้าถัดไป */
+        /* ฟังก์ชันเป่าเทียน 5 เล่มพร้อมกัน */
         function blowCandle() {
-            const flames = document.querySelectorAll('.flame-3d');
+            const flames = document.querySelectorAll('.flame-dot');
             const wishText = document.getElementById('wish-text');
             const blowBtn = document.getElementById('blow-btn');
             const nextBtn = document.getElementById('next-btn-page2');
             
             flames.forEach(flame => flame.classList.add('out'));
-            wishText.innerText = "เย้! เป่าเทียนครบแล้ว ขอให้สมหวังทุกประการนะ! ✨💖";
+            wishText.innerText = "เย้! เป่าเทียนดับหมดแล้ว ขอให้คำอธิษฐานเป็นจริงนะ! ✨💖";
             
-            // ซ่อนปุ่มเป่าเทียน และ แสดงปุ่มหน้าถัดไป
             blowBtn.style.display = 'none';
             nextBtn.style.display = 'inline-block';
             
             confetti({
-                particleCount: 60,
+                particleCount: 80,
                 spread: 70,
                 origin: { y: 0.5 }
             });
