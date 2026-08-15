@@ -174,6 +174,8 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             border: 3px solid #ffccd5;
             animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
         @keyframes popIn {
@@ -198,8 +200,53 @@
             color: #4a4a4a;
             margin-bottom: 15px;
             text-align: center;
-            max-height: 250px;
+            min-height: 180px;
+            max-height: 280px;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Interactive Gift Box Styles */
+        .gift-box-container {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        .gift-box-container:hover {
+            transform: scale(1.05);
+        }
+        .gift-svg {
+            width: 100px;
+            height: 100px;
+            filter: drop-shadow(0 5px 8px rgba(255,107,129,0.3));
+        }
+        .gift-lid {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: 50% 35px;
+        }
+        .gift-box-container.open .gift-lid {
+            transform: translateY(-40px) rotate(-15px);
+        }
+
+        /* Flower Particles in Gift Modal */
+        .flower-particle {
+            position: absolute;
+            font-size: 24px;
+            pointer-events: none;
+            animation: floatUpFlower 1.8s ease-out forwards;
+            z-index: 20;
+        }
+        @keyframes floatUpFlower {
+            0% { opacity: 1; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(var(--dr)); }
         }
 
         .btn-group {
@@ -520,7 +567,7 @@
             </div>
         </div>
 
-        <!-- Page 3 (NO CELEBRATE BUTTON) -->
+        <!-- Page 3 -->
         <div class="page" id="page3">
             <h1>🎂 Happy Birthday!</h1>
             <p style="margin-top: 0; color: #ff758c; font-size: 0.95em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะ 💕</p>
@@ -552,7 +599,7 @@
         <div class="modal-card">
             <div class="modal-title" id="modal-title">หัวข้อ</div>
             <div class="modal-body" id="modal-body">
-                ข้อความเนื้อหา...
+                <!-- Content inserted dynamically -->
             </div>
             <button class="btn" onclick="closeModal()">ปิดหน้าต่าง 💖</button>
         </div>
@@ -622,27 +669,92 @@
             }
         }
 
-        /* MODAL POPUP FUNCTIONS */
+        /* MODAL POPUP & GIFT BOX LOGIC */
         const modalData = {
-            gift: {
-                title: "🎁 ของขวัญวันเกิด",
-                content: "ของขวัญวันเกิดชิ้นนี้ตั้งใจทำให้อยากเห็นเธอยิ้มได้นะ! มีทั้งความรัก ความใส่ใจ และความทรงจำดีๆ มอบให้เธอหมดเลย ขอให้ชอบนะครับคนเก่ง 💕✨"
-            },
             wish: {
                 title: "💌 คำอวยพร",
-                content: "สุขสันต์วันเกิดนะคนเก่ง! ขอบคุณที่เข้ามาเป็นความสุขในทุกๆ วัน ขอให้เธอมีความสุขมากๆ ยิ้มเยอะๆ ในทุกวัน เจอแต่เรื่องน่ารักและคนที่ใจดีด้วยนะ รักแฟนที่สุดในโลก! 💕✨"
+                html: "สุขสันต์วันเกิดนะคนเก่ง! ขอบคุณที่เข้ามาเป็นความสุขในทุกๆ วัน ขอให้เธอมีความสุขมากๆ ยิ้มเยอะๆ ในทุกวัน เจอแต่เรื่องน่ารักและคนที่ใจดีด้วยนะ รักแฟนที่สุดในโลก! 💕✨"
             },
             thought: {
                 title: "💬 ความคิดเห็นถึงเจ้าของ",
-                content: "เธอเป็นคนที่เก่ง น่ารัก แล้วก็สดใสที่สุดในโลกเลย ขอบคุณที่เติบโตมาอย่างดีนะ ดีใจมากๆ ที่ได้อยู่ข้างๆ คอยยินดีกับเธอทุกเรื่อง จะคอยเป็นกำลังใจและสนับสนุนเธอตรงนี้เสมอนะครับ 🥰💖"
+                html: "เธอเป็นคนที่เก่ง น่ารัก แล้วก็สดใสที่สุดในโลกเลย ขอบคุณที่เติบโตมาอย่างดีนะ ดีใจมากๆ ที่ได้อยู่ข้างๆ คอยยินดีกับเธอทุกเรื่อง จะคอยเป็นกำลังใจและสนับสนุนเธอตรงนี้เสมอนะครับ 🥰💖"
             }
         };
 
         function openModal(type) {
-            if (modalData[type]) {
-                document.getElementById('modal-title').innerText = modalData[type].title;
-                document.getElementById('modal-body').innerText = modalData[type].content;
-                document.getElementById('modal-overlay').style.display = 'flex';
+            const modalBody = document.getElementById('modal-body');
+            const modalTitle = document.getElementById('modal-title');
+
+            if (type === 'gift') {
+                modalTitle.innerText = "🎁 ของขวัญวันเกิด";
+                modalBody.innerHTML = `
+                    <div class="gift-box-container" id="gift-box" onclick="openGiftBox(event)">
+                        <svg class="gift-svg" viewBox="0 0 100 100">
+                            <!-- Gift Box Body -->
+                            <rect x="20" y="40" width="60" height="45" rx="5" fill="#ff758c" />
+                            <rect x="44" y="40" width="12" height="45" fill="#ff4757" />
+                            <!-- Gift Box Lid -->
+                            <g class="gift-lid">
+                                <rect x="15" y="28" width="70" height="15" rx="3" fill="#ff80ab" />
+                                <rect x="44" y="28" width="12" height="15" fill="#ff4757" />
+                                <!-- Bow -->
+                                <path d="M 35 18 C 25 10, 40 5, 47 25 Z" fill="#ff4757" />
+                                <path d="M 65 18 C 75 10, 60 5, 53 25 Z" fill="#ff4757" />
+                                <circle cx="50" cy="25" r="5" fill="#ff2e4c" />
+                            </g>
+                        </svg>
+                        <p id="gift-hint" style="margin-top: 10px; color: #ff4757; font-weight: 700; font-size: 0.95em;">
+                            กดที่กล่องเพื่อเปิดของขวัญสิ! 🎁✨
+                        </p>
+                    </div>
+                `;
+            } else if (modalData[type]) {
+                modalTitle.innerText = modalData[type].title;
+                modalBody.innerHTML = modalData[type].html;
+            }
+
+            document.getElementById('modal-overlay').style.display = 'flex';
+        }
+
+        function openGiftBox(event) {
+            const giftBox = document.getElementById('gift-box');
+            const giftHint = document.getElementById('gift-hint');
+            const modalBody = document.getElementById('modal-body');
+
+            if (!giftBox.classList.contains('open')) {
+                giftBox.classList.add('open');
+                if (giftHint) giftHint.innerText = "เบ่งบานไปด้วยความรัก! 🌸💖";
+
+                // Spawn Blooming Flowers & Heart Particles
+                const flowers = ['🌸', '🌷', '🌹', '🌻', '🌺', '💖', '✨', '💐'];
+                for (let i = 0; i < 28; i++) {
+                    const flower = document.createElement('div');
+                    flower.className = 'flower-particle';
+                    flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+
+                    // Random direction vectors
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 80 + Math.random() * 110;
+                    const dx = Math.cos(angle) * distance + 'px';
+                    const dy = Math.sin(angle) * distance - 20 + 'px';
+                    const dr = (Math.random() * 360 - 180) + 'deg';
+
+                    flower.style.setProperty('--dx', dx);
+                    flower.style.setProperty('--dy', dy);
+                    flower.style.setProperty('--dr', dr);
+                    flower.style.left = '50%';
+                    flower.style.top = '40%';
+
+                    modalBody.appendChild(flower);
+                }
+
+                // Show Message after opening
+                setTimeout(() => {
+                    const message = document.createElement('p');
+                    message.style.cssText = "color: #ff4757; font-weight: 700; font-size: 1em; margin-top: 15px; animation: fadeIn 0.5s ease;";
+                    message.innerText = "มอบทุ่งดอกไม้และความรักทั้งหมดนี้ให้เธอคนเดียวเลย ขอให้เธอสดใสและมีความสุขเหมือนดอกไม้ที่เบ่งบานในทุกๆ วันนะ! 🌸💖✨";
+                    modalBody.appendChild(message);
+                }, 400);
             }
         }
 
