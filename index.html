@@ -115,11 +115,11 @@
             text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
         }
 
-        /* --- กรอบภาพเค้กอลังการ + เปลวไฟ Canvas --- */
+        /* --- กรอบภาพเค้ก + ปรับไฟวางเนียนบนปลายเทียน --- */
         .cake-wrapper {
             position: relative;
-            width: 260px;
-            height: 260px;
+            width: 240px;
+            height: 240px;
             margin: 10px auto;
             display: flex;
             justify-content: center;
@@ -130,10 +130,9 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.12));
         }
 
-        /* เปลวไฟ CSS บนปลายเทียน 5 เล่ม */
         .flames-container {
             position: absolute;
             top: 0;
@@ -145,44 +144,25 @@
 
         .flame-dot {
             position: absolute;
-            width: 12px;
-            height: 18px;
-            background: radial-gradient(circle, #fff 20%, #fffa65 40%, #ff4757 80%);
+            width: 10px;
+            height: 15px;
+            background: radial-gradient(circle, #fff 15%, #fffa65 45%, #ff4757 85%);
             border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 10px #fffa65, 0 0 20px #ff4757;
+            box-shadow: 0 0 8px #fffa65, 0 0 15px #ff4757;
             transform: translate(-50%, -100%);
-            animation: flameWiggle 0.4s infinite alternate ease-in-out;
-            transition: all 0.4s ease;
+            animation: flameWiggle 0.35s infinite alternate ease-in-out;
+            transition: all 0.3s ease;
         }
 
         @keyframes flameWiggle {
             0% { transform: translate(-50%, -100%) scale(1) rotate(-3deg); }
-            100% { transform: translate(-50%, -100%) scale(1.15) rotate(3deg); }
+            100% { transform: translate(-50%, -100%) scale(1.12) rotate(3deg); }
         }
 
         .flame-dot.out {
             opacity: 0 !important;
             transform: translate(-50%, -100%) scale(0) !important;
             box-shadow: none !important;
-        }
-
-        .smoke-particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: rgba(180, 180, 180, 0.6);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-        }
-
-        .flame-dot.out + .smoke-particle {
-            animation: smokeRise 1.5s ease-out forwards;
-        }
-
-        @keyframes smokeRise {
-            0% { opacity: 0.8; transform: translate(-50%, -100%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -200%) scale(3); }
         }
 
         .message-box {
@@ -304,30 +284,18 @@
             <button class="btn" onclick="nextPage(2)">กดเปิดการ์ดตรงนี้สิ ✨</button>
         </div>
 
-        <!-- หน้าที่ 2 (เค้กการ์ตูนอลังการ + เทียน 5 เล่ม + ล็อกปุ่มถัดไป) -->
+        <!-- หน้าที่ 2 (ปรับพิกัดเนียนเป๊ะ + เป่าดับทีละ 1-2 เล่ม) -->
         <div class="page" id="page2">
             <h1>Make a Wish! 🎂</h1>
             
             <div class="cake-wrapper">
-                <!-- ภาพเค้กการ์ตูน 3D สวยงามพร้อมป้าย 18 -->
-                <img src="https://api.iconify.design/noto:birthday-cake.svg" class="cake-img" alt="Birthday Cake 18" id="cake-image">
+                <img src="https://api.iconify.design/noto:birthday-cake.svg" class="cake-img" alt="Birthday Cake 18">
                 
-                <!-- เปลวไฟบนหัวเทียน 5 ตำแหน่ง -->
+                <!-- พิกัดเทียน 3 เล่มบนรูปเค้ก iconify (ตรงหัวเทียนเป๊ะๆ) -->
                 <div class="flames-container">
-                    <div class="flame-dot" style="top: 25%; left: 32%;"></div>
-                    <div class="smoke-particle" style="top: 25%; left: 32%;"></div>
-
-                    <div class="flame-dot" style="top: 20%; left: 41%;"></div>
-                    <div class="smoke-particle" style="top: 20%; left: 41%;"></div>
-
-                    <div class="flame-dot" style="top: 18%; left: 50%;"></div>
-                    <div class="smoke-particle" style="top: 18%; left: 50%;"></div>
-
-                    <div class="flame-dot" style="top: 20%; left: 59%;"></div>
-                    <div class="smoke-particle" style="top: 20%; left: 59%;"></div>
-
-                    <div class="flame-dot" style="top: 25%; left: 68%;"></div>
-                    <div class="smoke-particle" style="top: 25%; left: 68%;"></div>
+                    <div class="flame-dot" style="top: 31%; left: 37%;"></div>
+                    <div class="flame-dot" style="top: 25%; left: 50%;"></div>
+                    <div class="flame-dot" style="top: 31%; left: 63%;"></div>
                 </div>
             </div>
 
@@ -335,13 +303,12 @@
                 ตั้งจิตอธิษฐานแล้วกดเป่าเทียนนะคนเก่ง ✨💖
             </p>
 
-            <button class="btn" id="blow-btn" style="background: #ffeaa7; color: #d63031; margin-bottom: 5px;" onclick="blowCandle()">
+            <button class="btn" id="blow-btn" style="background: #ffeaa7; color: #d63031; margin-bottom: 5px;" onclick="blowCandleStepByStep()">
                 กดเพื่อเป่าเทียน! 🌬️
             </button>
 
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="nextPage(1)">⬅️ ถอยกลับ</button>
-                <!-- ปุ่มหน้าถัดไป (ถูกซ่อนไว้จนกว่าจะเป่าเทียนเสร็จ) -->
                 <button class="btn" id="next-btn-page2" style="display: none;" onclick="nextPage(3)">หน้าถัดไป ➡️</button>
             </div>
         </div>
@@ -404,24 +371,47 @@
             document.getElementById('page' + pageNumber).classList.add('active');
         }
 
-        /* ฟังก์ชันเป่าเทียน 5 เล่มพร้อมกัน */
-        function blowCandle() {
-            const flames = document.querySelectorAll('.flame-dot');
+        /* ฟังก์ชันเป่าเทียนทีละ 1-2 เล่มจนกว่าจะดับหมด */
+        function blowCandleStepByStep() {
+            // เลือกเฉพาะเทียนที่ไฟยังติดอยู่
+            const activeFlames = Array.from(document.querySelectorAll('.flame-dot:not(.out)'));
             const wishText = document.getElementById('wish-text');
             const blowBtn = document.getElementById('blow-btn');
             const nextBtn = document.getElementById('next-btn-page2');
-            
-            flames.forEach(flame => flame.classList.add('out'));
-            wishText.innerText = "เย้! เป่าเทียนดับหมดแล้ว ขอให้คำอธิษฐานเป็นจริงนะ! ✨💖";
-            
-            blowBtn.style.display = 'none';
-            nextBtn.style.display = 'inline-block';
-            
-            confetti({
-                particleCount: 80,
-                spread: 70,
-                origin: { y: 0.5 }
-            });
+
+            if (activeFlames.length > 0) {
+                // สุ่มดับ 1 ถึง 2 เล่ม
+                const countToExtinguish = Math.min(Math.floor(Math.random() * 2) + 1, activeFlames.length);
+                
+                for (let i = 0; i < countToExtinguish; i++) {
+                    const randomIndex = Math.floor(Math.random() * activeFlames.length);
+                    activeFlames[randomIndex].classList.add('out');
+                    activeFlames.splice(randomIndex, 1); // เอาเล่มที่ดับแล้วออกจากอาร์เรย์
+                }
+
+                // เช็คจำนวนเทียนที่เหลือ
+                const remaining = document.querySelectorAll('.flame-dot:not(.out)').length;
+
+                if (remaining > 0) {
+                    const statusMessages = [
+                        "ฟู่ๆ~ ไฟดับไปบางเล่มแล้ว! เป่าอีกรอบนะ 🌬️",
+                        "ฮึบอีกนิด! ใกล้จะดับหมดแล้ว 💖",
+                        "ออกแรงเป่าอีกนิดนึงเร็ว! 💨"
+                    ];
+                    wishText.innerText = statusMessages[Math.floor(Math.random() * statusMessages.length)];
+                } else {
+                    // ดับครบหมดแล้ว
+                    wishText.innerText = "เย้! เป่าเทียนดับหมดแล้ว ขอให้สมหวังทุกประการนะ! ✨💖";
+                    blowBtn.style.display = 'none';
+                    nextBtn.style.display = 'inline-block';
+                    
+                    confetti({
+                        particleCount: 90,
+                        spread: 75,
+                        origin: { y: 0.5 }
+                    });
+                }
+            }
         }
 
         function celebrate() {
