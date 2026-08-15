@@ -61,11 +61,11 @@
             padding: 25px 30px;
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(255, 107, 129, 0.25);
-            max-width: 420px;
+            max-width: 440px;
             width: 100%;
             text-align: center;
             position: relative;
-            min-height: 560px;
+            min-height: 580px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -99,8 +99,8 @@
         }
 
         .svg-cake-wrapper {
-            width: 290px;
-            height: 250px;
+            width: 310px;
+            height: 270px;
             margin: 0 auto;
         }
 
@@ -111,7 +111,7 @@
 
         .flame {
             transform-origin: center bottom;
-            animation: flicker 0.25s infinite alternate ease-in-out;
+            animation: flicker 0.2s infinite alternate ease-in-out;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
@@ -249,58 +249,128 @@
             <h1>Make a Wish! 🎂</h1>
             
             <div class="svg-cake-wrapper">
-                <svg viewBox="0 0 300 240" width="100%" height="100%">
-                    <!-- Plate -->
-                    <ellipse cx="150" cy="225" rx="125" ry="12" fill="#dcdde1" />
-                    <ellipse cx="150" cy="222" rx="118" ry="10" fill="#ffffff" stroke="#f1f2f6" stroke-width="2" />
+                <svg viewBox="0 0 320 270" width="100%" height="100%">
+                    <defs>
+                        <!-- Gradient ครีมและซอสชมพู -->
+                        <linearGradient id="pinkDrip" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#ffb6c1" />
+                            <stop offset="100%" stop-color="#ff94a8" />
+                        </linearGradient>
+                        <linearGradient id="cakeCream" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#fff0f3" />
+                            <stop offset="100%" stop-color="#ffdde1" />
+                        </linearGradient>
+                    </defs>
 
-                    <!-- Bottom Tier (Large Tier - Sweet Chocolate Cake) -->
-                    <path d="M 40 155 Q 150 180 260 155 L 260 210 Q 150 235 40 210 Z" fill="#6d4c41" />
-                    <path d="M 40 155 Q 150 180 260 155 L 260 168 Q 150 193 40 168 Z" fill="#5d4037" />
-                    <!-- Cream Drip Bottom Layer -->
-                    <path d="M 40 155 Q 150 180 260 155 C 260 155, 240 170, 225 160 C 210 150, 195 175, 180 160 C 165 145, 140 172, 125 158 C 110 145, 90 170, 75 158 C 60 145, 40 155, 40 155 Z" fill="#fff8e7" />
+                    <!-- Plate (จานรองเค้ก) -->
+                    <ellipse cx="160" cy="250" rx="135" ry="14" fill="#e0e0e0" />
+                    <ellipse cx="160" cy="246" rx="128" ry="11" fill="#ffffff" stroke="#ffb6c1" stroke-width="3" />
 
-                    <!-- Top Tier (Small Tier - Strawberry Cream Cake) -->
-                    <path d="M 75 95 Q 150 115 225 95 L 225 150 Q 150 170 75 150 Z" fill="#ff80ab" />
-                    <path d="M 75 95 Q 150 115 225 95 L 225 105 Q 150 125 75 105 Z" fill="#ff4081" />
-                    <!-- Cream Drip Top Layer -->
-                    <path d="M 75 95 Q 150 115 225 95 C 225 95, 210 112, 195 102 C 180 92, 165 115, 150 102 C 135 90, 120 112, 105 100 C 90 88, 75 95, 75 95 Z" fill="#ffffff" />
-
-                    <!-- Strawberry Toppings (On Top Tier) -->
-                    <g transform="translate(0, 5)">
-                        <!-- Strawberries Left -->
-                        <path d="M 90 88 C 85 80, 95 72, 98 80 C 101 72, 111 80, 106 88 C 102 94, 94 94, 90 88 Z" fill="#d50000" />
-                        <ellipse cx="98" cy="76" rx="3" ry="1.5" fill="#76ff03" />
-
-                        <path d="M 115 92 C 110 84, 120 76, 123 84 C 126 76, 136 84, 131 92 C 127 98, 119 98, 115 92 Z" fill="#d50000" />
-                        <ellipse cx="123" cy="80" rx="3" ry="1.5" fill="#76ff03" />
-
-                        <!-- Strawberries Right -->
-                        <path d="M 168 92 C 163 84, 173 76, 176 84 C 179 76, 189 84, 184 92 C 180 98, 172 98, 168 92 Z" fill="#d50000" />
-                        <ellipse cx="176" cy="80" rx="3" ry="1.5" fill="#76ff03" />
-
-                        <path d="M 193 88 C 188 80, 198 72, 201 80 C 204 72, 214 80, 209 88 C 205 94, 197 94, 193 88 Z" fill="#d50000" />
-                        <ellipse cx="201" cy="76" rx="3" ry="1.5" fill="#76ff03" />
+                    <!-- CAKE TIER 1 (ชั้นล่างก้อนใหญ่) -->
+                    <path d="M 40 170 Q 160 195 280 170 L 280 235 Q 160 260 40 235 Z" fill="url(#cakeCream)" stroke="#ffb6c1" stroke-width="1.5" />
+                    <!-- Pink Drip Layer 1 -->
+                    <path d="M 40 170 Q 160 195 280 170 
+                             C 280 170, 265 195, 250 180 
+                             C 235 165, 220 200, 205 182 
+                             C 190 165, 175 195, 160 180 
+                             C 145 165, 130 200, 115 182 
+                             C 100 165, 85 195, 70 180 
+                             C 55 165, 40 170, 40 170 Z" fill="url(#pinkDrip)" />
+                    
+                    <!-- โบว์ชมพูตรงกลางชั้นล่าง -->
+                    <g transform="translate(160, 215)">
+                        <path d="M -22 -6 C -35 -18, -40 5, -20 2 C -30 15, -15 20, -10 5" fill="#ff4757" />
+                        <path d="M 22 -6 C 35 -18, 40 5, 20 2 C 30 15, 15 20, 10 5" fill="#ff4757" />
+                        <circle cx="0" cy="-2" r="6" fill="#ff6b81" />
+                        <!-- สายโบว์ -->
+                        <path d="M -4 3 L -12 18 L -3 16 Z" fill="#ff4757" />
+                        <path d="M 4 3 L 12 18 L 3 16 Z" fill="#ff4757" />
                     </g>
 
-                    <!-- Number "18" Topper (Pitched next to the candle) -->
-                    <g transform="translate(180, 50)">
-                        <line x1="0" y1="15" x2="0" y2="40" stroke="#795548" stroke-width="3" stroke-linecap="round" />
-                        <rect x="-16" y="-12" width="32" height="26" rx="7" fill="#ff4081" stroke="#ffffff" stroke-width="2" />
-                        <text x="0" y="6" font-family="'Mali', cursive" font-weight="bold" font-size="15" fill="#ffffff" text-anchor="middle">18</text>
+                    <!-- CAKE TIER 2 (ชั้นบนก้อนเล็ก) -->
+                    <path d="M 75 110 Q 160 130 245 110 L 245 170 Q 160 190 75 170 Z" fill="url(#cakeCream)" stroke="#ffb6c1" stroke-width="1.5" />
+                    <!-- Pink Drip Layer 2 -->
+                    <path d="M 75 110 Q 160 130 245 110 
+                             C 245 110, 230 130, 215 118 
+                             C 200 106, 185 132, 170 120 
+                             C 155 108, 140 132, 125 118 
+                             C 110 104, 95 125, 85 115 
+                             C 75 105, 75 110, 75 110 Z" fill="url(#pinkDrip)" />
+
+                    <!-- Cream Puffs & Strawberries Top Decorative Line -->
+                    <!-- Cream Swirls -->
+                    <g fill="#ffffff" stroke="#ffcdd2" stroke-width="1">
+                        <circle cx="85" cy="112" r="7" />
+                        <circle cx="115" cy="118" r="7" />
+                        <circle cx="145" cy="120" r="7" />
+                        <circle cx="175" cy="120" r="7" />
+                        <circle cx="205" cy="118" r="7" />
+                        <circle cx="235" cy="112" r="7" />
+                    </g>
+                    <!-- Strawberries -->
+                    <g fill="#ff3838">
+                        <path d="M 82 104 C 80 96, 90 90, 93 96 C 96 90, 104 96, 100 104 C 97 108, 85 108, 82 104 Z" />
+                        <path d="M 220 104 C 218 96, 228 90, 231 96 C 234 90, 242 96, 238 104 C 235 108, 223 108, 220 104 Z" />
                     </g>
 
-                    <!-- Single Candle (Classic Style from Start) -->
-                    <g class="candle" id="candle-1">
-                        <!-- Candle Body -->
-                        <rect x="122" y="38" width="8" height="48" rx="2" fill="#ff4081" />
-                        <!-- Candle Wick -->
-                        <line x1="126" y1="38" x2="126" y2="30" stroke="#212121" stroke-width="2" stroke-linecap="round" />
+                    <!-- น้องกระต่ายถือหัวใจ (ตามรูปเทียนการ์ตูน) -->
+                    <g transform="translate(115, 70)">
+                        <!-- ตัว & หู -->
+                        <ellipse cx="0" cy="18" rx="12" ry="10" fill="#ffffff" stroke="#ffb6c1" stroke-width="1.5" />
+                        <ellipse cx="-7" cy="-2" rx="4" ry="11" fill="#ffffff" stroke="#ffb6c1" stroke-width="1.5" />
+                        <ellipse cx="-7" cy="-2" rx="2" ry="7" fill="#ffdde1" />
+                        <ellipse cx="7" cy="-2" rx="4" ry="11" fill="#ffffff" stroke="#ffb6c1" stroke-width="1.5" />
+                        <ellipse cx="7" cy="-2" rx="2" ry="7" fill="#ffdde1" />
+                        <!-- หน้า -->
+                        <circle cx="0" cy="12" r="11" fill="#ffffff" stroke="#ffb6c1" stroke-width="1.5" />
+                        <circle cx="-4" cy="11" r="1.2" fill="#4a4a4a" />
+                        <circle cx="4" cy="11" r="1.2" fill="#4a4a4a" />
+                        <path d="M -1.5 14 Q 0 16 1.5 14" fill="none" stroke="#ff758c" stroke-width="1.2" stroke-linecap="round" />
+                        <ellipse cx="-6" cy="13" rx="2" ry="1" fill="#ff80ab" opacity="0.6" />
+                        <ellipse cx="6" cy="13" rx="2" ry="1" fill="#ff80ab" opacity="0.6" />
+                        <!-- หัวใจที่ถือ -->
+                        <path d="M 0 17 C -3 13, -8 16, -5 21 L 0 25 L 5 21 C 8 16, 3 13, 0 17 Z" fill="#ff4757" />
+                    </g>
+
+                    <!-- CANDLE 1: เทียนตัวเลข "1" (พาสเทลชมพูอมส้ม) -->
+                    <g class="candle" id="candle-1" transform="translate(160, 50)">
+                        <line x1="0" y1="20" x2="0" y2="50" stroke="#ff9a9e" stroke-width="3" stroke-linecap="round" />
+                        <!-- เลข 1 ตัวการ์ตูน -->
+                        <path d="M -8 10 L -2 4 L -2 32 L 6 32" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M -8 10 L -2 4 L -2 32 L 6 32" fill="none" stroke="#ff8a5c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="-2" cy="12" r="2" fill="#ffffff" />
                         
-                        <!-- Flame locked perfectly on top -->
-                        <g class="flame">
-                            <ellipse cx="126" cy="20" rx="5" ry="9" fill="#ffc107" />
-                            <ellipse cx="126" cy="22" rx="2.5" ry="5" fill="#ff3d00" />
+                        <!-- ไส้เทียน -->
+                        <line x1="-2" y1="4" x2="-2" y2="-4" stroke="#2f3640" stroke-width="1.5" stroke-linecap="round" />
+                        
+                        <!-- เปลวไฟ ล็อกติดแน่น 100% -->
+                        <g class="flame" transform="translate(-2, -4)">
+                            <path d="M 0 0 C -5 -6, -5 -14, 0 -19 C 5 -14, 5 -6, 0 0 Z" fill="#ff9f43" />
+                            <path d="M 0 -2 C -2.5 -6, -2.5 -10, 0 -14 C 2.5 -10, 2.5 -6, 0 -2 Z" fill="#feca57" />
+                        </g>
+                    </g>
+
+                    <!-- CANDLE 2: เทียนตัวเลข "8" (พาสเทลม่วงฝันๆ) -->
+                    <g class="candle" id="candle-2" transform="translate(195, 55)">
+                        <line x1="0" y1="20" x2="0" y2="50" stroke="#a18cd1" stroke-width="3" stroke-linecap="round" />
+                        <!-- เลข 8 ตัวการ์ตูน -->
+                        <g fill="none" stroke="#ffffff" stroke-width="9">
+                            <circle cx="0" cy="10" r="7" />
+                            <circle cx="0" cy="23" r="9" />
+                        </g>
+                        <g fill="none" stroke="#b19ffb" stroke-width="5">
+                            <circle cx="0" cy="10" r="7" />
+                            <circle cx="0" cy="23" r="9" />
+                        </g>
+                        <circle cx="3" cy="8" r="1.5" fill="#ffffff" />
+                        
+                        <!-- ไส้เทียน -->
+                        <line x1="0" y1="3" x2="0" y2="-4" stroke="#2f3640" stroke-width="1.5" stroke-linecap="round" />
+                        
+                        <!-- เปลวไฟ ล็อกติดแน่น 100% -->
+                        <g class="flame" transform="translate(0, -4)">
+                            <path d="M 0 0 C -5 -6, -5 -14, 0 -19 C 5 -14, 5 -6, 0 0 Z" fill="#ff9f43" />
+                            <path d="M 0 -2 C -2.5 -6, -2.5 -10, 0 -14 C 2.5 -10, 2.5 -6, 0 -2 Z" fill="#feca57" />
                         </g>
                     </g>
 
@@ -379,30 +449,40 @@
             document.getElementById('page' + pageNumber).classList.add('active');
         }
 
+        /* ระบบเป่าเทียนทีละเล่ม */
         function blowCandleStepByStep() {
-            const candle = document.getElementById('candle-1');
+            const activeCandles = Array.from(document.querySelectorAll('.candle:not(.out)'));
             const wishText = document.getElementById('wish-text');
             const blowBtn = document.getElementById('blow-btn');
             const nextBtn = document.getElementById('next-btn-page2');
 
-            if (candle && !candle.classList.contains('out')) {
-                candle.classList.add('out');
-                wishText.innerText = "เย้! เป่าเทียนดับแล้ว ขอให้คำอธิษฐานเป็นจริงนะ! ✨💖";
-                blowBtn.style.display = 'none';
-                nextBtn.style.display = 'inline-block';
-                
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.5 }
-                });
+            if (activeCandles.length > 0) {
+                // สุ่มดับทีละเล่ม
+                const randomIndex = Math.floor(Math.random() * activeCandles.length);
+                activeCandles[randomIndex].classList.add('out');
+
+                const remaining = document.querySelectorAll('.candle:not(.out)').length;
+
+                if (remaining > 0) {
+                    wishText.innerText = "ฟู่ๆ~ ดับไปเล่มนึงแล้ว! เป่าอีกเล่มเร็วแฟน 🌬️💖";
+                } else {
+                    wishText.innerText = "เย้! เป่าเทียนดับหมดแล้ว ขอให้คำอธิษฐานเป็นจริงนะ! ✨💖";
+                    blowBtn.style.display = 'none';
+                    nextBtn.style.display = 'inline-block';
+                    
+                    confetti({
+                        particleCount: 120,
+                        spread: 70,
+                        origin: { y: 0.5 }
+                    });
+                }
             }
         }
 
         function celebrate() {
             confetti({
-                particleCount: 130,
-                spread: 85,
+                particleCount: 150,
+                spread: 90,
                 origin: { y: 0.6 }
             });
         }
