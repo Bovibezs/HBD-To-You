@@ -44,11 +44,13 @@
         .overlay-gif {
             width: 260px;
             max-width: 80vw;
-            height: auto;
+            height: 200px;
+            object-fit: cover;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(255, 107, 129, 0.4);
             border: 4px solid white;
             margin-bottom: 25px;
+            background: #fff0f3;
         }
 
         .card {
@@ -156,7 +158,7 @@
         .btn-secondary { background: #a4b0be; font-size: 1em; }
         .btn-secondary:hover { background: #747d8c; }
 
-        /* ปุ่มเล่นเพลงแบบซ่อนตัวปรับระดับเสียง */
+        /* ปุ่มเล่นเพลงมินิมอล */
         .music-controls {
             position: absolute;
             top: 15px;
@@ -216,9 +218,12 @@
         <source src="https://cdns-preview-d.dzcdn.net/stream/c-d3807d9f75fb146db7bbdbdcf1b3bb88-6.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- หน้าแรกพร้อม GIF Horimiya (เปลี่ยนเป็นลิงก์ไฟล์ Direct GIF) -->
+    <!-- หน้าแรกพร้อม GIF อนิเมะกอดกัน (ลิงก์ Direct CDN เสถียร 100%) -->
     <div id="start-overlay">
-        <img src="https://c.tenor.com/7YV9oWfD2rUAAAAC/horimiya-hug.gif" alt="Horimiya Hug" class="overlay-gif">
+        <img src="https://media.giphy.com/media/l2QDM9Jnim1YV55YA/giphy.gif" 
+             alt="Anime Hug" 
+             class="overlay-gif"
+             onerror="this.onerror=null; this.src='https://media.tenor.com/images/84a8618e470a1a084cbbbb4df03c155d/tenor.gif';">
         <h2 style="color: white; margin-bottom: 20px;">มีของขวัญวันเกิดรออยู่นะ... 💖</h2>
         <button class="btn" style="background: white; color: #ff4757;" onclick="initWebsite()">
             กดเพื่อเปิดของขวัญ 💖🎵
