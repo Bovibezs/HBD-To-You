@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday My Love 💖</title>
-    <!-- Font น่ารักๆ จาก Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
@@ -27,20 +26,40 @@
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(255, 107, 129, 0.2);
-            max-width: 450px;
+            box-shadow: 0 15px 35px rgba(255, 107, 129, 0.25);
+            max-width: 420px;
             width: 100%;
             text-align: center;
             position: relative;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        h1 {
-            color: #ff6b81;
-            font-size: 1.8em;
-            margin-bottom: 5px;
+        
+        /* สไตล์สำหรับจัดการหน้า */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+        .page.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { color: #ff6b81; font-size: 1.8em; margin: 10px 0; }
+        p { font-size: 1em; line-height: 1.6; color: #666; }
+
         .img-container {
             width: 100%;
-            height: 250px;
+            height: 220px;
             border-radius: 20px;
             overflow: hidden;
             margin: 15px 0;
@@ -51,120 +70,164 @@
             height: 100%;
             object-fit: cover;
         }
-        .timer-title {
-            font-weight: 600;
-            color: #ff4757;
-            margin-top: 15px;
-        }
+
+        .timer-title { font-weight: 600; color: #ff4757; margin-top: 10px; }
         .timer {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin: 10px 0;
+            gap: 8px;
+            margin: 15px 0;
         }
         .time-box {
             background: #ffeaa7;
-            padding: 8px 12px;
+            padding: 8px 10px;
             border-radius: 12px;
             font-weight: bold;
             color: #d63031;
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
+
         .message-box {
             background: #fff5f5;
             border: 2px dashed #ff80ab;
             border-radius: 15px;
             padding: 15px;
-            margin-top: 15px;
+            margin: 10px 0;
             font-size: 0.95em;
             line-height: 1.6;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            width: 100%;
+            margin-top: 15px;
         }
         .btn {
             background: #ff6b81;
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 1.1em;
+            padding: 10px 20px;
+            font-size: 1em;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 15px;
-            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
-            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.3);
+            transition: all 0.2s;
         }
-        .btn:hover {
-            transform: scale(1.05);
-            background: #ff4757;
-        }
-        audio {
-            display: none;
+        .btn:hover { transform: scale(1.05); background: #ff4757; }
+        .btn-secondary { background: #a4b0be; }
+        .btn-secondary:hover { background: #747d8c; }
+
+        .music-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.8);
+            border: 1px solid #ff80ab;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 1.1em;
         }
     </style>
 </head>
 <body>
 
-    <!-- เพลงประกอบ (เปลี่ยนลิงก์เพลงตรง src ได้ตามต้องการ) -->
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
+    <!-- เพลงประกอบ: Bruno Mars - That's What I Like -->
+    <iframe id="youtube-player" src="https://www.youtube.com/embed/h6kQSxZL_3k?enablejsapi=1&autoplay=0&loop=1" style="display:none;"></iframe>
 
     <div class="card">
-        <h1>🎂 Happy Birthday 🎂</h1>
-        <p style="margin:0; color:#888;">สุขสันต์วันเกิดนะคนเก่งของเค้า 💖</p>
-        
-        <!-- ลิงก์รูปภาพ (เปลี่ยนเป็นรูปตัวคุณเองในภายหลังได้) -->
-        <div class="img-container">
-            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Our Moment">
+        <button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+        <!-- หน้าที่ 1: หน้าแรก/เปิดการ์ด -->
+        <div class="page active" id="page1">
+            <h1>🎁 Special Birthday Gift</h1>
+            <p>มีของขวัญและความในใจอยากจะบอก...</p>
+            <div style="font-size: 4em; margin: 20px 0;">💌</div>
+            <button class="btn" onclick="nextPage(2); playMusic();">กดเปิดการ์ดตรงนี้สิ ✨</button>
         </div>
 
-        <div class="timer-title">เรารักกันมาแล้ว... 💕</div>
-        <div class="timer">
-            <div class="time-box"><span id="days">0</span> วัน</div>
-            <div class="time-box"><span id="hours">0</span> ชม.</div>
-            <div class="time-box"><span id="mins">0</span> นาที</div>
-            <div class="time-box"><span id="secs">0</span> วิ</div>
+        <!-- หน้าที่ 2: นับวันคบกัน + รูปภาพ -->
+        <div class="page" id="page2">
+            <h1>Our Memories 📸</h1>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Our Moment">
+            </div>
+            <div class="timer-title">เรารักกันมาแล้ว... 💕</div>
+            <div class="timer">
+                <div class="time-box"><span id="days">0</span> วัน</div>
+                <div class="time-box"><span id="hours">0</span> ชม.</div>
+                <div class="time-box"><span id="mins">0</span> นาที</div>
+                <div class="time-box"><span id="secs">0</span> วิ</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="nextPage(1)">⬅️ ถอยกลับ</button>
+                <button class="btn" onclick="nextPage(3)">หน้าถัดไป ➡️</button>
+            </div>
         </div>
 
-        <div class="message-box">
-            ขอบคุณที่เข้ามาเป็นความสุขในทุกๆ วันนะ ขอให้มีความสุขมากๆ สมหวังทุกเรื่อง รอยยิ้มของเธอคือสิ่งที่ดีที่สุดเลย รักแฟนที่สุดในโลกเลยนะ! 💌
+        <!-- หน้าที่ 3: คำอวยพร + ปุ่มฉลอง -->
+        <div class="page" id="page3">
+            <h1>🎂 Happy Birthday!</h1>
+            <div class="message-box">
+                สุขสันต์วันเกิดนะคนเก่ง! ขอบคุณที่เข้ามาเป็นความสุขในทุกๆ วัน ขอให้เธอมีความสุขมากๆ ยิ้มเยอะๆ ในทุกวัน รอยยิ้มของเธอคือสิ่งที่ดีที่สุดเลย รักแฟนที่สุดในโลก! 💕✨
+            </div>
+            <button class="btn" onclick="celebrate()">กดเพื่อฉลอง! 🎉💖</button>
+            <div class="btn-group" style="margin-top: 15px;">
+                <button class="btn btn-secondary" onclick="nextPage(2)">⬅️ ถอยกลับ</button>
+            </div>
         </div>
 
-        <button class="btn" onclick="celebrate()">กดเพื่อรับความรัก 🎁✨</button>
     </div>
 
-    <!-- เอฟเฟกต์พลุกระดาษ -->
+    <!-- เอฟเฟกต์พลุ -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    
-    <script>
-        // 📌 ตั้งค่าวันที่เริ่มคบกัน (ปี, เดือน-1, วัน)
-        // หมายเหตุ: เดือนต้องลบออก 1 (เช่น ม.ค.= 0, ก.พ.= 1, ..., ธ.ค.= 11)
-        // ตัวอย่างข้างล่างนี้คือ 1 มกราคม 2024
-        const startDate = new Date(2024, 0, 1); 
 
+    <script>
+        // 1. ระบบเปลี่ยนหน้า
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('page' + pageNumber).classList.add('active');
+        }
+
+        // 2. ตัวนับเวลา (เปลี่ยนวันเริ่มคบตรงนี้: ปี, เดือน-1, วัน)
+        const startDate = new Date(2024, 0, 1);
         function updateTimer() {
             const now = new Date();
             const diff = now - startDate;
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const mins = Math.floor((diff / 1000 / 60) % 60);
-            const secs = Math.floor((diff / 1000) % 60);
-
-            document.getElementById('days').innerText = days;
-            document.getElementById('hours').innerText = hours;
-            document.getElementById('mins').innerText = mins;
-            document.getElementById('secs').innerText = secs;
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('mins').innerText = Math.floor((diff / 1000 / 60) % 60);
+            document.getElementById('secs').innerText = Math.floor((diff / 1000) % 60);
         }
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // ฟังก์ชันกดปุ่มเปิดเพลง + พลุหัวใจ
-        function celebrate() {
-            const music = document.getElementById('bg-music');
-            music.play();
+        // 3. ควบคุมเพลง YouTube
+        let isPlaying = false;
+        function playMusic() {
+            const iframe = document.getElementById('youtube-player');
+            iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            isPlaying = true;
+        }
+        function toggleMusic() {
+            const iframe = document.getElementById('youtube-player');
+            if (isPlaying) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                isPlaying = false;
+            } else {
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                isPlaying = true;
+            }
+        }
 
+        // 4. เอฟเฟกต์พลุกระดาษฉลอง
+        function celebrate() {
             confetti({
-                particleCount: 100,
-                spread: 70,
+                particleCount: 120,
+                spread: 80,
                 origin: { y: 0.6 }
             });
         }
