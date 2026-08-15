@@ -23,7 +23,7 @@
             color: #4a4a4a;
         }
 
-        /* Overlay หน้าแรกเพื่อปลดล็อกเสียง */
+        /* Overlay หน้าแรกสุดเพื่อเปิดเพลง */
         #start-overlay {
             position: fixed;
             top: 0;
@@ -38,6 +38,17 @@
             align-items: center;
             text-align: center;
             padding: 20px;
+        }
+
+        /* ตกแต่ง GIF หน้าแรก */
+        .overlay-gif {
+            width: 260px;
+            max-width: 80vw;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 107, 129, 0.4);
+            border: 4px solid white;
+            margin-bottom: 25px;
         }
 
         .card {
@@ -145,7 +156,7 @@
         .btn-secondary { background: #a4b0be; font-size: 1em; }
         .btn-secondary:hover { background: #747d8c; }
 
-        /* แถบเพลงแบบกลมมินิมอล - ซ่อนความยาวเสียงไว้ จะขยายเมื่อเอาเมาส์ชี้/กด */
+        /* ปุ่มเล่นเพลงแบบซ่อนตัวปรับระดับเสียง */
         .music-controls {
             position: absolute;
             top: 15px;
@@ -160,11 +171,10 @@
             z-index: 10;
             transition: all 0.3s ease;
             overflow: hidden;
-            width: 36px; /* ขนาดเริ่มต้นเท่าปุ่มกลม */
+            width: 36px;
             height: 36px;
         }
 
-        /* เมื่อ Hover หรือเอาเมาส์ชี้ แถบปรับเสียงจะสไลด์ออกมา */
         .music-controls:hover, .music-controls.active {
             width: 125px;
             padding: 6px 10px;
@@ -202,22 +212,20 @@
 
 <body>
 
-    <!-- ใช้ลิงก์ CDN Fast Stream ป้องกันปัญหาเพลงดีเลย์ -->
     <audio id="bg-music" loop preload="auto">
         <source src="https://cdns-preview-d.dzcdn.net/stream/c-d3807d9f75fb146db7bbdbdcf1b3bb88-6.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- หน้ากดเพื่อเริ่มเล่นเพลง -->
+    <!-- หน้าแรกพร้อม GIF Horimiya -->
     <div id="start-overlay">
-        <div style="font-size: 5em; margin-bottom: 20px;">🎁</div>
-        <h2 style="color: white; margin-bottom: 20px;">มีของขวัญวันเกิดรออยู่นะ...</h2>
+        <img src="https://media.tenor.com/7YV9oWfD2rUAAAAC/horimiya-hug-anime-miyamura-hori.gif" alt="Horimiya Hug" class="overlay-gif">
+        <h2 style="color: white; margin-bottom: 20px;">มีของขวัญวันเกิดรออยู่นะ... 💖</h2>
         <button class="btn" style="background: white; color: #ff4757;" onclick="initWebsite()">
             กดเพื่อเปิดของขวัญ 💖🎵
         </button>
     </div>
 
     <div class="card">
-        <!-- แถบควบคุมเสียงเพลง (ซ่อนสไลเดอร์ ปรากฏเมื่อชี้) -->
         <div class="music-controls" id="music-controls">
             <button class="music-btn" onclick="toggleMusic(event)" title="เปิด/ปิดเพลง">🎵</button>
             <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.3" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
@@ -271,32 +279,20 @@
         const audio = document.getElementById('bg-music');
         const musicControls = document.getElementById('music-controls');
         
-        // ความดังเริ่มต้นที่ 30%
         audio.volume = 0.3;
 
-        // เริ่มเล่นเพลงแบบ Fast Stream
         function initWebsite() {
-            audio.play().then(() => {
-                console.log("Music playing fast");
-            }).catch(error => {
-                console.log("Playback error:", error);
-            });
-            
+            audio.play().catch(error => console.log("Playback error:", error));
             document.getElementById('start-overlay').style.display = 'none';
         }
 
-        // ปรับระดับเสียง
         function changeVolume(val) {
             audio.volume = val;
         }
 
-        // ปุ่ม 🎵 เปิด/ปิด และสลับโหมดเปิดซ่อนแถบเสียงบนมือถือ
         function toggleMusic(event) {
             if (event) event.stopPropagation();
-            
-            // Toggle แสดง/ซ่อน แถบปรับเสียง
             musicControls.classList.toggle('active');
-
             if (audio.paused) {
                 audio.play();
             } else {
@@ -304,20 +300,17 @@
             }
         }
 
-        // ซ่อนแถบปรับเสียงเมื่อแตะที่อื่นบนหน้าจอ
         document.addEventListener('click', (e) => {
             if (!musicControls.contains(e.target)) {
                 musicControls.classList.remove('active');
             }
         });
 
-        // ระบบเปลี่ยนหน้า
         function nextPage(pageNumber) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById('page' + pageNumber).classList.add('active');
         }
 
-        // ตัวนับเวลา
         const startDate = new Date(2024, 0, 1);
         function updateTimer() {
             const now = new Date();
@@ -330,7 +323,6 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // เอฟเฟกต์พลุ
         function celebrate() {
             confetti({
                 particleCount: 120,
