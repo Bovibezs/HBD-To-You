@@ -58,7 +58,7 @@
             display: block;
         }
 
-        /* กรอบ GIF หน้าการ์ดที่ 1 (ปรับขนาดเท่ารูปแรก 320px) */
+        /* กรอบ GIF หน้าการ์ดที่ 1 */
         .page-gif-wrapper {
             width: 320px;
             max-width: 90vw;
@@ -85,7 +85,7 @@
             width: 100%;
             text-align: center;
             position: relative;
-            min-height: 480px;
+            min-height: 520px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -118,18 +118,83 @@
             text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
         }
 
-        .img-container {
-            width: 100%;
-            height: 220px;
-            border-radius: 20px;
-            overflow: hidden;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        /* CSS สำหรับเค้กและเปลวไฟ */
+        .cake-container {
+            position: relative;
+            width: 160px;
+            height: 140px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
         }
-        .img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+
+        .cake {
+            width: 140px;
+            height: 80px;
+            background: #ffb7c5;
+            border-radius: 15px 15px 10px 10px;
+            position: relative;
+            box-shadow: 0 6px 0 #ff80ab, inset 0 12px 0 #fff;
+            border: 3px solid #ff4757;
+        }
+
+        .candle {
+            width: 12px;
+            height: 40px;
+            background: linear-gradient(to bottom, #74b9ff, #0984e3);
+            border-radius: 4px;
+            position: absolute;
+            top: 22px;
+            z-index: 2;
+            border: 1px solid #0984e3;
+        }
+
+        .flame {
+            width: 16px;
+            height: 24px;
+            background: orange;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -22px;
+            left: -2px;
+            box-shadow: 0 0 10px orange, 0 0 20px yellow;
+            animation: flicker 0.6s infinite alternate;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+            100% { transform: scale(1.15) rotate(2deg); opacity: 1; }
+        }
+
+        /* สไตล์เมื่อเป่าเทียนดับ */
+        .flame.out {
+            opacity: 0 !important;
+            transform: scale(0) !important;
+            box-shadow: none !important;
+        }
+
+        .smoke {
+            position: absolute;
+            top: -25px;
+            left: 2px;
+            width: 8px;
+            height: 15px;
+            background: rgba(200, 200, 200, 0.6);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .flame.out + .smoke {
+            animation: smokeUp 1.5s ease-out forwards;
+        }
+
+        @keyframes smokeUp {
+            0% { opacity: 0.8; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-30px) scale(2.5); }
         }
 
         .timer-title { font-weight: 600; color: #ff4757; margin-top: 10px; }
@@ -268,12 +333,26 @@
             <button class="btn" onclick="nextPage(2)">กดเปิดการ์ดตรงนี้สิ ✨</button>
         </div>
 
-        <!-- หน้าที่ 2 -->
+        <!-- หน้าที่ 2 (หน้าเป่าเทียนเค้กวันเกิด) -->
         <div class="page" id="page2">
-            <h1>Our Memories 📸</h1>
-            <div class="img-container">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Our Moment">
+            <h1>Make a Wish! 🎂</h1>
+            
+            <div class="cake-container">
+                <div class="candle">
+                    <div class="flame" id="flame"></div>
+                    <div class="smoke"></div>
+                </div>
+                <div class="cake"></div>
             </div>
+
+            <p id="wish-text" style="font-weight: 600; color: #ff4757; margin: 10px 0;">
+                อธิษฐานแล้วกดเป่าเทียนนะคนเก่ง ✨
+            </p>
+
+            <button class="btn" style="background: #ffeaa7; color: #d63031; margin-bottom: 10px;" onclick="blowCandle()">
+                กดเพื่อเป่าเทียน! 🌬️
+            </button>
+
             <div class="timer-title">เรารักกันมาแล้ว... 💕</div>
             <div class="timer">
                 <div class="time-box"><span id="days">0</span> วัน</div>
@@ -281,6 +360,7 @@
                 <div class="time-box"><span id="mins">0</span> นาที</div>
                 <div class="time-box"><span id="secs">0</span> วิ</div>
             </div>
+
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="nextPage(1)">⬅️ ถอยกลับ</button>
                 <button class="btn" onclick="nextPage(3)">หน้าถัดไป ➡️</button>
@@ -343,6 +423,21 @@
         function nextPage(pageNumber) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById('page' + pageNumber).classList.add('active');
+        }
+
+        /* ฟังก์ชันสำหรับเป่าเทียน */
+        function blowCandle() {
+            const flame = document.getElementById('flame');
+            const wishText = document.getElementById('wish-text');
+            
+            flame.classList.add('out');
+            wishText.innerText = "เย้! เป่าเทียนแล้ว ขอให้สมหวังทุกประการนะ! ✨💖";
+            
+            confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { y: 0.5 }
+            });
         }
 
         const startDate = new Date(2024, 0, 1);
