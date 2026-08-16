@@ -104,7 +104,6 @@
             margin: 0 auto;
         }
 
-        /* Candle & Smoke VFX Styles */
         .candle { transition: opacity 0.3s ease; }
         .candle.out .flame-group { display: none !important; }
         .smoke-group { display: none; opacity: 0; transform-origin: center bottom; }
@@ -116,7 +115,6 @@
             100% { opacity: 0; transform: translateY(-42px) scale(1.6) translateX(6px); }
         }
 
-        /* Menu Buttons for Page 3 */
         .topic-menu {
             display: flex;
             flex-direction: column;
@@ -148,15 +146,15 @@
             box-shadow: 0 6px 16px rgba(255, 107, 129, 0.2);
         }
 
-        /* Modal Overlay - Fullscreen Clean Glass Overlay without Card border */
+        /* Modal Overlay - Fullscreen Clean Glass Overlay */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(10px);
             z-index: 1000;
             display: none;
             flex-direction: column;
@@ -165,7 +163,6 @@
             padding: 20px;
         }
 
-        /* Clean Gift Scene Container (No borders, background, or extra boxes) */
         .gift-scene {
             display: flex;
             flex-direction: column;
@@ -174,10 +171,9 @@
             position: relative;
             width: 100%;
             max-width: 360px;
-            min-height: 350px;
+            min-height: 380px;
         }
 
-        /* Standard Card for Text Modals (Wish modal) */
         .modal-card {
             background: #ffffff;
             border-radius: 25px;
@@ -195,7 +191,7 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* Enhanced Gift Box & Open Animation */
+        /* Stunning 3D Gift Box Styling */
         .gift-box-container {
             cursor: pointer;
             display: flex;
@@ -205,28 +201,36 @@
             position: relative;
             width: 100%;
         }
-        .gift-box-container:hover .gift-svg {
-            transform: scale(1.08);
-        }
-        
+
         .gift-svg {
-            width: 140px;
-            height: 140px;
-            filter: drop-shadow(0 10px 20px rgba(255,107,129,0.5));
-            transition: transform 0.3s ease;
+            width: 170px;
+            height: 170px;
+            filter: drop-shadow(0 15px 25px rgba(255, 105, 135, 0.45));
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: gentleWiggle 3s infinite ease-in-out;
         }
-        
+
+        @keyframes gentleWiggle {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-6px) rotate(-2deg); }
+            75% { transform: translateY(-3px) rotate(2deg); }
+        }
+
+        .gift-box-container:hover .gift-svg {
+            transform: scale(1.1) rotate(0deg);
+            animation: none;
+        }
+
         .gift-lid {
-            transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            transform-origin: 80px 25px;
+            transition: transform 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+            transform-origin: 80px 30px;
         }
 
-        /* Lid flip animation when opened */
         .gift-box-container.open .gift-lid {
-            transform: translateY(-80px) rotate(-45deg) scale(0.9);
+            transform: translateY(-110px) rotate(-35deg) scale(0.8);
+            opacity: 0;
         }
 
-        /* Glow Flash behind the box when opened */
         .glow-flash {
             position: absolute;
             width: 10px;
@@ -240,54 +244,58 @@
             z-index: 5;
         }
         .gift-box-container.open .glow-flash {
-            animation: burstGlow 0.8s ease-out forwards;
+            animation: burstGlow 0.9s ease-out forwards;
         }
 
         @keyframes burstGlow {
             0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-            50% { opacity: 0.9; }
-            100% { transform: translate(-50%, -50%) scale(45); opacity: 0; }
+            50% { opacity: 0.95; }
+            100% { transform: translate(-50%, -50%) scale(50); opacity: 0; }
         }
 
-        /* Bouquet Image Reveal */
+        /* Smooth Floating Flower Bouquet Reveal */
         .bouquet-card {
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 10;
-            animation: bouquetPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: floatUpFlower 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
 
-        @keyframes bouquetPop {
-            0% { opacity: 0; transform: scale(0.2) translateY(50px); }
-            70% { transform: scale(1.05) translateY(-5px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
+        @keyframes floatUpFlower {
+            0% { opacity: 0; transform: translateY(60px) scale(0.6); }
+            70% { opacity: 1; transform: translateY(-10px) scale(1.03); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .bouquet-img {
-            max-width: 280px;
-            max-height: 280px;
+            max-width: 290px;
+            max-height: 290px;
             width: 85vw;
             height: auto;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
             border: 4px solid #ffffff;
             object-fit: cover;
+            animation: gentleFloat 3.5s infinite ease-in-out 1s;
         }
 
-        /* Flower Particles Burst */
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
         .flower-particle {
             position: absolute;
-            font-size: 30px;
+            font-size: 28px;
             pointer-events: none;
-            animation: floatOutFlower 1.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation: floatOutFlower 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             z-index: 20;
         }
         @keyframes floatOutFlower {
-            0% { opacity: 1; transform: translate(0, 0) scale(0.2) rotate(0deg); }
-            40% { opacity: 1; }
-            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.6) rotate(var(--dr)); }
+            0% { opacity: 1; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.5) rotate(var(--dr)); }
         }
 
         .btn-group {
@@ -316,15 +324,20 @@
 
         .btn-close-gift {
             margin-top: 25px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             color: #ff4757;
-            padding: 12px 30px;
+            padding: 12px 32px;
             font-weight: 700;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
         }
         .btn-close-gift:hover {
             background: #ffffff;
             color: #ff2e4c;
+            transform: scale(1.05);
         }
 
         .music-controls {
@@ -450,21 +463,15 @@
                         </linearGradient>
                     </defs>
 
-                    <!-- Shadow under Plate -->
                     <ellipse cx="160" cy="278" rx="142" ry="18" fill="url(#plate-shadow)" />
-
-                    <!-- Plate -->
                     <ellipse cx="160" cy="272" rx="138" ry="15" fill="#e2e2e2" />
                     <ellipse cx="160" cy="269" rx="135" ry="14" fill="#ffffff" stroke="#f0b6c1" stroke-width="2" />
 
-                    <!-- Bottom Tier -->
                     <path d="M 45 175 C 45 175 45 250 45 250 C 45 268 275 268 275 250 L 275 175 Z" fill="url(#cake-layer1)" />
                     <ellipse cx="160" cy="175" rx="115" ry="20" fill="#fff3ee" stroke="#f7d4c8" stroke-width="1" />
 
-                    <!-- Drips Bottom Tier -->
                     <path d="M 45 176 Q 60 195 70 176 Q 85 205 95 176 Q 115 210 130 176 Q 150 200 165 176 Q 185 212 200 176 Q 220 198 235 176 Q 255 208 265 176 Q 272 188 275 176 Q 160 198 45 176 Z" fill="url(#strawberry-drip)" opacity="0.9" />
 
-                    <!-- Cream Swirls -->
                     <g fill="#ffffff" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
                         <circle cx="55" cy="254" r="8" /><circle cx="75" cy="259" r="8" /><circle cx="97" cy="263" r="8" />
                         <circle cx="120" cy="265" r="8" /><circle cx="142" cy="266" r="8" /><circle cx="160" cy="266" r="8" />
@@ -472,40 +479,18 @@
                         <circle cx="245" cy="259" r="8" /><circle cx="265" cy="254" r="8" />
                     </g>
 
-                    <!-- Big Bow -->
                     <g transform="translate(160, 230)" filter="drop-shadow(0px 3px 3px rgba(0,0,0,0.15))">
                         <path d="M -38 -8 C -60 -30, -65 15, -32 8 C -50 25, -20 32, -12 10" fill="#ff4d6d" />
                         <path d="M 38 -8 C 60 -30, 65 15, 32 8 C 50 25, 20 32, 12 10" fill="#ff4d6d" />
                         <rect x="-12" y="-6" width="24" height="18" rx="6" fill="#c9184a" />
                         <circle cx="0" cy="3" r="4" fill="#ff80ab" />
                     </g>
-                    <!-- Side Bow Left & Right -->
-                    <g transform="translate(68, 208) scale(0.65)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.15))">
-                        <path d="M -30 -5 C -50 -25, -55 10, -25 5 C -40 20, -15 28, -8 8" fill="#ff758c" />
-                        <path d="M 30 -5 C 50 -25, 55 10, 25 5 C 40 20, 15 28, 8 8" fill="#ff758c" />
-                        <circle cx="0" cy="0" r="8" fill="#ff4d6d" />
-                    </g>
-                    <g transform="translate(252, 208) scale(0.65)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.15))">
-                        <path d="M -30 -5 C -50 -25, -55 10, -25 5 C -40 20, -15 28, -8 8" fill="#ff758c" />
-                        <path d="M 30 -5 C 50 -25, 55 10, 25 5 C 40 20, 15 28, 8 8" fill="#ff758c" />
-                        <circle cx="0" cy="0" r="8" fill="#ff4d6d" />
-                    </g>
 
-                    <!-- Top Tier -->
                     <path d="M 90 115 C 90 115 90 172 90 172 C 90 188 230 188 230 172 L 230 115 Z" fill="url(#cake-layer2)" />
                     <ellipse cx="160" cy="115" rx="70" ry="14" fill="#ffffff" stroke="#ffccd5" stroke-width="1" />
 
-                    <!-- Drips Top Tier -->
                     <path d="M 90 116 Q 102 135 110 116 Q 125 142 138 116 Q 152 136 160 116 Q 172 140 182 116 Q 198 138 210 116 Q 222 130 230 116 Q 160 130 90 116 Z" fill="#ff6b81" opacity="0.85" />
 
-                    <!-- Top Rim Cream Dots -->
-                    <g fill="#ffffff" filter="drop-shadow(0px 1px 2px rgba(0,0,0,0.1))">
-                        <circle cx="96" cy="117" r="6" /><circle cx="114" cy="122" r="6" /><circle cx="135" cy="125" r="6" />
-                        <circle cx="160" cy="126" r="6" /><circle cx="185" cy="125" r="6" /><circle cx="206" cy="122" r="6" />
-                        <circle cx="224" cy="117" r="6" />
-                    </g>
-
-                    <!-- Teddy Bear -->
                     <g transform="translate(160, 148)" filter="drop-shadow(0px 3px 3px rgba(0,0,0,0.12))">
                         <circle cx="-19" cy="-17" r="9" fill="#d7a15c" /><circle cx="-19" cy="-17" r="5" fill="#ffb3c6" />
                         <circle cx="19" cy="-17" r="9" fill="#d7a15c" /><circle cx="19" cy="-17" r="5" fill="#ffb3c6" />
@@ -516,40 +501,16 @@
                         <circle cx="-9" cy="-4" r="2.2" fill="#2c1a0c" /><circle cx="9" cy="-4" r="2.2" fill="#2c1a0c" />
                         <ellipse cx="-14" cy="2" rx="4" ry="2" fill="#ff6b81" opacity="0.7" />
                         <ellipse cx="14" cy="2" rx="4" ry="2" fill="#ff6b81" opacity="0.7" />
-                        <path d="M 10 -20 C 5 -24, 5 -13, 10 -16 C 15 -24, 15 -13, 10 -16" fill="#ff4757" />
-                        <circle cx="10" cy="-16" r="2" fill="#ffffff" />
                     </g>
 
-                    <!-- Bunny -->
-                    <g transform="translate(125, 106) scale(0.8)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
-                        <ellipse cx="-6" cy="-14" rx="4" ry="10" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
-                        <ellipse cx="-6" cy="-14" rx="2" ry="6" fill="#ffccd5" />
-                        <ellipse cx="6" cy="-14" rx="4" ry="10" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
-                        <ellipse cx="6" cy="-14" rx="2" ry="6" fill="#ffccd5" />
-                        <circle cx="0" cy="0" r="11" fill="#ffffff" stroke="#f0b6c1" stroke-width="1" />
-                        <circle cx="-4" cy="-2" r="1.3" fill="#4a4a4a" /><circle cx="4" cy="-2" r="1.3" fill="#4a4a4a" />
-                        <polygon points="-1,1 1,1 0,3" fill="#ff6b81" />
-                    </g>
-
-                    <!-- Puppy -->
-                    <g transform="translate(195, 106) scale(0.8)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
-                        <ellipse cx="-11" cy="-2" rx="5" ry="9" fill="#c7a75c" /><ellipse cx="11" cy="-2" rx="5" ry="9" fill="#c7a75c" />
-                        <circle cx="0" cy="0" r="11" fill="#fffdfa" />
-                        <circle cx="-4" cy="-2" r="1.3" fill="#333" /><circle cx="4" cy="-2" r="1.3" fill="#333" />
-                        <ellipse cx="0" cy="1" rx="2" ry="1.5" fill="#333" />
-                    </g>
-
-                    <!-- Candle Base -->
                     <ellipse cx="160" cy="114" rx="9" ry="3.5" fill="rgba(0,0,0,0.12)" />
                     <ellipse cx="160" cy="113" rx="7" ry="2.5" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
 
-                    <!-- Candle -->
                     <g class="candle" id="candle-1" transform="translate(160, 68)">
                         <g class="smoke-group">
                             <circle cx="0" cy="10" r="4" fill="#e0e0e0" />
                             <circle cx="-4" cy="0" r="6" fill="#d6d6d6" />
                             <circle cx="3" cy="-10" r="8" fill="#cccccc" />
-                            <path d="M -3 10 Q -8 -5 2 -18 T -2 -35" fill="none" stroke="#e0e0e0" stroke-width="4" stroke-linecap="round" />
                         </g>
                         <rect x="-6" y="10" width="12" height="35" rx="3" fill="url(#candle-body)" stroke="#ffb6c1" stroke-width="1" />
                         <line x1="0" y1="10" x2="0" y2="1" stroke="#333333" stroke-width="2" stroke-linecap="round" />
@@ -560,49 +521,10 @@
                         </g>
                     </g>
 
-                    <!-- Bow Over Candle Base -->
-                    <g transform="translate(160, 114) scale(0.95)" filter="drop-shadow(0px 2px 3px rgba(0,0,0,0.15))">
-                        <path d="M -25 -8 C -42 -28, -45 8, -20 2 C -30 16, -12 20, -6 4" fill="#ff758c" />
-                        <path d="M 25 -8 C 42 -28, 45 8, 20 2 C 30 16, 12 20, 6 4" fill="#ff758c" />
-                        <rect x="-8" y="-6" width="16" height="13" rx="4" fill="#ff4757" />
-                    </g>
-
-                    <!-- "18" Badge -->
                     <g transform="translate(242, 98) rotate(14) scale(0.95)" filter="drop-shadow(2px 3px 4px rgba(0,0,0,0.15))">
                         <line x1="-15" y1="25" x2="-35" y2="85" stroke="#d7ccc8" stroke-width="3" stroke-linecap="round" />
-                        <g transform="translate(-22, 45) scale(0.7)">
-                            <path d="M -15 -5 C -25 -15, -28 5, -12 2 C -20 10, -10 14, -6 3" fill="#ffe082" />
-                            <path d="M 15 -5 C 25 -15, 28 5, 12 2 C 20 10, 10 14, 6 3" fill="#ffe082" />
-                            <circle cx="0" cy="0" r="4" fill="#ffd54f" />
-                        </g>
                         <rect x="-42" y="-30" width="64" height="52" rx="22" fill="#fff0f3" stroke="#ff80ab" stroke-width="3" />
-                        <rect x="-38" y="-26" width="56" height="44" rx="18" fill="#ffffff" stroke="#ffccd5" stroke-width="1.5" stroke-dasharray="3,2" />
                         <text x="-10" y="8" font-family="'Mali', cursive" font-weight="700" font-size="30" fill="#ff4d6d" text-anchor="middle">18</text>
-                    </g>
-
-                    <!-- Heart Sign Left -->
-                    <g transform="translate(45, 185) rotate(-12) scale(0.85)" filter="drop-shadow(-2px 3px 3px rgba(0,0,0,0.12))">
-                        <line x1="0" y1="20" x2="0" y2="72" stroke="#d7ccc8" stroke-width="2.5" />
-                        <path d="M 0 -18 C -15 -35, -35 -10, 0 15 C 35 -10, 15 -35, 0 -18 Z" fill="#ff80ab" stroke="#ffffff" stroke-width="2" />
-                        <text x="0" y="-5" font-family="'Mali', cursive" font-weight="700" font-size="8" fill="#ffffff" text-anchor="middle">HAPPY</text>
-                        <text x="0" y="4" font-family="'Mali', cursive" font-weight="700" font-size="7" fill="#ffffff" text-anchor="middle">BIRTHDAY</text>
-                    </g>
-
-                    <!-- Rainbow & Cloud -->
-                    <g transform="translate(48, 258) scale(0.65)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
-                        <path d="M -20 0 A 20 20 0 0 1 20 0" fill="none" stroke="#ff80ab" stroke-width="4" />
-                        <path d="M -16 0 A 16 16 0 0 1 16 0" fill="none" stroke="#ffe082" stroke-width="4" />
-                        <path d="M -12 0 A 12 12 0 0 1 12 0" fill="none" stroke="#b2dfdb" stroke-width="4" />
-                        <circle cx="-18" cy="2" r="8" fill="#ffffff" />
-                        <circle cx="-10" cy="-2" r="9" fill="#ffffff" />
-                        <circle cx="0" cy="2" r="7" fill="#ffffff" />
-                    </g>
-
-                    <!-- Lighter -->
-                    <g transform="translate(262, 260) scale(0.7)" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
-                        <rect x="0" y="0" width="35" height="16" rx="4" fill="#d7ccc8" />
-                        <rect x="-8" y="3" width="10" height="10" rx="2" fill="#cfd8dc" />
-                        <circle cx="-3" cy="8" r="3" fill="#90a4ae" />
                     </g>
                 </svg>
             </div>
@@ -637,7 +559,6 @@
                 </button>
             </div>
 
-            <!-- horimiya2.gif at the bottom of Page 3 -->
             <div class="page-gif-wrapper" style="margin-top: 10px; margin-bottom: 15px;">
                 <img src="horimiya2.gif" alt="Horimiya Birthday">
             </div>
@@ -649,26 +570,67 @@
 
     </div>
 
-    <!-- POPUP OVERLAY FOR GIFT (Borderless Clean Style) -->
+    <!-- POPUP OVERLAY FOR GIFT (3D Gorgeous Gift Box) -->
     <div class="modal-overlay" id="gift-overlay">
         <div class="gift-scene" id="gift-scene">
             <div class="gift-box-container" id="gift-box" onclick="openGiftBox(event)">
                 <div class="glow-flash"></div>
-                <svg class="gift-svg" id="gift-svg-elem" viewBox="0 0 100 100">
-                    <!-- Gift Box Body -->
-                    <rect x="20" y="40" width="60" height="45" rx="5" fill="#ff758c" />
-                    <rect x="44" y="40" width="12" height="45" fill="#ff4757" />
-                    <!-- Gift Box Lid -->
+                
+                <!-- Beautiful 3D Pastel Gift Box SVG -->
+                <svg class="gift-svg" id="gift-svg-elem" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="box-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ff9a9e" />
+                            <stop offset="50%" stop-color="#fecfef" />
+                            <stop offset="100%" stop-color="#fe9a8b" />
+                        </linearGradient>
+                        <linearGradient id="lid-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ff758c" />
+                            <stop offset="100%" stop-color="#ff7eb3" />
+                        </linearGradient>
+                        <linearGradient id="ribbon-gold" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ffffff" />
+                            <stop offset="50%" stop-color="#fff0f3" />
+                            <stop offset="100%" stop-color="#ffccd5" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Box Shadow -->
+                    <ellipse cx="100" cy="180" rx="65" ry="12" fill="rgba(0,0,0,0.2)" />
+
+                    <!-- Main Box Body -->
+                    <rect x="35" y="75" width="130" height="95" rx="12" fill="url(#box-gradient)" stroke="#ff80ab" stroke-width="1.5" />
+                    <path d="M 35 75 L 165 75 L 165 85 L 35 85 Z" fill="rgba(0,0,0,0.06)" />
+
+                    <!-- Vertical Ribbon -->
+                    <rect x="88" y="75" width="24" height="95" fill="url(#ribbon-gold)" />
+                    <line x1="88" y1="75" x2="88" y2="170" stroke="#ff80ab" stroke-width="0.8" opacity="0.5" />
+                    <line x1="112" y1="75" x2="112" y2="170" stroke="#ff80ab" stroke-width="0.8" opacity="0.5" />
+
+                    <!-- Lid Group (Animates Open) -->
                     <g class="gift-lid">
-                        <rect x="15" y="28" width="70" height="15" rx="3" fill="#ff80ab" />
-                        <rect x="44" y="28" width="12" height="15" fill="#ff4757" />
-                        <!-- Bow -->
-                        <path d="M 35 18 C 25 10, 40 5, 47 25 Z" fill="#ff4757" />
-                        <path d="M 65 18 C 75 10, 60 5, 53 25 Z" fill="#ff4757" />
-                        <circle cx="50" cy="25" r="5" fill="#ff2e4c" />
+                        <!-- Lid Main -->
+                        <rect x="26" y="52" width="148" height="28" rx="7" fill="url(#lid-gradient)" stroke="#ff4757" stroke-width="1" />
+                        <rect x="88" y="52" width="24" height="28" fill="url(#ribbon-gold)" />
+                        
+                        <!-- Bow Top -->
+                        <g transform="translate(100, 50)">
+                            <!-- Left Bow Loop -->
+                            <path d="M 0 -2 C -25 -28, -45 -5, -4 -2" fill="#ffffff" stroke="#ffccd5" stroke-width="1.5" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.15))" />
+                            <path d="M -2 -2 C -20 -18, -32 -6, -5 -2" fill="#ff80ab" opacity="0.6" />
+                            
+                            <!-- Right Bow Loop -->
+                            <path d="M 0 -2 C 25 -28, 45 -5, 4 -2" fill="#ffffff" stroke="#ffccd5" stroke-width="1.5" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.15))" />
+                            <path d="M 2 -2 C 20 -18, 32 -6, 5 -2" fill="#ff80ab" opacity="0.6" />
+                            
+                            <!-- Bow Center Knot -->
+                            <circle cx="0" cy="-2" r="7" fill="#ffffff" stroke="#ff4d6d" stroke-width="1.5" />
+                            <circle cx="0" cy="-2" r="4" fill="#ff758c" />
+                        </g>
                     </g>
                 </svg>
-                <p id="gift-hint" style="margin-top: 20px; color: #ffffff; font-weight: 700; font-size: 1.1em; text-shadow: 0 2px 5px rgba(0,0,0,0.4);">
+
+                <p id="gift-hint" style="margin-top: 15px; color: #ffffff; font-weight: 700; font-size: 1.15em; text-shadow: 0 2px 8px rgba(0,0,0,0.5); letter-spacing: 0.5px;">
                     แตะที่กล่องเพื่อเปิดของขวัญ 💖✨
                 </p>
                 
@@ -681,7 +643,7 @@
         <button class="btn btn-close-gift" onclick="closeGiftModal()">⬅️ ย้อนกลับ</button>
     </div>
 
-    <!-- POPUP OVERLAY FOR WISH (Standard Card Style) -->
+    <!-- POPUP OVERLAY FOR WISH -->
     <div class="modal-overlay" id="wish-overlay">
         <div class="modal-card">
             <div style="color: #ff4757; font-size: 1.4em; font-weight: 700; margin-bottom: 12px;">💌 คำอวยพร</div>
@@ -756,9 +718,7 @@
             }
         }
 
-        /* GIFT MODAL HANDLERS */
         function openGiftModal() {
-            // Reset Gift State before opening
             const giftBox = document.getElementById('gift-box');
             const giftSvg = document.getElementById('gift-svg-elem');
             const giftHint = document.getElementById('gift-hint');
@@ -769,9 +729,7 @@
             if (giftHint) giftHint.style.display = 'block';
             if (bouquetCard) bouquetCard.style.display = 'none';
 
-            // Clean up old flower particles
             document.querySelectorAll('.flower-particle').forEach(el => el.remove());
-
             document.getElementById('gift-overlay').style.display = 'flex';
         }
 
@@ -797,21 +755,22 @@
             if (!giftBox.classList.contains('open')) {
                 giftBox.classList.add('open');
 
-                // 1. Confetti Burst & Flower Explosion VFX
+                // Confetti Explosion
                 confetti({
-                    particleCount: 90,
-                    spread: 110,
+                    particleCount: 100,
+                    spread: 100,
                     origin: { y: 0.5 }
                 });
 
-                const flowers = ['🌸', '🌷', '🌹', '🌺', '💖', '✨', '💐', '🌼'];
-                for (let i = 0; i < 35; i++) {
+                // Floating Particles Effect
+                const flowers = ['🌸', '🌷', '🌹', '✨', '💖', '💐', '⭐', '🌼'];
+                for (let i = 0; i < 30; i++) {
                     const flower = document.createElement('div');
                     flower.className = 'flower-particle';
                     flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
 
                     const angle = Math.random() * Math.PI * 2;
-                    const distance = 100 + Math.random() * 140;
+                    const distance = 90 + Math.random() * 150;
                     const dx = Math.cos(angle) * distance + 'px';
                     const dy = Math.sin(angle) * distance + 'px';
                     const dr = (Math.random() * 360 - 180) + 'deg';
@@ -820,17 +779,17 @@
                     flower.style.setProperty('--dy', dy);
                     flower.style.setProperty('--dr', dr);
                     flower.style.left = '50%';
-                    flower.style.top = '45%';
+                    flower.style.top = '40%';
 
                     giftScene.appendChild(flower);
                 }
 
-                // 2. Hide Gift Box Icon & Show Flower Bouquet Image
+                // Show Bouquet Animation Timing
                 setTimeout(() => {
                     if (giftSvg) giftSvg.style.display = 'none';
                     if (giftHint) giftHint.style.display = 'none';
                     if (bouquetCard) bouquetCard.style.display = 'flex';
-                }, 400);
+                }, 350);
             }
         }
     </script>
