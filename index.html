@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday na ka💖</title>
     <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
     
@@ -10,10 +10,11 @@
         * {
             box-sizing: border-box;
             font-family: 'Mali', cursive;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
             min-height: 100vh;
             display: flex;
@@ -38,17 +39,17 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            transition: opacity 0.6s ease, visibility 0.6s;
+            transition: opacity 0.4s ease;
         }
 
         .gif-wrapper, .page-gif-wrapper {
             width: 320px;
-            max-width: 90vw;
+            max-width: 85vw;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(255, 107, 129, 0.4);
             border: 4px solid white;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             background: #fff;
         }
 
@@ -60,26 +61,27 @@
 
         .card {
             background: rgba(255, 255, 255, 0.96);
-            padding: 25px 30px;
+            padding: 20px;
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(255, 107, 129, 0.25);
             max-width: 440px;
             width: 100%;
             text-align: center;
             position: relative;
-            min-height: 580px;
+            min-height: 560px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             overflow: hidden;
         }
         
-        /* Fixed Page Transition CSS */
+        /* Mobile-Optimized Page Transitions */
         .page {
-            display: none;
+            display: none !important;
             opacity: 0;
-            transform: scale(0.95) translateY(10px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: scale(0.96);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            width: 100%;
             height: 100%;
             flex-direction: column;
             justify-content: center;
@@ -87,19 +89,19 @@
         }
         
         .page.active {
-            display: flex;
+            display: flex !important;
             opacity: 1;
-            transform: scale(1) translateY(0);
+            transform: scale(1);
         }
 
-        h1 { color: #ff6b81; font-size: 1.8em; margin: 10px 0; }
-        p { font-size: 1em; line-height: 1.6; color: #666; }
+        h1 { color: #ff6b81; font-size: 1.7em; margin: 5px 0; }
+        p { font-size: 0.95em; line-height: 1.5; color: #666; }
 
         .name-title {
             color: #ff4757;
             font-weight: 700;
-            font-size: 2.5em;
-            margin: 5px 0 15px 0;
+            font-size: 2.2em;
+            margin: 5px 0 10px 0;
             text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
         }
 
@@ -107,22 +109,23 @@
             background: #fff5f7;
             border: 2px dashed #ff80ab;
             border-radius: 20px;
-            padding: 20px;
-            margin: 15px 0;
+            padding: 15px;
+            margin: 10px 0;
             box-shadow: inset 0 0 10px rgba(255, 182, 193, 0.2);
         }
 
         .intro-box p {
             color: #ff4757;
-            font-size: 1.05em;
+            font-size: 0.98em;
             font-weight: 600;
-            line-height: 1.7;
+            line-height: 1.6;
             margin: 0;
         }
 
         .svg-cake-wrapper {
-            width: 330px;
-            height: 310px;
+            width: 100%;
+            max-width: 300px;
+            height: 280px;
             margin: 0 auto;
         }
 
@@ -140,32 +143,30 @@
         .topic-menu {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
             width: 100%;
-            margin: 15px 0;
+            margin: 10px 0;
         }
 
         .topic-btn {
             background: #ffffff;
             color: #ff4757;
             border: 2px solid #ffccd5;
-            padding: 16px 20px;
-            font-size: 1.1em;
+            padding: 14px 18px;
+            font-size: 1.05em;
             border-radius: 20px;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(255, 107, 129, 0.12);
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .topic-btn:hover {
+        .topic-btn:active {
             background: #fff0f3;
-            border-color: #ff6b81;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(255, 107, 129, 0.2);
+            transform: scale(0.98);
         }
 
         .modal-overlay {
@@ -174,8 +175,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
             z-index: 1000;
             display: none;
             flex-direction: column;
@@ -183,7 +184,7 @@
             align-items: center;
             padding: 20px;
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.3s ease;
         }
 
         .modal-overlay.show {
@@ -198,25 +199,19 @@
             justify-content: center;
             position: relative;
             width: 100%;
-            max-width: 360px;
-            min-height: 350px;
+            max-width: 340px;
+            min-height: 320px;
         }
 
         .modal-card {
             background: #ffffff;
             border-radius: 25px;
-            padding: 25px 20px;
-            max-width: 380px;
+            padding: 20px;
+            max-width: 360px;
             width: 100%;
             text-align: center;
             box-shadow: 0 15px 35px rgba(0,0,0,0.25);
             border: 3px solid #ffccd5;
-            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
         }
 
         .gift-box-container {
@@ -227,27 +222,22 @@
             justify-content: center;
             position: relative;
             width: 100%;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .gift-box-container:hover {
-            transform: scale(1.08) rotate(-2deg);
         }
         
         .gift-svg {
-            width: 180px;
-            height: 180px;
-            filter: drop-shadow(0 12px 25px rgba(255, 107, 129, 0.45));
+            width: 160px;
+            height: 160px;
+            filter: drop-shadow(0 10px 20px rgba(255, 107, 129, 0.45));
             overflow: visible;
         }
         
         .gift-lid {
-            transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             transform-origin: 130px 60px;
         }
 
         .gift-box-container.open .gift-lid {
-            transform: translateY(-90px) rotate(-38deg) scale(0.9);
+            transform: translateY(-80px) rotate(-35deg) scale(0.9);
         }
 
         .glow-flash {
@@ -269,7 +259,7 @@
         @keyframes burstGlow {
             0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
             50% { opacity: 0.9; }
-            100% { transform: translate(-50%, -50%) scale(45); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(40); opacity: 0; }
         }
 
         .bouquet-card {
@@ -278,19 +268,12 @@
             align-items: center;
             justify-content: center;
             z-index: 10;
-            animation: bouquetPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes bouquetPop {
-            0% { opacity: 0; transform: scale(0.2) translateY(50px); }
-            70% { transform: scale(1.05) translateY(-5px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .bouquet-img {
-            max-width: 280px;
-            max-height: 280px;
-            width: 85vw;
+            max-width: 250px;
+            max-height: 250px;
+            width: 80vw;
             height: auto;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
@@ -300,15 +283,14 @@
 
         .flower-particle {
             position: absolute;
-            font-size: 30px;
+            font-size: 26px;
             pointer-events: none;
-            animation: floatOutFlower 1.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation: floatOutFlower 1.5s ease-out forwards;
             z-index: 20;
         }
         @keyframes floatOutFlower {
-            0% { opacity: 1; transform: translate(0, 0) scale(0.2) rotate(0deg); }
-            40% { opacity: 1; }
-            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.6) rotate(var(--dr)); }
+            0% { opacity: 1; transform: translate(0, 0) scale(0.2); }
+            100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(var(--dr)); }
         }
 
         .btn-group {
@@ -323,38 +305,34 @@
             background: #ff6b81;
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 1.1em;
+            padding: 12px 22px;
+            font-size: 1em;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.3);
-            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(255, 107, 129, 0.3);
+            transition: background 0.2s ease, transform 0.1s ease;
             font-weight: 600;
         }
-        .btn:hover { transform: scale(1.05); background: #ff4757; }
-        .btn-secondary { background: #a4b0be; font-size: 1em; }
-        .btn-secondary:hover { background: #747d8c; }
+        .btn:active { transform: scale(0.96); background: #ff4757; }
+        .btn-secondary { background: #a4b0be; }
+        .btn-secondary:active { background: #747d8c; }
 
         .btn-close-gift {
-            margin-top: 25px;
-            background: rgba(255, 255, 255, 0.9);
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.95);
             color: #ff4757;
-            padding: 12px 30px;
+            padding: 12px 28px;
             font-weight: 700;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
             border-radius: 50px;
             border: none;
             cursor: pointer;
         }
-        .btn-close-gift:hover {
-            background: #ffffff;
-            color: #ff2e4c;
-        }
 
         .music-controls {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 12px;
+            right: 12px;
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.9);
@@ -369,8 +347,8 @@
             height: 36px;
         }
 
-        .music-controls:hover, .music-controls.active {
-            width: 125px;
+        .music-controls.active {
+            width: 120px;
             padding: 6px 10px;
         }
 
@@ -396,9 +374,8 @@
             margin-left: 6px;
         }
 
-        .music-controls:hover .volume-slider, 
         .music-controls.active .volume-slider {
-            width: 65px;
+            width: 60px;
             opacity: 1;
         }
     </style>
@@ -414,7 +391,7 @@
         <div class="gif-wrapper">
             <img src="horimiya.gif" alt="Horimiya Hug">
         </div>
-        <h2 style="color: white; margin-bottom: 20px; font-size: 1.4em;">There’s a birthday gift waiting for you... 💖</h2>
+        <h2 style="color: white; margin-bottom: 20px; font-size: 1.3em;">There’s a birthday gift waiting for you... 💖</h2>
         <button class="btn" style="background: white; color: #ff4757;" onclick="initWebsite()">
             Click to open the gift. 🎁🎵
         </button>
@@ -423,10 +400,10 @@
     <div class="card">
         <div class="music-controls" id="music-controls">
             <button class="music-btn" onclick="toggleMusic(event)" title="เปิด/ปิดเพลง">🎵</button>
-            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
+            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6" oninput="changeVolume(this.value)">
         </div>
 
-        <!-- PAGE 0: หน้าเกริ่นนำ -->
+        <!-- PAGE 0 -->
         <div class="page active" id="page0">
             <h1>Hey, You! ✨</h1>
             <div class="intro-box">
@@ -438,7 +415,7 @@
             <button class="btn" onclick="nextPage(1)">ไปต่อกันเลย 💖✨</button>
         </div>
 
-        <!-- PAGE 1: หน้า Happy Birthday -->
+        <!-- PAGE 1 -->
         <div class="page" id="page1">
             <h1>🎁 Happy Birthday</h1>
             <div class="name-title">To Ploy 💖</div>
@@ -452,7 +429,7 @@
             </div>
         </div>
 
-        <!-- PAGE 2: หน้าเป่าเค้ก -->
+        <!-- PAGE 2 -->
         <div class="page" id="page2">
             <h1>Make a Wish! 🎂</h1>
             
@@ -463,25 +440,21 @@
                             <stop offset="0%" stop-color="rgba(0,0,0,0.15)" />
                             <stop offset="100%" stop-color="rgba(0,0,0,0)" />
                         </radialGradient>
-                        
                         <linearGradient id="cake-layer1" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#fff8f3" />
                             <stop offset="40%" stop-color="#ffffff" />
                             <stop offset="85%" stop-color="#ffeedd" />
                             <stop offset="100%" stop-color="#f5d6c6" />
                         </linearGradient>
-                        
                         <linearGradient id="cake-layer2" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#ffffff" />
                             <stop offset="50%" stop-color="#fff7f5" />
                             <stop offset="100%" stop-color="#ffe6eb" />
                         </linearGradient>
-                        
                         <linearGradient id="strawberry-drip" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" stop-color="#ff4757" />
                             <stop offset="100%" stop-color="#ff6b81" />
                         </linearGradient>
-                        
                         <linearGradient id="candle-body" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#ff758c" />
                             <stop offset="40%" stop-color="#ffffff" />
@@ -495,7 +468,6 @@
 
                     <path d="M 45 175 C 45 175 45 250 45 250 C 45 268 275 268 275 250 L 275 175 Z" fill="url(#cake-layer1)" />
                     <ellipse cx="160" cy="175" rx="115" ry="20" fill="#fff3ee" stroke="#f7d4c8" stroke-width="1" />
-
                     <path d="M 45 176 Q 60 195 70 176 Q 85 205 95 176 Q 115 210 130 176 Q 150 200 165 176 Q 185 212 200 176 Q 220 198 235 176 Q 255 208 265 176 Q 272 188 275 176 Q 160 198 45 176 Z" fill="url(#strawberry-drip)" opacity="0.9" />
 
                     <g fill="#ffffff" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
@@ -505,7 +477,7 @@
                         <circle cx="245" cy="259" r="8" /><circle cx="265" cy="254" r="8" />
                     </g>
 
-                    <g transform="translate(160, 230)" filter="drop-shadow(0px 3px 3px rgba(0,0,0,0.15))">
+                    <g transform="translate(160, 230)">
                         <path d="M -38 -8 C -60 -30, -65 15, -32 8 C -50 25, -20 32, -12 10" fill="#ff4d6d" />
                         <path d="M 38 -8 C 60 -30, 65 15, 32 8 C 50 25, 20 32, 12 10" fill="#ff4d6d" />
                         <rect x="-12" y="-6" width="24" height="18" rx="6" fill="#c9184a" />
@@ -514,10 +486,9 @@
 
                     <path d="M 90 115 C 90 115 90 172 90 172 C 90 188 230 188 230 172 L 230 115 Z" fill="url(#cake-layer2)" />
                     <ellipse cx="160" cy="115" rx="70" ry="14" fill="#ffffff" stroke="#ffccd5" stroke-width="1" />
-
                     <path d="M 90 116 Q 102 135 110 116 Q 125 142 138 116 Q 152 136 160 116 Q 172 140 182 116 Q 198 138 210 116 Q 222 130 230 116 Q 160 130 90 116 Z" fill="#ff6b81" opacity="0.85" />
 
-                    <g transform="translate(160, 148)" filter="drop-shadow(0px 3px 3px rgba(0,0,0,0.12))">
+                    <g transform="translate(160, 148)">
                         <circle cx="-19" cy="-17" r="9" fill="#d7a15c" /><circle cx="-19" cy="-17" r="5" fill="#ffb3c6" />
                         <circle cx="19" cy="-17" r="9" fill="#d7a15c" /><circle cx="19" cy="-17" r="5" fill="#ffb3c6" />
                         <ellipse cx="0" cy="-2" rx="25" ry="19" fill="#e4b06e" />
@@ -547,7 +518,7 @@
                         </g>
                     </g>
 
-                    <g transform="translate(242, 98) rotate(14) scale(0.95)" filter="drop-shadow(2px 3px 4px rgba(0,0,0,0.15))">
+                    <g transform="translate(242, 98) rotate(14) scale(0.95)">
                         <line x1="-15" y1="25" x2="-35" y2="85" stroke="#d7ccc8" stroke-width="3" stroke-linecap="round" />
                         <rect x="-42" y="-30" width="64" height="52" rx="22" fill="#fff0f3" stroke="#ff80ab" stroke-width="3" />
                         <text x="-10" y="8" font-family="'Mali', cursive" font-weight="700" font-size="30" fill="#ff4d6d" text-anchor="middle">18</text>
@@ -555,11 +526,11 @@
                 </svg>
             </div>
 
-            <p id="wish-text" style="font-weight: 600; color: #ff4757; margin: 10px 0 10px;">
+            <p id="wish-text" style="font-weight: 600; color: #ff4757; margin: 5px 0;">
                 ตั้งจิตอธิษฐานแล้วกดเป่าเทียนนะคนเก่ง ✨💖
             </p>
 
-            <button class="btn" id="blow-btn" style="background: #ffeaa7; color: #d63031; margin-bottom: 5px;" onclick="blowCandleStepByStep()">
+            <button class="btn" id="blow-btn" style="background: #ffeaa7; color: #d63031;" onclick="blowCandleStepByStep()">
                 กดเพื่อเป่าเทียน! 🌬️
             </button>
 
@@ -569,10 +540,10 @@
             </div>
         </div>
 
-        <!-- PAGE 3: หน้าเมนูของขวัญและคำอวยพร -->
+        <!-- PAGE 3 -->
         <div class="page" id="page3">
             <h1>🎂 Happy Birthday!</h1>
-            <p style="margin-top: 0; color: #ff758c; font-size: 0.95em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะ 💕</p>
+            <p style="margin-top: 0; color: #ff758c; font-size: 0.9em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะ 💕</p>
             
             <div class="topic-menu">
                 <button class="topic-btn" onclick="openGiftModal()">
@@ -585,7 +556,7 @@
                 </button>
             </div>
 
-            <div class="page-gif-wrapper" style="margin-top: 10px; margin-bottom: 15px;">
+            <div class="page-gif-wrapper" style="margin-top: 5px; margin-bottom: 10px;">
                 <img src="horimiya2.gif" alt="Horimiya Birthday">
             </div>
 
@@ -596,7 +567,7 @@
 
     </div>
 
-    <!-- POPUP OVERLAY FOR GIFT -->
+    <!-- GIFT MODAL -->
     <div class="modal-overlay" id="gift-overlay">
         <div class="gift-scene" id="gift-scene">
             <div class="gift-box-container" id="gift-box" onclick="openGiftBox(event)">
@@ -620,25 +591,17 @@
                             <stop offset="50%" stop-color="#fff5f7" />
                             <stop offset="100%" stop-color="#ffe3e8" />
                         </linearGradient>
-
-                        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#e63946" flood-opacity="0.25"/>
-                        </filter>
-                        
-                        <filter id="lidShadow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000000" flood-opacity="0.15"/>
-                        </filter>
                     </defs>
 
                     <ellipse cx="100" cy="180" rx="65" ry="10" fill="rgba(0,0,0,0.18)" />
 
-                    <g filter="url(#softShadow)">
+                    <g>
                         <rect x="40" y="80" width="120" height="92" rx="14" fill="url(#boxGrad)" />
                         <rect x="88" y="80" width="24" height="92" fill="url(#ribbonGrad)" />
                         <path d="M 46 86 L 46 166" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.4" />
                     </g>
 
-                    <g class="gift-lid" id="gift-lid-group" filter="url(#lidShadow)">
+                    <g class="gift-lid" id="gift-lid-group">
                         <rect x="32" y="60" width="136" height="28" rx="8" fill="url(#lidGrad)" />
                         <rect x="88" y="60" width="24" height="28" fill="url(#ribbonGrad)" />
                         <line x1="38" y1="65" x2="162" y2="65" stroke="#ffffff" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
@@ -657,7 +620,7 @@
                     </g>
                 </svg>
 
-                <p id="gift-hint" style="margin-top: 20px; color: #ffffff; font-weight: 700; font-size: 1.1em; text-shadow: 0 2px 5px rgba(0,0,0,0.4);">
+                <p id="gift-hint" style="margin-top: 15px; color: #ffffff; font-weight: 700; font-size: 1.05em; text-shadow: 0 2px 5px rgba(0,0,0,0.4);">
                     แตะที่กล่องเพื่อเปิดของขวัญ 💖✨
                 </p>
                 
@@ -669,11 +632,11 @@
         <button class="btn btn-close-gift" onclick="closeGiftModal()">⬅️ ย้อนกลับ</button>
     </div>
 
-    <!-- POPUP OVERLAY FOR WISH -->
+    <!-- WISH MODAL -->
     <div class="modal-overlay" id="wish-overlay">
         <div class="modal-card">
-            <div style="color: #ff4757; font-size: 1.4em; font-weight: 700; margin-bottom: 12px;">💌 คำอวยพร</div>
-            <div style="background: #fff5f7; border: 2px dashed #ff80ab; border-radius: 15px; padding: 20px; font-size: 1em; line-height: 1.6; color: #4a4a4a; margin-bottom: 15px; text-align: center;">
+            <div style="color: #ff4757; font-size: 1.3em; font-weight: 700; margin-bottom: 10px;">💌 คำอวยพร</div>
+            <div style="background: #fff5f7; border: 2px dashed #ff80ab; border-radius: 15px; padding: 15px; font-size: 0.95em; line-height: 1.6; color: #4a4a4a; margin-bottom: 15px; text-align: center;">
                 สุขสันต์วันเกิดนะคนเก่ง! ขอบคุณที่เข้ามาเป็นความสุขในทุกๆ วัน ขอให้เธอมีความสุขมากๆ ยิ้มเยอะๆ ในทุกวัน เจอแต่เรื่องน่ารักและคนที่ใจดีด้วยนะ รักแฟนที่สุดในโลก! 💕✨
             </div>
             <button class="btn" onclick="closeWishModal()">ปิดหน้าต่าง 💖</button>
@@ -690,13 +653,13 @@
 
         function initWebsite() {
             audio.load();
-            audio.play().catch(error => console.log("Audio play error:", error));
+            audio.play().catch(e => console.log(e));
             
             const startOverlay = document.getElementById('start-overlay');
             startOverlay.style.opacity = '0';
             setTimeout(() => {
                 startOverlay.style.display = 'none';
-            }, 600);
+            }, 400);
         }
 
         function changeVolume(val) {
@@ -713,36 +676,28 @@
             }
         }
 
-        document.addEventListener('click', (e) => {
+        document.addEventListener('touchstart', (e) => {
             if (!musicControls.contains(e.target)) {
                 musicControls.classList.remove('active');
             }
-        });
+        }, {passive: true});
 
-        /* Robust & Stable Page Navigation System */
-        let isTransitioning = false;
-
-        function nextPage(pageNumber) {
-            if (isTransitioning) return;
-
-            const pages = document.querySelectorAll('.page');
-            const targetPage = document.getElementById('page' + pageNumber);
+        /* Absolute Instant Navigation Function for Mobile Fix */
+        function nextPage(targetIndex) {
+            const allPages = document.querySelectorAll('.page');
+            const targetPage = document.getElementById('page' + targetIndex);
 
             if (!targetPage) return;
 
-            isTransitioning = true;
-
-            pages.forEach(p => {
-                p.classList.remove('active');
-                p.style.display = 'none';
+            // 1. Force remove 'active' from all pages immediately
+            allPages.forEach(page => {
+                page.classList.remove('active');
             });
 
-            targetPage.style.display = 'flex';
-
-            setTimeout(() => {
+            // 2. Display target page and add opacity transition cleanly
+            requestAnimationFrame(() => {
                 targetPage.classList.add('active');
-                isTransitioning = false;
-            }, 50);
+            });
         }
 
         function blowCandleStepByStep() {
@@ -758,9 +713,9 @@
                 nextBtn.style.display = 'inline-block';
                 
                 confetti({
-                    particleCount: 120,
-                    spread: 70,
-                    origin: { y: 0.5 }
+                    particleCount: 100,
+                    spread: 60,
+                    origin: { y: 0.6 }
                 });
             }
         }
@@ -786,7 +741,7 @@
         function closeGiftModal() {
             const overlay = document.getElementById('gift-overlay');
             overlay.classList.remove('show');
-            setTimeout(() => overlay.style.display = 'none', 400);
+            setTimeout(() => overlay.style.display = 'none', 300);
         }
 
         function openWishModal() {
@@ -798,7 +753,7 @@
         function closeWishModal() {
             const overlay = document.getElementById('wish-overlay');
             overlay.classList.remove('show');
-            setTimeout(() => overlay.style.display = 'none', 400);
+            setTimeout(() => overlay.style.display = 'none', 300);
         }
 
         function openGiftBox(event) {
@@ -812,19 +767,19 @@
                 giftBox.classList.add('open');
 
                 confetti({
-                    particleCount: 90,
-                    spread: 110,
-                    origin: { y: 0.5 }
+                    particleCount: 70,
+                    spread: 90,
+                    origin: { y: 0.6 }
                 });
 
-                const flowers = ['🌸', '🌷', '🌹', '🌺', '💖', '✨', '💐', '🌼'];
-                for (let i = 0; i < 35; i++) {
+                const flowers = ['🌸', '🌷', '🌹', '🌺', '💖', '✨', '💐'];
+                for (let i = 0; i < 25; i++) {
                     const flower = document.createElement('div');
                     flower.className = 'flower-particle';
                     flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
 
                     const angle = Math.random() * Math.PI * 2;
-                    const distance = 100 + Math.random() * 140;
+                    const distance = 80 + Math.random() * 100;
                     const dx = Math.cos(angle) * distance + 'px';
                     const dy = Math.sin(angle) * distance + 'px';
                     const dr = (Math.random() * 360 - 180) + 'deg';
@@ -842,7 +797,7 @@
                     if (giftSvg) giftSvg.style.display = 'none';
                     if (giftHint) giftHint.style.display = 'none';
                     if (bouquetCard) bouquetCard.style.display = 'flex';
-                }, 400);
+                }, 350);
             }
         }
     </script>
