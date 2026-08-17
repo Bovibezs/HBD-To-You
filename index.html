@@ -31,6 +31,60 @@
             align-items: center;
             justify-content: center;
             color: #4a4a4a;
+            position: relative;
+        }
+
+        /* ปุ่มควบคุมเพลงไว้นอกการ์ด (บนพื้นหลังสีชมพู มุมขวาบน) */
+        .music-controls {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 6px;
+            border-radius: 30px;
+            border: 2px solid #ff80ab;
+            box-shadow: 0 4px 15px rgba(255, 107, 129, 0.3);
+            z-index: 900;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            width: 40px;
+            height: 40px;
+        }
+
+        .music-controls.active {
+            width: 130px;
+            padding: 6px 10px;
+        }
+
+        .music-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+
+        .volume-slider {
+            width: 0;
+            height: 5px;
+            accent-color: #ff6b81;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            margin-left: 6px;
+        }
+
+        .music-controls.active .volume-slider {
+            width: 70px;
+            opacity: 1;
         }
 
         #start-overlay {
@@ -413,56 +467,6 @@
             border: none;
             cursor: pointer;
         }
-
-        .music-controls {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 5px;
-            border-radius: 30px;
-            border: 1px solid #ff80ab;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            z-index: 10;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            width: 34px;
-            height: 34px;
-        }
-
-        .music-controls.active {
-            width: 110px;
-            padding: 5px 8px;
-        }
-
-        .music-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1em;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 24px;
-        }
-
-        .volume-slider {
-            width: 0;
-            height: 4px;
-            accent-color: #ff6b81;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s ease;
-            margin-left: 5px;
-        }
-
-        .music-controls.active .volume-slider {
-            width: 55px;
-            opacity: 1;
-        }
     </style>
 </head>
 
@@ -471,6 +475,12 @@
     <audio id="bg-music" loop preload="auto">
         <source src="song.mp3" type="audio/mpeg">
     </audio>
+
+    <!-- กล่องควบคุมเพลง (อยู่นอกการ์ดขาว บนพื้นหลังสีชมพู มุมขวาบน) -->
+    <div class="music-controls" id="music-controls">
+        <button class="music-btn" onclick="toggleMusic(event)" title="เปิด/ปิดแถบเสียง">🎵</button>
+        <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6" oninput="changeVolume(this.value)">
+    </div>
 
     <div id="start-overlay">
         <div class="gif-wrapper">
@@ -484,10 +494,6 @@
 
     <!-- MAIN CARD -->
     <div class="card" id="main-card">
-        <div class="music-controls" id="music-controls">
-            <button class="music-btn" onclick="toggleMusic(event)" title="เปิด/ปิดเพลง">🎵</button>
-            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6" oninput="changeVolume(this.value)">
-        </div>
 
         <!-- PAGE 0 -->
         <div class="page active" id="page0">
@@ -674,14 +680,14 @@
 
     </div>
 
-    <!-- TEXT POP-UP 1 (รอ 1.5 วินาทีแล้วไป Pop-up 2 อัตโนมัติ) -->
+    <!-- TEXT POP-UP 1 -->
     <div class="text-pop-overlay" id="text-pop-1">
         <div class="text-pop-content">
             <div class="floating-text">ขอบคุณนะคะที่อ่านมาจนจบ 💖✨</div>
         </div>
     </div>
 
-    <!-- TEXT POP-UP 2 (รอ 2 วินาทีแล้วไปหน้าสรุปอัตโนมัติ) -->
+    <!-- TEXT POP-UP 2 -->
     <div class="text-pop-overlay" id="text-pop-2">
         <div class="text-pop-content">
             <div class="floating-text">เดี่ยวบอสสรุปให้ฟังนะคะ🎉✨</div>
@@ -750,7 +756,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-close-gift" onclick="closeGiftModal()">⬅️ ย้อนกลับ</button>
+        <button class="btn btn-close-gift" onclick="closeGiftModal()">⬅️ Back</button>
     </div>
 
     <!-- WISH MODAL -->
@@ -794,8 +800,6 @@
             musicControls.classList.toggle('active');
             if (audio.paused) {
                 audio.play();
-            } else {
-                audio.pause();
             }
         }
 
@@ -804,6 +808,12 @@
                 musicControls.classList.remove('active');
             }
         }, {passive: true});
+
+        document.addEventListener('click', (e) => {
+            if (!musicControls.contains(e.target)) {
+                musicControls.classList.remove('active');
+            }
+        });
 
         function nextPage(targetIndex) {
             if (isTransitioning || targetIndex === currentPageIndex) return;
@@ -857,7 +867,7 @@
             if (num === 1) {
                 setTimeout(() => {
                     switchTextPop(1, 2);
-                }, 1500); // 1.5 วินาที
+                }, 1500);
             }
         }
 
@@ -871,11 +881,10 @@
                 nextPop.style.display = 'flex';
                 setTimeout(() => nextPop.classList.add('show'), 10);
 
-                // ถ้าเปลี่ยนมา Pop-up 2 ให้รอ 2 วินาทีแล้วไปหน้าสรุปอัตโนมัติ
                 if (toNum === 2) {
                     setTimeout(() => {
                         goToSummary();
-                    }, 2000); // 2 วินาที
+                    }, 2000);
                 }
             }, 250);
         }
@@ -942,8 +951,7 @@
 
         function closeWishModal() {
             const overlay = document.getElementById('wish-overlay');
-            overlay.classList.remove('show');
-            setTimeout(() => overlay.style.display = 'none', 300);
+            overlay.style.display = 'none';
         }
 
         function openGiftBox(event) {
