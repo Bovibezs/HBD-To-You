@@ -74,12 +74,12 @@
             overflow: hidden;
         }
         
-        /* Smooth Page Transition Animations */
+        /* Fixed Page Transition CSS */
         .page {
             display: none;
             opacity: 0;
-            transform: scale(0.92) translateY(15px);
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: scale(0.95) translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
             height: 100%;
             flex-direction: column;
             justify-content: center;
@@ -103,7 +103,6 @@
             text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
         }
 
-        /* Intro Text Styling */
         .intro-box {
             background: #fff5f7;
             border: 2px dashed #ff80ab;
@@ -127,7 +126,6 @@
             margin: 0 auto;
         }
 
-        /* Candle & Smoke VFX Styles */
         .candle { transition: opacity 0.3s ease; }
         .candle.out .flame-group { display: none !important; }
         .smoke-group { display: none; opacity: 0; transform-origin: center bottom; }
@@ -139,7 +137,6 @@
             100% { opacity: 0; transform: translateY(-42px) scale(1.6) translateX(6px); }
         }
 
-        /* Menu Buttons */
         .topic-menu {
             display: flex;
             flex-direction: column;
@@ -171,7 +168,6 @@
             box-shadow: 0 6px 16px rgba(255, 107, 129, 0.2);
         }
 
-        /* Modal Overlay */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -223,7 +219,6 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* Gift Box & Open Animation */
         .gift-box-container {
             cursor: pointer;
             display: flex;
@@ -415,7 +410,6 @@
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- หน้า Cover แรกสุด -->
     <div id="start-overlay">
         <div class="gif-wrapper">
             <img src="horimiya.gif" alt="Horimiya Hug">
@@ -432,7 +426,7 @@
             <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
         </div>
 
-        <!-- PAGE 0: หน้าเกริ่นนำ (Intro Page ใหม่) -->
+        <!-- PAGE 0: หน้าเกริ่นนำ -->
         <div class="page active" id="page0">
             <h1>Hey, You! ✨</h1>
             <div class="intro-box">
@@ -725,22 +719,30 @@
             }
         });
 
-        /* Smooth Page Transition Logic */
+        /* Robust & Stable Page Navigation System */
+        let isTransitioning = false;
+
         function nextPage(pageNumber) {
-            const activePage = document.querySelector('.page.active');
+            if (isTransitioning) return;
+
+            const pages = document.querySelectorAll('.page');
             const targetPage = document.getElementById('page' + pageNumber);
 
-            if (activePage && activePage !== targetPage) {
-                activePage.style.opacity = '0';
-                activePage.style.transform = 'scale(0.92) translateY(-15px)';
-                
-                setTimeout(() => {
-                    activePage.classList.remove('active');
-                    activePage.style.transform = '';
-                    
-                    targetPage.classList.add('active');
-                }, 300);
-            }
+            if (!targetPage) return;
+
+            isTransitioning = true;
+
+            pages.forEach(p => {
+                p.classList.remove('active');
+                p.style.display = 'none';
+            });
+
+            targetPage.style.display = 'flex';
+
+            setTimeout(() => {
+                targetPage.classList.add('active');
+                isTransitioning = false;
+            }, 50);
         }
 
         function blowCandleStepByStep() {
@@ -763,7 +765,6 @@
             }
         }
 
-        /* GIFT MODAL HANDLERS */
         function openGiftModal() {
             const giftBox = document.getElementById('gift-box');
             const giftSvg = document.getElementById('gift-svg-elem');
