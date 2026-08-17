@@ -80,7 +80,7 @@
             display: none !important;
             opacity: 0;
             transform: scale(0.96);
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
             width: 100%;
             height: 100%;
             flex-direction: column;
@@ -92,6 +92,27 @@
             display: flex !important;
             opacity: 1;
             transform: scale(1);
+        }
+
+        /* สไตล์สำหรับการ์ดข้อความจางๆ (Message Card) */
+        .msg-box {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 2px dashed rgba(255, 128, 171, 0.6);
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin: 15px 0;
+            box-shadow: 0 8px 20px rgba(255, 107, 129, 0.15);
+            width: 100%;
+        }
+
+        .msg-box p {
+            color: #d63031;
+            font-size: 1.05em;
+            font-weight: 600;
+            line-height: 1.7;
+            margin: 0;
         }
 
         h1 { color: #ff6b81; font-size: 1.7em; margin: 5px 0; }
@@ -429,7 +450,7 @@
             </div>
         </div>
 
-        <!-- PAGE 2 -->
+        <!-- PAGE 2: เป่าเค้ก -->
         <div class="page" id="page2">
             <h1>Make a Wish! 🎂</h1>
             
@@ -536,12 +557,37 @@
 
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="nextPage(1)">⬅️ ถอยกลับ</button>
+                <!-- กดแล้วไปหน้าข้อความที่ 1 (page3) -->
                 <button class="btn" id="next-btn-page2" style="display: none;" onclick="nextPage(3)">หน้าถัดไป ➡️</button>
             </div>
         </div>
 
-        <!-- PAGE 3 -->
+        <!-- PAGE 3: ข้อความที่ 1 (Background จางๆ) -->
         <div class="page" id="page3">
+            <h1>ข้อความถึงเธอ ✨</h1>
+            <div class="msg-box">
+                <p>ข้อความที่ 1 (สามารถมาเปลี่ยนคำพูดตรงนี้ได้ในภายหลังนะ) 💕<br><br>ขอบคุณสำหรับทุกๆ ช่วงเวลาดีๆ ที่อยู่ด้วยกันนะ มีความสุขมากๆ ในวันเกิดปีนี้!</p>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="nextPage(2)">⬅️ ย้อนกลับ</button>
+                <button class="btn" onclick="nextPage(4)">ไปต่อ ➡️</button>
+            </div>
+        </div>
+
+        <!-- PAGE 4: ข้อความที่ 2 (Background จางๆ) -->
+        <div class="page" id="page4">
+            <h1>อีกเรื่องหนึ่งที่อยากบอก 💌</h1>
+            <div class="msg-box">
+                <p>ข้อความที่ 2 (สามารถมาเปลี่ยนคำพูดตรงนี้ได้ในภายหลังนะ) 💖<br><br>ขอให้ปีนี้เป็นปีที่ใจดีกับเธอมากๆ รักษาสุขภาพ แล้วก็ยิ้มเยอะๆ ในทุกๆ วันเลยนะ!</p>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="nextPage(3)">⬅️ ย้อนกลับ</button>
+                <button class="btn" onclick="nextPage(5)">ไปหน้าสรุป 🎁</button>
+            </div>
+        </div>
+
+        <!-- PAGE 5: หน้าสรุป (เดิมคือ page3) -->
+        <div class="page" id="page5">
             <h1>🎂 Happy Birthday!</h1>
             <p style="margin-top: 0; color: #ff758c; font-size: 0.9em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะ 💕</p>
             
@@ -561,7 +607,7 @@
             </div>
 
             <div class="btn-group">
-                <button class="btn btn-secondary" onclick="nextPage(2)">⬅️ ถอยกลับ</button>
+                <button class="btn btn-secondary" onclick="nextPage(4)">⬅️ ย้อนกลับ</button>
             </div>
         </div>
 
@@ -752,8 +798,8 @@
 
         function closeWishModal() {
             const overlay = document.getElementById('wish-overlay');
-            overlay.classList.remove('show');
-            setTimeout(() => overlay.style.display = 'none', 300);
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('show'), 10);
         }
 
         function openGiftBox(event) {
