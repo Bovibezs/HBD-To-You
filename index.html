@@ -21,6 +21,7 @@
             align-items: center;
             justify-content: center;
             color: #4a4a4a;
+            overflow-x: hidden;
         }
 
         #start-overlay {
@@ -37,6 +38,7 @@
             align-items: center;
             text-align: center;
             padding: 20px;
+            transition: opacity 0.6s ease, visibility 0.6s;
         }
 
         .gif-wrapper, .page-gif-wrapper {
@@ -69,22 +71,25 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow: hidden;
         }
         
+        /* Smooth Page Transition Animations */
         .page {
             display: none;
-            animation: fadeIn 0.5s ease-in-out;
+            opacity: 0;
+            transform: scale(0.92) translateY(15px);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
             height: 100%;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
+        
         .page.active {
             display: flex;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            opacity: 1;
+            transform: scale(1) translateY(0);
         }
 
         h1 { color: #ff6b81; font-size: 1.8em; margin: 10px 0; }
@@ -96,6 +101,24 @@
             font-size: 2.5em;
             margin: 5px 0 15px 0;
             text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
+        }
+
+        /* Intro Text Styling */
+        .intro-box {
+            background: #fff5f7;
+            border: 2px dashed #ff80ab;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: inset 0 0 10px rgba(255, 182, 193, 0.2);
+        }
+
+        .intro-box p {
+            color: #ff4757;
+            font-size: 1.05em;
+            font-weight: 600;
+            line-height: 1.7;
+            margin: 0;
         }
 
         .svg-cake-wrapper {
@@ -116,7 +139,7 @@
             100% { opacity: 0; transform: translateY(-42px) scale(1.6) translateX(6px); }
         }
 
-        /* Menu Buttons for Page 3 */
+        /* Menu Buttons */
         .topic-menu {
             display: flex;
             flex-direction: column;
@@ -163,6 +186,13 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
         }
 
         .gift-scene {
@@ -185,7 +215,7 @@
             text-align: center;
             box-shadow: 0 15px 35px rgba(0,0,0,0.25);
             border: 3px solid #ffccd5;
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes popIn {
@@ -193,7 +223,7 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* Gift Box & Open Animation Improved */
+        /* Gift Box & Open Animation */
         .gift-box-container {
             cursor: pointer;
             display: flex;
@@ -225,7 +255,6 @@
             transform: translateY(-90px) rotate(-38deg) scale(0.9);
         }
 
-        /* Glow Flash */
         .glow-flash {
             position: absolute;
             width: 10px;
@@ -248,7 +277,6 @@
             100% { transform: translate(-50%, -50%) scale(45); opacity: 0; }
         }
 
-        /* Bouquet Image Reveal */
         .bouquet-card {
             display: none;
             flex-direction: column;
@@ -275,7 +303,6 @@
             object-fit: cover;
         }
 
-        /* Flower Particles Burst */
         .flower-particle {
             position: absolute;
             font-size: 30px;
@@ -306,7 +333,7 @@
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 107, 129, 0.3);
-            transition: all 0.2s;
+            transition: all 0.25s ease;
             font-weight: 600;
         }
         .btn:hover { transform: scale(1.05); background: #ff4757; }
@@ -388,6 +415,7 @@
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- หน้า Cover แรกสุด -->
     <div id="start-overlay">
         <div class="gif-wrapper">
             <img src="horimiya.gif" alt="Horimiya Hug">
@@ -404,18 +432,33 @@
             <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6" oninput="changeVolume(this.value)" title="ปรับระดับเสียง">
         </div>
 
-        <!-- Page 1 -->
-        <div class="page active" id="page1">
+        <!-- PAGE 0: หน้าเกริ่นนำ (Intro Page ใหม่) -->
+        <div class="page active" id="page0">
+            <h1>Hey, You! ✨</h1>
+            <div class="intro-box">
+                <p>ก่อนจะไปดูของขวัญ... อยากบอกว่าดีใจมากๆ ที่ได้มีเธออยู่ในทุกๆ วัน วันนี้เป็นวันพิเศษของคนพิเศษ เลยตั้งใจทำสิ่งนี้ขึ้นมาให้เธอคนเดียวเลยนะ 💕</p>
+            </div>
+            <div class="page-gif-wrapper">
+                <img src="horimiya.gif" alt="Intro Gif">
+            </div>
+            <button class="btn" onclick="nextPage(1)">ไปต่อกันเลย 💖✨</button>
+        </div>
+
+        <!-- PAGE 1: หน้า Happy Birthday -->
+        <div class="page" id="page1">
             <h1>🎁 Happy Birthday</h1>
             <div class="name-title">To Ploy 💖</div>
             <p>I have a message and a surprise for you...</p>
             <div class="page-gif-wrapper">
                 <img src="horimiya1.gif" alt="Horimiya Surprise">
             </div>
-            <button class="btn" onclick="nextPage(2)">กดเปิดการ์ดตรงนี้สิ ✨</button>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="nextPage(0)">⬅️ ย้อนกลับ</button>
+                <button class="btn" onclick="nextPage(2)">ไปเป่าเค้กกัน 🎂</button>
+            </div>
         </div>
 
-        <!-- Page 2 -->
+        <!-- PAGE 2: หน้าเป่าเค้ก -->
         <div class="page" id="page2">
             <h1>Make a Wish! 🎂</h1>
             
@@ -452,21 +495,15 @@
                         </linearGradient>
                     </defs>
 
-                    <!-- Shadow under Plate -->
                     <ellipse cx="160" cy="278" rx="142" ry="18" fill="url(#plate-shadow)" />
-
-                    <!-- Plate -->
                     <ellipse cx="160" cy="272" rx="138" ry="15" fill="#e2e2e2" />
                     <ellipse cx="160" cy="269" rx="135" ry="14" fill="#ffffff" stroke="#f0b6c1" stroke-width="2" />
 
-                    <!-- Bottom Tier -->
                     <path d="M 45 175 C 45 175 45 250 45 250 C 45 268 275 268 275 250 L 275 175 Z" fill="url(#cake-layer1)" />
                     <ellipse cx="160" cy="175" rx="115" ry="20" fill="#fff3ee" stroke="#f7d4c8" stroke-width="1" />
 
-                    <!-- Drips Bottom Tier -->
                     <path d="M 45 176 Q 60 195 70 176 Q 85 205 95 176 Q 115 210 130 176 Q 150 200 165 176 Q 185 212 200 176 Q 220 198 235 176 Q 255 208 265 176 Q 272 188 275 176 Q 160 198 45 176 Z" fill="url(#strawberry-drip)" opacity="0.9" />
 
-                    <!-- Cream Swirls -->
                     <g fill="#ffffff" filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.1))">
                         <circle cx="55" cy="254" r="8" /><circle cx="75" cy="259" r="8" /><circle cx="97" cy="263" r="8" />
                         <circle cx="120" cy="265" r="8" /><circle cx="142" cy="266" r="8" /><circle cx="160" cy="266" r="8" />
@@ -474,7 +511,6 @@
                         <circle cx="245" cy="259" r="8" /><circle cx="265" cy="254" r="8" />
                     </g>
 
-                    <!-- Big Bow -->
                     <g transform="translate(160, 230)" filter="drop-shadow(0px 3px 3px rgba(0,0,0,0.15))">
                         <path d="M -38 -8 C -60 -30, -65 15, -32 8 C -50 25, -20 32, -12 10" fill="#ff4d6d" />
                         <path d="M 38 -8 C 60 -30, 65 15, 32 8 C 50 25, 20 32, 12 10" fill="#ff4d6d" />
@@ -482,14 +518,11 @@
                         <circle cx="0" cy="3" r="4" fill="#ff80ab" />
                     </g>
 
-                    <!-- Top Tier -->
                     <path d="M 90 115 C 90 115 90 172 90 172 C 90 188 230 188 230 172 L 230 115 Z" fill="url(#cake-layer2)" />
                     <ellipse cx="160" cy="115" rx="70" ry="14" fill="#ffffff" stroke="#ffccd5" stroke-width="1" />
 
-                    <!-- Drips Top Tier -->
                     <path d="M 90 116 Q 102 135 110 116 Q 125 142 138 116 Q 152 136 160 116 Q 172 140 182 116 Q 198 138 210 116 Q 222 130 230 116 Q 160 130 90 116 Z" fill="#ff6b81" opacity="0.85" />
 
-                    <!-- Teddy Bear -->
                     <g transform="translate(160, 148)" filter="drop-shadow(0px 3px 3px rgba(0,0,0,0.12))">
                         <circle cx="-19" cy="-17" r="9" fill="#d7a15c" /><circle cx="-19" cy="-17" r="5" fill="#ffb3c6" />
                         <circle cx="19" cy="-17" r="9" fill="#d7a15c" /><circle cx="19" cy="-17" r="5" fill="#ffb3c6" />
@@ -502,11 +535,9 @@
                         <ellipse cx="14" cy="2" rx="4" ry="2" fill="#ff6b81" opacity="0.7" />
                     </g>
 
-                    <!-- Candle Base -->
                     <ellipse cx="160" cy="114" rx="9" ry="3.5" fill="rgba(0,0,0,0.12)" />
                     <ellipse cx="160" cy="113" rx="7" ry="2.5" fill="#ffffff" stroke="#ffb6c1" stroke-width="1" />
 
-                    <!-- Candle -->
                     <g class="candle" id="candle-1" transform="translate(160, 68)">
                         <g class="smoke-group">
                             <circle cx="0" cy="10" r="4" fill="#e0e0e0" />
@@ -522,7 +553,6 @@
                         </g>
                     </g>
 
-                    <!-- "18" Badge -->
                     <g transform="translate(242, 98) rotate(14) scale(0.95)" filter="drop-shadow(2px 3px 4px rgba(0,0,0,0.15))">
                         <line x1="-15" y1="25" x2="-35" y2="85" stroke="#d7ccc8" stroke-width="3" stroke-linecap="round" />
                         <rect x="-42" y="-30" width="64" height="52" rx="22" fill="#fff0f3" stroke="#ff80ab" stroke-width="3" />
@@ -545,7 +575,7 @@
             </div>
         </div>
 
-        <!-- Page 3 -->
+        <!-- PAGE 3: หน้าเมนูของขวัญและคำอวยพร -->
         <div class="page" id="page3">
             <h1>🎂 Happy Birthday!</h1>
             <p style="margin-top: 0; color: #ff758c; font-size: 0.95em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะ 💕</p>
@@ -572,7 +602,7 @@
 
     </div>
 
-    <!-- POPUP OVERLAY FOR GIFT (Pretty Stylish Gift Box) -->
+    <!-- POPUP OVERLAY FOR GIFT -->
     <div class="modal-overlay" id="gift-overlay">
         <div class="gift-scene" id="gift-scene">
             <div class="gift-box-container" id="gift-box" onclick="openGiftBox(event)">
@@ -580,27 +610,23 @@
                 
                 <svg class="gift-svg" id="gift-svg-elem" viewBox="0 0 200 200">
                     <defs>
-                        <!-- ไล่เฉดสีตัวกล่องหลัก -->
                         <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#ff758c" />
                             <stop offset="50%" stop-color="#ff8fa3" />
                             <stop offset="100%" stop-color="#ffb3c6" />
                         </linearGradient>
 
-                        <!-- ไล่เฉดสีฝากล่อง -->
                         <linearGradient id="lidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#ff80ab" />
                             <stop offset="100%" stop-color="#ffb6c1" />
                         </linearGradient>
 
-                        <!-- ไล่เฉดสีริบบิ้นสีขาวทองพาสเทล -->
                         <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#ffffff" />
                             <stop offset="50%" stop-color="#fff5f7" />
                             <stop offset="100%" stop-color="#ffe3e8" />
                         </linearGradient>
 
-                        <!-- เงามีมิตินุ่มๆ -->
                         <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
                             <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#e63946" flood-opacity="0.25"/>
                         </filter>
@@ -610,41 +636,28 @@
                         </filter>
                     </defs>
 
-                    <!-- Shadow under Box Base -->
                     <ellipse cx="100" cy="180" rx="65" ry="10" fill="rgba(0,0,0,0.18)" />
 
-                    <!-- GIFT BOX BODY -->
                     <g filter="url(#softShadow)">
                         <rect x="40" y="80" width="120" height="92" rx="14" fill="url(#boxGrad)" />
-                        <!-- Ribbon Vertical Base -->
                         <rect x="88" y="80" width="24" height="92" fill="url(#ribbonGrad)" />
-                        <!-- Highlight Shine lines for Box Body -->
                         <path d="M 46 86 L 46 166" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.4" />
                     </g>
 
-                    <!-- GIFT BOX LID & BOW (Animates together) -->
                     <g class="gift-lid" id="gift-lid-group" filter="url(#lidShadow)">
-                        <!-- Lid Shadow Effect on Box -->
                         <rect x="32" y="60" width="136" height="28" rx="8" fill="url(#lidGrad)" />
-                        <!-- Ribbon Vertical Lid -->
                         <rect x="88" y="60" width="24" height="28" fill="url(#ribbonGrad)" />
-                        <!-- Lid Highlight -->
                         <line x1="38" y1="65" x2="162" y2="65" stroke="#ffffff" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
 
-                        <!-- PRETTY RIBBON BOW -->
-                        <!-- Left Loop -->
                         <path d="M 100 60 C 65 20, 35 48, 88 58 Z" fill="url(#ribbonGrad)" />
                         <path d="M 98 58 C 70 30, 50 48, 88 58 Z" fill="#ffccd5" opacity="0.5" />
                         
-                        <!-- Right Loop -->
                         <path d="M 100 60 C 135 20, 165 48, 112 58 Z" fill="url(#ribbonGrad)" />
                         <path d="M 102 58 C 130 30, 150 48, 112 58 Z" fill="#ffccd5" opacity="0.5" />
 
-                        <!-- Ribbon Tails -->
                         <path d="M 93 60 C 80 72, 65 75, 58 88 C 72 82, 85 80, 95 62 Z" fill="url(#ribbonGrad)" opacity="0.95" />
                         <path d="M 107 60 C 120 72, 135 75, 142 88 C 128 82, 115 80, 105 62 Z" fill="url(#ribbonGrad)" opacity="0.95" />
 
-                        <!-- Bow Center Knot -->
                         <rect x="88" y="52" width="24" height="16" rx="6" fill="url(#ribbonGrad)" />
                         <circle cx="100" cy="60" r="5" fill="#ff4d6d" opacity="0.8" />
                     </g>
@@ -654,7 +667,6 @@
                     แตะที่กล่องเพื่อเปิดของขวัญ 💖✨
                 </p>
                 
-                <!-- Bouquet Image Reveal -->
                 <div class="bouquet-card" id="bouquet-card">
                     <img src="flower.jpg" alt="ช่อดอกไม้ของขวัญ" class="bouquet-img" onerror="this.src=''">
                 </div>
@@ -684,13 +696,13 @@
 
         function initWebsite() {
             audio.load();
-            audio.play().then(() => {
-                console.log("Audio playing perfectly!");
-            }).catch(error => {
-                console.log("Audio play error:", error);
-            });
+            audio.play().catch(error => console.log("Audio play error:", error));
             
-            document.getElementById('start-overlay').style.display = 'none';
+            const startOverlay = document.getElementById('start-overlay');
+            startOverlay.style.opacity = '0';
+            setTimeout(() => {
+                startOverlay.style.display = 'none';
+            }, 600);
         }
 
         function changeVolume(val) {
@@ -713,9 +725,22 @@
             }
         });
 
+        /* Smooth Page Transition Logic */
         function nextPage(pageNumber) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById('page' + pageNumber).classList.add('active');
+            const activePage = document.querySelector('.page.active');
+            const targetPage = document.getElementById('page' + pageNumber);
+
+            if (activePage && activePage !== targetPage) {
+                activePage.style.opacity = '0';
+                activePage.style.transform = 'scale(0.92) translateY(-15px)';
+                
+                setTimeout(() => {
+                    activePage.classList.remove('active');
+                    activePage.style.transform = '';
+                    
+                    targetPage.classList.add('active');
+                }, 300);
+            }
         }
 
         function blowCandleStepByStep() {
@@ -744,6 +769,7 @@
             const giftSvg = document.getElementById('gift-svg-elem');
             const giftHint = document.getElementById('gift-hint');
             const bouquetCard = document.getElementById('bouquet-card');
+            const overlay = document.getElementById('gift-overlay');
 
             giftBox.classList.remove('open');
             if (giftSvg) giftSvg.style.display = 'block';
@@ -751,19 +777,27 @@
             if (bouquetCard) bouquetCard.style.display = 'none';
 
             document.querySelectorAll('.flower-particle').forEach(el => el.remove());
-            document.getElementById('gift-overlay').style.display = 'flex';
+            
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('show'), 10);
         }
 
         function closeGiftModal() {
-            document.getElementById('gift-overlay').style.display = 'none';
+            const overlay = document.getElementById('gift-overlay');
+            overlay.classList.remove('show');
+            setTimeout(() => overlay.style.display = 'none', 400);
         }
 
         function openWishModal() {
-            document.getElementById('wish-overlay').style.display = 'flex';
+            const overlay = document.getElementById('wish-overlay');
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('show'), 10);
         }
 
         function closeWishModal() {
-            document.getElementById('wish-overlay').style.display = 'none';
+            const overlay = document.getElementById('wish-overlay');
+            overlay.classList.remove('show');
+            setTimeout(() => overlay.style.display = 'none', 400);
         }
 
         function openGiftBox(event) {
