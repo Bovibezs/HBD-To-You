@@ -73,12 +73,12 @@
             flex-direction: column;
             justify-content: space-between;
             overflow: hidden;
-            transition: filter 0.3s ease, transform 0.3s ease;
+            transition: filter 0.4s ease, opacity 0.4s ease;
         }
 
-        /* เมื่อเปิด Pop-up ข้อความ จะทำการจางเบื้องหลังลง */
+        /* เมื่อเปิดข้อความ ฉากหลังการ์ดจะจางและเบลอลง */
         .card.dimmed {
-            filter: blur(4px) opacity(0.4);
+            filter: blur(5px) opacity(0.35);
             pointer-events: none;
         }
         
@@ -100,16 +100,17 @@
             transform: scale(1);
         }
 
-        /* กล่องข้อความ Pop-up ตรงกลาง */
-        .msg-pop-overlay {
+        /* Overlay สำหรับข้อความลอยเพียวๆ */
+        .text-pop-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.15);
             z-index: 800;
             display: none;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -117,36 +118,47 @@
             transition: opacity 0.3s ease;
         }
 
-        .msg-pop-overlay.show {
+        .text-pop-overlay.show {
             display: flex;
             opacity: 1;
         }
 
-        .msg-pop-box {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 3px dashed #ff80ab;
-            border-radius: 25px;
-            padding: 30px 20px;
-            max-width: 360px;
-            width: 90%;
+        /* กล่องใสไม่มี Background สี่เหลี่ยม */
+        .text-pop-content {
+            background: transparent;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(255, 107, 129, 0.3);
-            transform: scale(0.85);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 320px;
+            width: 100%;
+            transform: scale(0.7) translateY(20px);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .msg-pop-overlay.show .msg-pop-box {
-            transform: scale(1);
+        /* Animation เด้งขึ้นมา */
+        .text-pop-overlay.show .text-pop-content {
+            transform: scale(1) translateY(0);
+            opacity: 1;
         }
 
-        .msg-pop-box p {
-            color: #ff4757;
-            font-size: 1.25em;
+        /* สไตล์ข้อความเด่น ลอยสวยงาม */
+        .floating-text {
+            color: #ff3366;
+            font-size: 1.6em;
             font-weight: 700;
-            margin: 0 0 20px 0;
-            line-height: 1.6;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.9),
+                         0 4px 20px rgba(255, 71, 87, 0.4);
+            animation: textPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.04); }
         }
 
         h1 { color: #ff6b81; font-size: 1.7em; margin: 5px 0; }
@@ -360,16 +372,16 @@
             background: #ff6b81;
             color: white;
             border: none;
-            padding: 12px 22px;
+            padding: 12px 24px;
             font-size: 1em;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(255, 107, 129, 0.3);
+            box-shadow: 0 6px 18px rgba(255, 107, 129, 0.4);
             transition: background 0.2s ease, transform 0.1s ease;
-            font-weight: 600;
+            font-weight: 700;
         }
-        .btn:active { transform: scale(0.96); background: #ff4757; }
-        .btn-secondary { background: #a4b0be; }
+        .btn:active { transform: scale(0.95); background: #ff4757; }
+        .btn-secondary { background: #a4b0be; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
         .btn-secondary:active { background: #747d8c; }
 
         .btn-close-gift {
@@ -596,7 +608,7 @@
             </div>
         </div>
 
-        <!-- PAGE 3: หน้าเมนูหลัก (ตรงตามรูปภาพ) -->
+        <!-- PAGE 3: หน้าเมนูหลัก -->
         <div class="page" id="page3">
             <h1>🎂 Happy Birthday!</h1>
             <p style="margin-top: 0; color: #ff758c; font-size: 0.9em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะ 💕</p>
@@ -618,7 +630,7 @@
 
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="nextPage(2)">⬅️ ย้อนกลับ</button>
-                <button class="btn" onclick="openMsgPop(1)">ถัดไป ➡️</button>
+                <button class="btn" onclick="openTextPop(1)">ถัดไป ➡️</button>
             </div>
         </div>
 
@@ -644,17 +656,18 @@
 
     </div>
 
-    <!-- POP-UP ข้อความ 1 & 2 ซ้อนขึ้นตรงกลาง (การ์ดหลังจางลง) -->
-    <div class="msg-pop-overlay" id="msg-pop-1">
-        <div class="msg-pop-box">
-            <p>เย้จบแล้ว 🎉✨</p>
-            <button class="btn" onclick="switchMsgPop(1, 2)">ไปต่อ ➡️</button>
+    <!-- TEXT POP-UP 1 (ไร้กล่องสี่เหลี่ยม + Animation ลอยขึ้น) -->
+    <div class="text-pop-overlay" id="text-pop-1">
+        <div class="text-pop-content">
+            <div class="floating-text">เย้จบแล้ว 🎉✨</div>
+            <button class="btn" onclick="switchTextPop(1, 2)">ไปต่อ ➡️</button>
         </div>
     </div>
 
-    <div class="msg-pop-overlay" id="msg-pop-2">
-        <div class="msg-pop-box">
-            <p>ขอบคุณที่อ่านจนจบนะ💖✨</p>
+    <!-- TEXT POP-UP 2 (ไร้กล่องสี่เหลี่ยม + Animation ลอยขึ้น) -->
+    <div class="text-pop-overlay" id="text-pop-2">
+        <div class="text-pop-content">
+            <div class="floating-text">ขอบคุณที่อ่านจนจบนะ💖✨</div>
             <button class="btn" onclick="goToSummary()">ไปหน้าสรุป ✨</button>
         </div>
     </div>
@@ -789,34 +802,36 @@
             });
         }
 
-        /* ฟังก์ชันควบคุม Pop-up ข้อความ + ฉากหลังจาง */
-        function openMsgPop(num) {
+        /* เปิดข้อความลอย + ฉากหลังจาง */
+        function openTextPop(num) {
             document.getElementById('main-card').classList.add('dimmed');
-            const pop = document.getElementById('msg-pop-' + num);
+            const pop = document.getElementById('text-pop-' + num);
             pop.style.display = 'flex';
             setTimeout(() => pop.classList.add('show'), 10);
         }
 
-        function switchMsgPop(fromNum, toNum) {
-            const currentPop = document.getElementById('msg-pop-' + fromNum);
-            const nextPop = document.getElementById('msg-pop-' + toNum);
+        /* สลับไปยังข้อความถัดไปพร้อม Animation */
+        function switchTextPop(fromNum, toNum) {
+            const currentPop = document.getElementById('text-pop-' + fromNum);
+            const nextPop = document.getElementById('text-pop-' + toNum);
             
             currentPop.classList.remove('show');
             setTimeout(() => {
                 currentPop.style.display = 'none';
                 nextPop.style.display = 'flex';
                 setTimeout(() => nextPop.classList.add('show'), 10);
-            }, 200);
+            }, 250);
         }
 
+        /* ปิดข้อความ แล้วไปหน้าสรุป */
         function goToSummary() {
-            const pop2 = document.getElementById('msg-pop-2');
+            const pop2 = document.getElementById('text-pop-2');
             pop2.classList.remove('show');
             setTimeout(() => {
                 pop2.style.display = 'none';
                 document.getElementById('main-card').classList.remove('dimmed');
-                nextPage(4); // ไปหน้าสรุปสุดท้าย
-            }, 200);
+                nextPage(4);
+            }, 250);
         }
 
         function blowCandleStepByStep() {
