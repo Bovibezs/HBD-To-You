@@ -93,36 +93,30 @@
             transform: scale(1);
         }
 
-        /* สไตล์การ์ดข้อความโปร่งแสงอยู่ตรงกลาง */
+        /* กล่องข้อความโปร่งแสงอยู่ตรงกลาง + Background การ์ดจางลง */
         .glass-msg-card {
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 2px dashed rgba(255, 107, 129, 0.4);
-            border-radius: 20px;
-            padding: 30px 20px;
+            border-radius: 22px;
+            padding: 35px 25px;
             margin: auto 0;
             width: 100%;
-            box-shadow: 0 8px 25px rgba(255, 107, 129, 0.12);
+            box-shadow: 0 8px 30px rgba(255, 107, 129, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        .glass-msg-card h2 {
-            color: #ff4757;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-
         .glass-msg-card p {
-            color: #d63031;
-            font-size: 1.05em;
-            font-weight: 600;
-            line-height: 1.7;
+            color: #ff4757;
+            font-size: 1.25em;
+            font-weight: 700;
+            line-height: 1.8;
             margin: 0;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
         }
 
         h1 { color: #ff6b81; font-size: 1.7em; margin: 5px 0; }
@@ -571,7 +565,7 @@
             </div>
         </div>
 
-        <!-- PAGE 3 (หน้าเดิมในรูป): เมนูเลือกของขวัญ/คำอวยพร + ปุ่มถัดไป -->
+        <!-- PAGE 3: เมนูเลือกของขวัญ/คำอวยพร + ปุ่มถัดไป -->
         <div class="page" id="page3">
             <h1>🎂 Happy Birthday!</h1>
             <p style="margin-top: 0; color: #ff758c; font-size: 0.9em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะ 💕</p>
@@ -597,23 +591,21 @@
             </div>
         </div>
 
-        <!-- PAGE 4 (ใหม่): ข้อความที่ 1 (ขึ้นตรงกลางการ์ดจางๆ) -->
+        <!-- PAGE 4: ข้อความแรก "เย้จบแล้ว" (Background จางลง ข้อความขึ้นตรงกลาง) -->
         <div class="page" id="page4">
             <div class="glass-msg-card">
-                <h2>✨ ข้อความที่ 1 ✨</h2>
-                <p>ข้อความตัวอย่างที่ 1 (มาแก้ตรงนี้ได้เลยนะ)<br><br>ขอบคุณที่เป็นความสดใสและเรื่องราวดีๆ ในทุกวันนะ ขอให้วันเกิดปีนี้เต็มไปด้วยรอยยิ้มและความสุขมากๆ 💕</p>
+                <p>เย้จบแล้ว 🎉✨</p>
             </div>
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="nextPage(3)">⬅️ ย้อนกลับ</button>
-                <button class="btn" onclick="nextPage(5)">ข้อความต่อไป ➡️</button>
+                <button class="btn" onclick="nextPage(5)">ไปต่อ ➡️</button>
             </div>
         </div>
 
-        <!-- PAGE 5 (ใหม่): ข้อความที่ 2 (ขึ้นตรงกลางการ์ดจางๆ) -->
+        <!-- PAGE 5: ข้อความที่สอง "ขอบคุณที่อ่านจนจบ" -->
         <div class="page" id="page5">
             <div class="glass-msg-card">
-                <h2>💌 ข้อความที่ 2 💌</h2>
-                <p>ข้อความตัวอย่างที่ 2 (มาแก้ตรงนี้ได้เลยนะ)<br><br>ขอให้ปีนี้เป็นปีที่สมปรารถนาในทุกเรื่อง ใจดีกับเธอในทุกๆ วัน รักษาสุขภาพด้วยนะคนเก่ง 💖</p>
+                <p>ขอบคุณที่อ่านจนจบนะ💖✨</p>
             </div>
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="nextPage(4)">⬅️ ย้อนกลับ</button>
@@ -621,14 +613,14 @@
             </div>
         </div>
 
-        <!-- PAGE 6 (ใหม่): หน้าสรุปปิดท้าย -->
+        <!-- PAGE 6: หน้าสรุปสุดท้าย -->
         <div class="page" id="page6">
             <div class="glass-msg-card" style="border: 2px solid #ff80ab; background: rgba(255, 255, 255, 0.75);">
                 <h1 style="margin-top: 0; font-size: 1.8em; color: #ff4757;">🎉 Happy Birthday! 🎉</h1>
                 <p style="color: #ff6b81; font-size: 1.1em; font-weight: 700; margin: 10px 0;">
                     หวังว่าจะชอบของขวัญชิ้นนี้นะครับ 💕
                 </p>
-                <p style="color: #666; font-size: 0.95em;">
+                <p style="color: #666; font-size: 0.95em; font-weight: normal;">
                     ขอให้วันเกิดปีนี้มีความสุขที่สุดในโลกเลยนะ! ✨💖
                 </p>
             </div>
