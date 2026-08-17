@@ -73,6 +73,13 @@
             flex-direction: column;
             justify-content: space-between;
             overflow: hidden;
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        /* เมื่อเปิด Pop-up ข้อความ จะทำการจางเบื้องหลังลง */
+        .card.dimmed {
+            filter: blur(4px) opacity(0.4);
+            pointer-events: none;
         }
         
         .page {
@@ -93,30 +100,53 @@
             transform: scale(1);
         }
 
-        /* กล่องข้อความโปร่งแสงอยู่ตรงกลาง + Background การ์ดจางลง */
-        .glass-msg-card {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 2px dashed rgba(255, 107, 129, 0.4);
-            border-radius: 22px;
-            padding: 35px 25px;
-            margin: auto 0;
+        /* กล่องข้อความ Pop-up ตรงกลาง */
+        .msg-pop-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            box-shadow: 0 8px 30px rgba(255, 107, 129, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            z-index: 800;
+            display: none;
             justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .glass-msg-card p {
+        .msg-pop-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .msg-pop-box {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 3px dashed #ff80ab;
+            border-radius: 25px;
+            padding: 30px 20px;
+            max-width: 360px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(255, 107, 129, 0.3);
+            transform: scale(0.85);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .msg-pop-overlay.show .msg-pop-box {
+            transform: scale(1);
+        }
+
+        .msg-pop-box p {
             color: #ff4757;
             font-size: 1.25em;
             font-weight: 700;
-            line-height: 1.8;
-            margin: 0;
-            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+            margin: 0 0 20px 0;
+            line-height: 1.6;
         }
 
         h1 { color: #ff6b81; font-size: 1.7em; margin: 5px 0; }
@@ -422,7 +452,8 @@
         </button>
     </div>
 
-    <div class="card">
+    <!-- MAIN CARD CARD -->
+    <div class="card" id="main-card">
         <div class="music-controls" id="music-controls">
             <button class="music-btn" onclick="toggleMusic(event)" title="เปิด/ปิดเพลง">🎵</button>
             <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6" oninput="changeVolume(this.value)">
@@ -561,11 +592,11 @@
 
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="nextPage(1)">⬅️ ถอยกลับ</button>
-                <button class="btn" id="next-btn-page2" style="display: none;" onclick="nextPage(3)">หน้าถัดไป ➡️</button>
+                <button class="btn" id="next-btn-page2" style="display: none;" onclick="nextPage(3)">ถัดไป ➡️</button>
             </div>
         </div>
 
-        <!-- PAGE 3: เมนูเลือกของขวัญ/คำอวยพร + ปุ่มถัดไป -->
+        <!-- PAGE 3: หน้าเมนูหลัก (ตรงตามรูปภาพ) -->
         <div class="page" id="page3">
             <h1>🎂 Happy Birthday!</h1>
             <p style="margin-top: 0; color: #ff758c; font-size: 0.9em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะ 💕</p>
@@ -587,52 +618,45 @@
 
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="nextPage(2)">⬅️ ย้อนกลับ</button>
-                <button class="btn" onclick="nextPage(4)">ถัดไป ➡️</button>
+                <button class="btn" onclick="openMsgPop(1)">ถัดไป ➡️</button>
             </div>
         </div>
 
-        <!-- PAGE 4: ข้อความแรก "เย้จบแล้ว" (Background จางลง ข้อความขึ้นตรงกลาง) -->
+        <!-- PAGE 4: หน้าสรุปสุดท้าย -->
         <div class="page" id="page4">
-            <div class="glass-msg-card">
-                <p>เย้จบแล้ว 🎉✨</p>
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-secondary" onclick="nextPage(3)">⬅️ ย้อนกลับ</button>
-                <button class="btn" onclick="nextPage(5)">ไปต่อ ➡️</button>
-            </div>
-        </div>
+            <h1 style="margin-top: 0; font-size: 1.8em; color: #ff4757;">🎉 Happy Birthday! 🎉</h1>
+            <p style="color: #ff6b81; font-size: 1.1em; font-weight: 700; margin: 10px 0;">
+                หวังว่าจะชอบของขวัญชิ้นนี้นะครับ 💕
+            </p>
+            <p style="color: #666; font-size: 0.95em; font-weight: normal;">
+                ขอให้วันเกิดปีนี้มีความสุขที่สุดในโลกเลยนะ! ✨💖
+            </p>
 
-        <!-- PAGE 5: ข้อความที่สอง "ขอบคุณที่อ่านจนจบ" -->
-        <div class="page" id="page5">
-            <div class="glass-msg-card">
-                <p>ขอบคุณที่อ่านจนจบนะ💖✨</p>
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-secondary" onclick="nextPage(4)">⬅️ ย้อนกลับ</button>
-                <button class="btn" onclick="nextPage(6)">ไปหน้าสรุป ✨</button>
-            </div>
-        </div>
-
-        <!-- PAGE 6: หน้าสรุปสุดท้าย -->
-        <div class="page" id="page6">
-            <div class="glass-msg-card" style="border: 2px solid #ff80ab; background: rgba(255, 255, 255, 0.75);">
-                <h1 style="margin-top: 0; font-size: 1.8em; color: #ff4757;">🎉 Happy Birthday! 🎉</h1>
-                <p style="color: #ff6b81; font-size: 1.1em; font-weight: 700; margin: 10px 0;">
-                    หวังว่าจะชอบของขวัญชิ้นนี้นะครับ 💕
-                </p>
-                <p style="color: #666; font-size: 0.95em; font-weight: normal;">
-                    ขอให้วันเกิดปีนี้มีความสุขที่สุดในโลกเลยนะ! ✨💖
-                </p>
-            </div>
             <div class="page-gif-wrapper" style="margin-top: 15px; margin-bottom: 10px;">
                 <img src="horimiya.gif" alt="Summary Gif">
             </div>
+            
             <div class="btn-group">
-                <button class="btn btn-secondary" onclick="nextPage(5)">⬅️ ย้อนกลับ</button>
+                <button class="btn btn-secondary" onclick="nextPage(3)">⬅️ ย้อนกลับ</button>
                 <button class="btn" onclick="nextPage(0)">กลับหน้าแรก 🏠</button>
             </div>
         </div>
 
+    </div>
+
+    <!-- POP-UP ข้อความ 1 & 2 ซ้อนขึ้นตรงกลาง (การ์ดหลังจางลง) -->
+    <div class="msg-pop-overlay" id="msg-pop-1">
+        <div class="msg-pop-box">
+            <p>เย้จบแล้ว 🎉✨</p>
+            <button class="btn" onclick="switchMsgPop(1, 2)">ไปต่อ ➡️</button>
+        </div>
+    </div>
+
+    <div class="msg-pop-overlay" id="msg-pop-2">
+        <div class="msg-pop-box">
+            <p>ขอบคุณที่อ่านจนจบนะ💖✨</p>
+            <button class="btn" onclick="goToSummary()">ไปหน้าสรุป ✨</button>
+        </div>
     </div>
 
     <!-- GIFT MODAL -->
@@ -763,6 +787,36 @@
             requestAnimationFrame(() => {
                 targetPage.classList.add('active');
             });
+        }
+
+        /* ฟังก์ชันควบคุม Pop-up ข้อความ + ฉากหลังจาง */
+        function openMsgPop(num) {
+            document.getElementById('main-card').classList.add('dimmed');
+            const pop = document.getElementById('msg-pop-' + num);
+            pop.style.display = 'flex';
+            setTimeout(() => pop.classList.add('show'), 10);
+        }
+
+        function switchMsgPop(fromNum, toNum) {
+            const currentPop = document.getElementById('msg-pop-' + fromNum);
+            const nextPop = document.getElementById('msg-pop-' + toNum);
+            
+            currentPop.classList.remove('show');
+            setTimeout(() => {
+                currentPop.style.display = 'none';
+                nextPop.style.display = 'flex';
+                setTimeout(() => nextPop.classList.add('show'), 10);
+            }, 200);
+        }
+
+        function goToSummary() {
+            const pop2 = document.getElementById('msg-pop-2');
+            pop2.classList.remove('show');
+            setTimeout(() => {
+                pop2.style.display = 'none';
+                document.getElementById('main-card').classList.remove('dimmed');
+                nextPage(4); // ไปหน้าสรุปสุดท้าย
+            }, 200);
         }
 
         function blowCandleStepByStep() {
