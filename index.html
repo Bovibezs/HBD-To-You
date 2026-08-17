@@ -815,7 +815,7 @@
             }
         }, {passive: true});
 
-        /* ฟังก์ชันสลับหน้าพร้อม Slide Transition Animation */
+        /* ฟังก์ชันสลับหน้าพร้อม Slide Transition Animation (แก้ไขปุ่มถอยกลับแล้ว) */
         function nextPage(targetIndex) {
             if (isTransitioning || targetIndex === currentPageIndex) return;
             
@@ -825,29 +825,40 @@
             if (!targetPage) return;
             isTransitioning = true;
 
+            // เช็คทิศทาง: เดินหน้า (Forward) หรือ ถอยกลับ (Backward)
             const isForward = targetIndex > currentPageIndex;
 
-            // กำหนด ทิศทางการสไลด์
+            // เคลียร์คลาส animation เก่าออกก่อน
             targetPage.classList.remove('enter-from-left', 'enter-from-right');
-            targetPage.classList.add(isForward ? 'enter-from-right' : 'enter-from-left');
+            
+            // ตั้งค่าตำแหน่งเริ่มต้นก่อนเลื่อนเข้า
+            if (isForward) {
+                targetPage.classList.add('enter-from-right');
+            } else {
+                targetPage.classList.add('enter-from-left');
+            }
 
-            // 1. ค่อยๆ จางหน้าปัจจุบันออก
+            // 1. จางและสไลด์หน้าปัจจุบันออก
             currentPage.style.opacity = '0';
             currentPage.style.transform = isForward ? 'translateX(-30px) scale(0.96)' : 'translateX(30px) scale(0.96)';
 
             setTimeout(() => {
+                // ซ่อนหน้าเดิม
                 currentPage.classList.remove('active');
+                currentPage.style.opacity = '';
                 currentPage.style.transform = '';
 
-                // 2. แสดงหน้าที่ต้องการ พร้อมสไลด์เข้า
+                // 2. แสดงหน้าใหม่
                 targetPage.classList.add('active');
                 
+                // ใช้ Double RequestAnimationFrame เพื่อรับประกันว่า Browser Render Transition ทันบนมือถือ
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         targetPage.classList.remove('enter-from-left', 'enter-from-right');
                     });
                 });
 
+                // อัปเดต index หน้าปัจจุบัน
                 currentPageIndex = targetIndex;
                 
                 setTimeout(() => {
