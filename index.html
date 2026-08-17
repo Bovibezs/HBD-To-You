@@ -682,11 +682,10 @@
 
     </div>
 
-    <!-- TEXT POP-UP 1 -->
+    <!-- TEXT POP-UP 1 (ปรับให้ซ่อนปุ่ม เพื่อให้รอ 1.5 วินาทีแล้วเปลี่ยนอัตโนมัติ) -->
     <div class="text-pop-overlay" id="text-pop-1">
         <div class="text-pop-content">
             <div class="floating-text">เย้จบแล้ว 🎉✨</div>
-            <button class="btn" onclick="switchTextPop(1, 2)">ไปต่อ ➡️</button>
         </div>
     </div>
 
@@ -815,7 +814,7 @@
             }
         }, {passive: true});
 
-        /* ฟังก์ชันสลับหน้าพร้อม Slide Transition Animation (แก้ไขปุ่มถอยกลับแล้ว) */
+        /* ฟังก์ชันสลับหน้าพร้อม Slide Transition Animation */
         function nextPage(targetIndex) {
             if (isTransitioning || targetIndex === currentPageIndex) return;
             
@@ -825,40 +824,32 @@
             if (!targetPage) return;
             isTransitioning = true;
 
-            // เช็คทิศทาง: เดินหน้า (Forward) หรือ ถอยกลับ (Backward)
             const isForward = targetIndex > currentPageIndex;
 
-            // เคลียร์คลาส animation เก่าออกก่อน
             targetPage.classList.remove('enter-from-left', 'enter-from-right');
             
-            // ตั้งค่าตำแหน่งเริ่มต้นก่อนเลื่อนเข้า
             if (isForward) {
                 targetPage.classList.add('enter-from-right');
             } else {
                 targetPage.classList.add('enter-from-left');
             }
 
-            // 1. จางและสไลด์หน้าปัจจุบันออก
             currentPage.style.opacity = '0';
             currentPage.style.transform = isForward ? 'translateX(-30px) scale(0.96)' : 'translateX(30px) scale(0.96)';
 
             setTimeout(() => {
-                // ซ่อนหน้าเดิม
                 currentPage.classList.remove('active');
                 currentPage.style.opacity = '';
                 currentPage.style.transform = '';
 
-                // 2. แสดงหน้าใหม่
                 targetPage.classList.add('active');
                 
-                // ใช้ Double RequestAnimationFrame เพื่อรับประกันว่า Browser Render Transition ทันบนมือถือ
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         targetPage.classList.remove('enter-from-left', 'enter-from-right');
                     });
                 });
 
-                // อัปเดต index หน้าปัจจุบัน
                 currentPageIndex = targetIndex;
                 
                 setTimeout(() => {
@@ -867,11 +858,18 @@
             }, 250);
         }
 
+        /* เปิด Pop-up พร้อมตั้งเวลา 1.5 วินาทีเพื่อเปลี่ยนอัตโนมัติ */
         function openTextPop(num) {
             document.getElementById('main-card').classList.add('dimmed');
             const pop = document.getElementById('text-pop-' + num);
             pop.style.display = 'flex';
             setTimeout(() => pop.classList.add('show'), 10);
+
+            if (num === 1) {
+                setTimeout(() => {
+                    switchTextPop(1, 2);
+                }, 1500);
+            }
         }
 
         function switchTextPop(fromNum, toNum) {
