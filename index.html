@@ -75,7 +75,6 @@
             overflow: hidden;
         }
         
-        /* Mobile-Optimized Page Transitions */
         .page {
             display: none !important;
             opacity: 0;
@@ -94,20 +93,31 @@
             transform: scale(1);
         }
 
-        /* สไตล์สำหรับการ์ดข้อความจางๆ (Message Card) */
-        .msg-box {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 2px dashed rgba(255, 128, 171, 0.6);
+        /* สไตล์การ์ดข้อความโปร่งแสงอยู่ตรงกลาง */
+        .glass-msg-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px dashed rgba(255, 107, 129, 0.4);
             border-radius: 20px;
-            padding: 25px 20px;
-            margin: 15px 0;
-            box-shadow: 0 8px 20px rgba(255, 107, 129, 0.15);
+            padding: 30px 20px;
+            margin: auto 0;
             width: 100%;
+            box-shadow: 0 8px 25px rgba(255, 107, 129, 0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .msg-box p {
+        .glass-msg-card h2 {
+            color: #ff4757;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .glass-msg-card p {
             color: #d63031;
             font-size: 1.05em;
             font-weight: 600;
@@ -450,7 +460,7 @@
             </div>
         </div>
 
-        <!-- PAGE 2: เป่าเค้ก -->
+        <!-- PAGE 2 -->
         <div class="page" id="page2">
             <h1>Make a Wish! 🎂</h1>
             
@@ -557,37 +567,12 @@
 
             <div class="btn-group">
                 <button class="btn btn-secondary" onclick="nextPage(1)">⬅️ ถอยกลับ</button>
-                <!-- กดแล้วไปหน้าข้อความที่ 1 (page3) -->
                 <button class="btn" id="next-btn-page2" style="display: none;" onclick="nextPage(3)">หน้าถัดไป ➡️</button>
             </div>
         </div>
 
-        <!-- PAGE 3: ข้อความที่ 1 (Background จางๆ) -->
+        <!-- PAGE 3 (หน้าเดิมในรูป): เมนูเลือกของขวัญ/คำอวยพร + ปุ่มถัดไป -->
         <div class="page" id="page3">
-            <h1>ข้อความถึงเธอ ✨</h1>
-            <div class="msg-box">
-                <p>ข้อความที่ 1 (สามารถมาเปลี่ยนคำพูดตรงนี้ได้ในภายหลังนะ) 💕<br><br>ขอบคุณสำหรับทุกๆ ช่วงเวลาดีๆ ที่อยู่ด้วยกันนะ มีความสุขมากๆ ในวันเกิดปีนี้!</p>
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-secondary" onclick="nextPage(2)">⬅️ ย้อนกลับ</button>
-                <button class="btn" onclick="nextPage(4)">ไปต่อ ➡️</button>
-            </div>
-        </div>
-
-        <!-- PAGE 4: ข้อความที่ 2 (Background จางๆ) -->
-        <div class="page" id="page4">
-            <h1>อีกเรื่องหนึ่งที่อยากบอก 💌</h1>
-            <div class="msg-box">
-                <p>ข้อความที่ 2 (สามารถมาเปลี่ยนคำพูดตรงนี้ได้ในภายหลังนะ) 💖<br><br>ขอให้ปีนี้เป็นปีที่ใจดีกับเธอมากๆ รักษาสุขภาพ แล้วก็ยิ้มเยอะๆ ในทุกๆ วันเลยนะ!</p>
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-secondary" onclick="nextPage(3)">⬅️ ย้อนกลับ</button>
-                <button class="btn" onclick="nextPage(5)">ไปหน้าสรุป 🎁</button>
-            </div>
-        </div>
-
-        <!-- PAGE 5: หน้าสรุป (เดิมคือ page3) -->
-        <div class="page" id="page5">
             <h1>🎂 Happy Birthday!</h1>
             <p style="margin-top: 0; color: #ff758c; font-size: 0.9em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะ 💕</p>
             
@@ -607,7 +592,52 @@
             </div>
 
             <div class="btn-group">
+                <button class="btn btn-secondary" onclick="nextPage(2)">⬅️ ย้อนกลับ</button>
+                <button class="btn" onclick="nextPage(4)">ถัดไป ➡️</button>
+            </div>
+        </div>
+
+        <!-- PAGE 4 (ใหม่): ข้อความที่ 1 (ขึ้นตรงกลางการ์ดจางๆ) -->
+        <div class="page" id="page4">
+            <div class="glass-msg-card">
+                <h2>✨ ข้อความที่ 1 ✨</h2>
+                <p>ข้อความตัวอย่างที่ 1 (มาแก้ตรงนี้ได้เลยนะ)<br><br>ขอบคุณที่เป็นความสดใสและเรื่องราวดีๆ ในทุกวันนะ ขอให้วันเกิดปีนี้เต็มไปด้วยรอยยิ้มและความสุขมากๆ 💕</p>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="nextPage(3)">⬅️ ย้อนกลับ</button>
+                <button class="btn" onclick="nextPage(5)">ข้อความต่อไป ➡️</button>
+            </div>
+        </div>
+
+        <!-- PAGE 5 (ใหม่): ข้อความที่ 2 (ขึ้นตรงกลางการ์ดจางๆ) -->
+        <div class="page" id="page5">
+            <div class="glass-msg-card">
+                <h2>💌 ข้อความที่ 2 💌</h2>
+                <p>ข้อความตัวอย่างที่ 2 (มาแก้ตรงนี้ได้เลยนะ)<br><br>ขอให้ปีนี้เป็นปีที่สมปรารถนาในทุกเรื่อง ใจดีกับเธอในทุกๆ วัน รักษาสุขภาพด้วยนะคนเก่ง 💖</p>
+            </div>
+            <div class="btn-group">
                 <button class="btn btn-secondary" onclick="nextPage(4)">⬅️ ย้อนกลับ</button>
+                <button class="btn" onclick="nextPage(6)">ไปหน้าสรุป ✨</button>
+            </div>
+        </div>
+
+        <!-- PAGE 6 (ใหม่): หน้าสรุปปิดท้าย -->
+        <div class="page" id="page6">
+            <div class="glass-msg-card" style="border: 2px solid #ff80ab; background: rgba(255, 255, 255, 0.75);">
+                <h1 style="margin-top: 0; font-size: 1.8em; color: #ff4757;">🎉 Happy Birthday! 🎉</h1>
+                <p style="color: #ff6b81; font-size: 1.1em; font-weight: 700; margin: 10px 0;">
+                    หวังว่าจะชอบของขวัญชิ้นนี้นะครับ 💕
+                </p>
+                <p style="color: #666; font-size: 0.95em;">
+                    ขอให้วันเกิดปีนี้มีความสุขที่สุดในโลกเลยนะ! ✨💖
+                </p>
+            </div>
+            <div class="page-gif-wrapper" style="margin-top: 15px; margin-bottom: 10px;">
+                <img src="horimiya.gif" alt="Summary Gif">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="nextPage(5)">⬅️ ย้อนกลับ</button>
+                <button class="btn" onclick="nextPage(0)">กลับหน้าแรก 🏠</button>
             </div>
         </div>
 
@@ -728,19 +758,16 @@
             }
         }, {passive: true});
 
-        /* Absolute Instant Navigation Function for Mobile Fix */
         function nextPage(targetIndex) {
             const allPages = document.querySelectorAll('.page');
             const targetPage = document.getElementById('page' + targetIndex);
 
             if (!targetPage) return;
 
-            // 1. Force remove 'active' from all pages immediately
             allPages.forEach(page => {
                 page.classList.remove('active');
             });
 
-            // 2. Display target page and add opacity transition cleanly
             requestAnimationFrame(() => {
                 targetPage.classList.add('active');
             });
@@ -798,8 +825,8 @@
 
         function closeWishModal() {
             const overlay = document.getElementById('wish-overlay');
-            overlay.style.display = 'flex';
-            setTimeout(() => overlay.classList.add('show'), 10);
+            overlay.classList.remove('show');
+            setTimeout(() => overlay.style.display = 'none', 300);
         }
 
         function openGiftBox(event) {
