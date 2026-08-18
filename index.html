@@ -264,15 +264,25 @@
             margin: 0 auto;
         }
 
-        .candle { transition: opacity 0.3s ease; }
+        /* Candle & Smoke Styles */
+        .candle { position: relative; }
         .candle.out .flame-group { display: none !important; }
-        .smoke-group { display: none; opacity: 0; transform-origin: center bottom; }
+        .smoke-group { display: none; opacity: 0; transform-origin: center top; }
         .candle.out .smoke-group { display: block; animation: riseAndFade 2.2s ease-out forwards; }
 
         @keyframes riseAndFade {
-            0% { opacity: 0.85; transform: translateY(0) scale(0.6); }
-            50% { opacity: 0.6; transform: translateY(-25px) scale(1.1); }
-            100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
+            0% { 
+                opacity: 0.9; 
+                transform: translateY(0) scale(0.5); 
+            }
+            50% { 
+                opacity: 0.6; 
+                transform: translateY(-20px) scale(1.1); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translateY(-45px) scale(1.5); 
+            }
         }
 
         .topic-menu {
@@ -519,7 +529,7 @@
             </div>
         </div>
 
-        <!-- PAGE 2: หน้าเค้กอัปเดตความพรีเมียม -->
+        <!-- PAGE 2: หน้าเค้ก + ควันเป่าเทียนตรงไส้เทียน -->
         <div class="page" id="page2">
             <h1>อธิษฐานขอพรก่อนเป่าเทียนนะคะ!! 🎂</h1>
             
@@ -550,7 +560,6 @@
                             <stop offset="40%" stop-color="#ffffff" />
                             <stop offset="100%" stop-color="#ff758c" />
                         </linearGradient>
-                        <!-- Premium Gold & Pink Gradient for Number 18 -->
                         <linearGradient id="num-gold" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#fff200" />
                             <stop offset="50%" stop-color="#ff758c" />
@@ -583,22 +592,19 @@
                     <!-- Cream Drip Top -->
                     <path d="M 90 121 Q 102 140 110 121 Q 125 147 138 121 Q 152 141 160 121 Q 172 145 182 121 Q 198 143 210 121 Q 222 135 230 121 Q 160 135 90 121 Z" fill="#ff6b81" opacity="0.85" />
 
-                    <!-- TOP DECORATIONS: Strawberries, Cherries, Sprinkles -->
+                    <!-- TOP DECORATIONS -->
                     <g id="top-decorations">
-                        <!-- Cream Swirls -->
                         <circle cx="102" cy="116" r="7" fill="#ffffff" filter="drop-shadow(0 2px 3px rgba(0,0,0,0.15))" />
                         <circle cx="120" cy="119" r="6" fill="#ffffff" />
                         <circle cx="200" cy="119" r="6" fill="#ffffff" />
                         <circle cx="218" cy="116" r="7" fill="#ffffff" filter="drop-shadow(0 2px 3px rgba(0,0,0,0.15))" />
 
-                        <!-- Cherries -->
                         <circle cx="102" cy="110" r="5.5" fill="#ff2d55" />
                         <path d="M 102 105 Q 106 97 110 98" stroke="#70ad47" stroke-width="1.5" fill="none" />
                         
                         <circle cx="218" cy="110" r="5.5" fill="#ff2d55" />
                         <path d="M 218 105 Q 214 97 210 98" stroke="#70ad47" stroke-width="1.5" fill="none" />
 
-                        <!-- Strawberries in Center -->
                         <g transform="translate(136, 105) scale(0.75)">
                             <path d="M0 0 C -8 -10, -12 5, 0 16 C 12 5, 8 -10, 0 0 Z" fill="#ff3344" />
                             <path d="M-2 -3 L-4 -6 M2 -3 L4 -6 M0 -4 L0 -7" stroke="#70ad47" stroke-width="2" />
@@ -611,7 +617,6 @@
                             <circle cx="-3" cy="4" r="0.8" fill="#ffeb3b" /><circle cx="3" cy="5" r="0.8" fill="#ffeb3b" /><circle cx="0" cy="9" r="0.8" fill="#ffeb3b" />
                         </g>
 
-                        <!-- Color Sprinkles -->
                         <rect x="110" y="125" width="4" height="2" rx="1" fill="#ffbe0b" transform="rotate(25 110 125)" />
                         <rect x="140" y="123" width="4" height="2" rx="1" fill="#ff006e" transform="rotate(-15 140 123)" />
                         <rect x="175" y="124" width="4" height="2" rx="1" fill="#3a86ff" transform="rotate(40 175 124)" />
@@ -623,42 +628,39 @@
                         <rect x="210" y="198" width="5" height="2.5" rx="1" fill="#8338ec" transform="rotate(-10 210 198)" />
                         <rect x="245" y="193" width="5" height="2.5" rx="1" fill="#06d6a0" transform="rotate(45 245 193)" />
 
-                        <!-- Sparkles -->
                         <path d="M 160 92 L 162 97 L 167 99 L 162 101 L 160 106 L 158 101 L 153 99 L 158 97 Z" fill="#fff" opacity="0.9" />
                         <path d="M 85 175 L 86 178 L 89 179 L 86 180 L 85 183 L 84 180 L 81 179 L 84 178 Z" fill="#ffea00" opacity="0.8" />
                         <path d="M 235 170 L 236 173 L 239 174 L 236 175 L 235 178 L 234 175 L 231 174 L 234 173 Z" fill="#ffea00" opacity="0.8" />
                     </g>
 
-                    <!-- Center Main Candle -->
+                    <!-- Center Main Candle (พร้อมควันลอยตรงจากไส้เทียน) -->
                     <g class="candle" id="candle-1" transform="translate(160, 62)">
-                        <!-- Straight Upward Smoke Effect -->
-                        <g class="smoke-group">
-                            <circle cx="0" cy="-5" r="3.5" fill="#e8e8e8" />
-                            <circle cx="0" cy="-15" r="5" fill="#d6d6d6" />
-                            <circle cx="0" cy="-28" r="7" fill="#cccccc" />
-                            <circle cx="0" cy="-42" r="9" fill="#bebebe" />
-                        </g>
                         <!-- Candle Body & Wick -->
                         <rect x="-5" y="12" width="10" height="38" rx="3" fill="url(#candle-body)" stroke="#ffb6c1" stroke-width="1" />
                         <line x1="0" y1="12" x2="0" y2="3" stroke="#333333" stroke-width="2" stroke-linecap="round" />
+                        
                         <!-- Candle Flame -->
                         <g class="flame-group" filter="drop-shadow(0px 0px 8px #ff9800)">
                             <ellipse cx="0" cy="-7" rx="7" ry="12" fill="#ff9800" />
                             <ellipse cx="0" cy="-5" rx="4" ry="8" fill="#ffeb3b" />
                             <ellipse cx="0" cy="-3" rx="2" ry="4" fill="#ffffff" />
                         </g>
+
+                        <!-- Smoke Group (พิกัดตรงจุดไส้เทียน x=0, y=3) -->
+                        <g class="smoke-group">
+                            <circle cx="0" cy="0" r="3.5" fill="#e8e8e8" />
+                            <circle cx="0" cy="-10" r="5" fill="#d6d6d6" />
+                            <circle cx="0" cy="-22" r="6.5" fill="#cccccc" />
+                            <circle cx="0" cy="-36" r="8" fill="#bebebe" />
+                        </g>
                     </g>
 
-                    <!-- NEW COOLER x10 NUMBER 18 TOPPER -->
+                    <!-- NUMBER 18 TOPPER -->
                     <g transform="translate(200, 48)" filter="drop-shadow(0px 4px 10px rgba(255, 42, 85, 0.4))">
-                        <!-- Stick -->
                         <line x1="0" y1="40" x2="-10" y2="78" stroke="#e2e2e2" stroke-width="3.5" stroke-linecap="round" />
-                        <!-- Glowing Badge Outer Ring -->
                         <circle cx="0" cy="18" r="26" fill="#ffffff" stroke="url(#num-gold)" stroke-width="3.5" />
                         <circle cx="0" cy="18" r="22" fill="#fff0f3" />
-                        <!-- Stylish Number 18 -->
                         <text x="0" y="27" font-family="'Mali', cursive" font-weight="700" font-size="25" fill="url(#num-gold)" text-anchor="middle" letter-spacing="-1">18</text>
-                        <!-- Crown accent on top of 18 -->
                         <path d="M -8 -4 L -4 1 L 0 -6 L 4 1 L 8 -4 L 6 4 L -6 4 Z" fill="#ffbe0b" />
                     </g>
                 </svg>
@@ -678,7 +680,7 @@
             </div>
         </div>
 
-        <!-- PAGE 3: หน้าเมนูหลัก -->
+        <!-- PAGE 3 -->
         <div class="page" id="page3">
             <h1>🎂 Happy Birthday!</h1>
             <p style="margin-top: 0; color: #ff758c; font-size: 0.88em;">เลือกเปิดหัวข้อที่อยากอ่านได้เลยนะคะ 💕</p>
@@ -704,7 +706,7 @@
             </div>
         </div>
 
-        <!-- PAGE 4: หน้าสรุปสุดท้าย (ใช้ horimiya3.gif) -->
+        <!-- PAGE 4 -->
         <div class="page" id="page4">
             <h1 style="margin-top: 0; font-size: 1.7em; color: #ff4757;">🎉 Happy Birthday! 🎉</h1>
             <p style="color: #ff6b81; font-size: 1.05em; font-weight: 700; margin: 8px 0;">
