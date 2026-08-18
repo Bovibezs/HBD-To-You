@@ -264,24 +264,31 @@
             margin: 0 auto;
         }
 
-        /* Candle & Smoke Styles */
+        /* ----- Candle & Smoke Styles (ปรับให้เริ่มลอยขึ้นจากปลายไส้เทียนทันที) ----- */
         .candle { position: relative; }
         .candle.out .flame-group { display: none !important; }
-        .smoke-group { display: none; opacity: 0; transform-origin: center top; }
-        .candle.out .smoke-group { display: block; animation: riseAndFade 2.2s ease-out forwards; }
+        .smoke-group { 
+            display: none; 
+            opacity: 0; 
+            transform-origin: 0px 3px; 
+        }
+        .candle.out .smoke-group { 
+            display: block; 
+            animation: riseAndFadeDirect 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
+        }
 
-        @keyframes riseAndFade {
+        @keyframes riseAndFadeDirect {
             0% { 
                 opacity: 0.9; 
-                transform: translateY(0) scale(0.5); 
+                transform: translateY(0) scale(0.6); 
             }
-            50% { 
-                opacity: 0.6; 
-                transform: translateY(-20px) scale(1.1); 
+            40% { 
+                opacity: 0.7; 
+                transform: translateY(-20px) scale(1.0); 
             }
             100% { 
                 opacity: 0; 
-                transform: translateY(-45px) scale(1.5); 
+                transform: translateY(-55px) scale(1.5); 
             }
         }
 
@@ -529,7 +536,7 @@
             </div>
         </div>
 
-        <!-- PAGE 2: หน้าเค้ก + ควันเป่าเทียนตรงไส้เทียน -->
+        <!-- PAGE 2: หน้าเค้ก -->
         <div class="page" id="page2">
             <h1>อธิษฐานขอพรก่อนเป่าเทียนนะคะ!! 🎂</h1>
             
@@ -633,7 +640,7 @@
                         <path d="M 235 170 L 236 173 L 239 174 L 236 175 L 235 178 L 234 175 L 231 174 L 234 173 Z" fill="#ffea00" opacity="0.8" />
                     </g>
 
-                    <!-- Center Main Candle (พร้อมควันลอยตรงจากไส้เทียน) -->
+                    <!-- Center Main Candle (ไส้เทียนยึดตำแหน่ง y=3) -->
                     <g class="candle" id="candle-1" transform="translate(160, 62)">
                         <!-- Candle Body & Wick -->
                         <rect x="-5" y="12" width="10" height="38" rx="3" fill="url(#candle-body)" stroke="#ffb6c1" stroke-width="1" />
@@ -646,12 +653,12 @@
                             <ellipse cx="0" cy="-3" rx="2" ry="4" fill="#ffffff" />
                         </g>
 
-                        <!-- Smoke Group (พิกัดตรงจุดไส้เทียน x=0, y=3) -->
+                        <!-- Smoke Group (จุดตั้งต้นควันวางไว้ตรงหัวไส้เทียน y=3 พอดีเป๊ะ) -->
                         <g class="smoke-group">
-                            <circle cx="0" cy="0" r="3.5" fill="#e8e8e8" />
-                            <circle cx="0" cy="-10" r="5" fill="#d6d6d6" />
-                            <circle cx="0" cy="-22" r="6.5" fill="#cccccc" />
-                            <circle cx="0" cy="-36" r="8" fill="#bebebe" />
+                            <circle cx="0" cy="3" r="3.5" fill="#e8e8e8" />
+                            <circle cx="0" cy="-4" r="5" fill="#d6d6d6" />
+                            <circle cx="0" cy="-12" r="6.5" fill="#cccccc" />
+                            <circle cx="0" cy="-22" r="8" fill="#bebebe" />
                         </g>
                     </g>
 
