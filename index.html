@@ -229,7 +229,7 @@
             100% { transform: scale(1.05); }
         }
 
-        h1 { color: #ff6b81; font-size: 1.6em; margin: 5px 0; }
+        h1 { color: #ff6b81; font-size: 1.5em; margin: 5px 0; }
         p { font-size: 0.9em; line-height: 1.4; color: #666; }
 
         .name-title {
@@ -259,7 +259,7 @@
 
         .svg-cake-wrapper {
             width: 100%;
-            max-width: 280px;
+            max-width: 290px;
             height: 250px;
             margin: 0 auto;
         }
@@ -536,83 +536,110 @@
             </div>
         </div>
 
-        <!-- PAGE 2: หน้าเค้ก (รูปแบบเค้กอันเดิม) -->
+        <!-- PAGE 2: หน้าเค้กแบบเดิม (หมี + ป้าย 18 + ควันลอย) -->
         <div class="page" id="page2">
             <h1>อธิษฐานขอพรก่อนเป่าเทียนนะคะ!! 🎂</h1>
             
             <div class="svg-cake-wrapper">
-                <svg viewBox="0 0 320 320" width="100%" height="100%">
+                <svg viewBox="0 0 320 280" width="100%" height="100%">
                     <defs>
-                        <linearGradient id="cake1" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#ffb6c1" />
-                            <stop offset="100%" stop-color="#ff80ab" />
-                        </linearGradient>
-                        <linearGradient id="cake2" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <linearGradient id="cakeCream" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" stop-color="#ffffff" />
-                            <stop offset="100%" stop-color="#ffe4e8" />
+                            <stop offset="100%" stop-color="#fff5f6" />
                         </linearGradient>
-                        <linearGradient id="candle" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#ff9a9e" />
-                            <stop offset="50%" stop-color="#fecfef" />
-                            <stop offset="100%" stop-color="#ff9a9e" />
+                        <linearGradient id="cakeBase" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#fff0f3" />
+                            <stop offset="100%" stop-color="#fde2e4" />
                         </linearGradient>
                     </defs>
 
                     <!-- Plate -->
-                    <ellipse cx="160" cy="270" rx="130" ry="20" fill="#e0e0e0" />
-                    <ellipse cx="160" cy="265" rx="120" ry="18" fill="#ffffff" />
+                    <ellipse cx="160" cy="240" rx="120" ry="18" fill="#f3dada" opacity="0.6" />
+                    <ellipse cx="160" cy="236" rx="115" ry="15" fill="#ffffff" stroke="#ffccd5" stroke-width="2" />
 
-                    <!-- Bottom Cake Tier -->
-                    <path d="M 60 180 L 60 250 C 60 265, 260 265, 260 250 L 260 180 Z" fill="url(#cake1)" />
-                    <ellipse cx="160" cy="180" rx="100" ry="15" fill="#ffccd5" />
-
-                    <!-- Top Cake Tier -->
-                    <path d="M 90 120 L 90 180 C 90 192, 230 192, 230 180 L 230 120 Z" fill="url(#cake2)" />
-                    <ellipse cx="160" cy="120" rx="70" ry="12" fill="#ffffff" />
-
-                    <!-- Drips / Decoration -->
-                    <path d="M 90 120 Q 100 135 110 120 Q 125 140 140 120 Q 155 135 170 120 Q 185 140 200 120 Q 215 135 230 120 C 230 120 230 130 230 130 C 230 142 90 142 90 130 Z" fill="#ff80ab" opacity="0.8" />
-
-                    <!-- Strawberries -->
-                    <circle cx="110" cy="115" r="8" fill="#ff4757" />
-                    <circle cx="160" cy="112" r="8" fill="#ff4757" />
-                    <circle cx="210" cy="115" r="8" fill="#ff4757" />
-
-                    <!-- Candle 1 (Left) -->
-                    <g class="candle" id="candle-1" transform="translate(135, 60)">
-                        <rect x="-4" y="0" width="8" height="50" rx="3" fill="url(#candle)" />
-                        <line x1="0" y1="0" x2="0" y2="-8" stroke="#555" stroke-width="2" />
-                        
-                        <g class="flame-group">
-                            <ellipse cx="0" cy="-18" rx="6" ry="10" fill="#ff9f43" />
-                            <ellipse cx="0" cy="-16" rx="3" ry="6" fill="#ffdd59" />
-                        </g>
-
-                        <!-- Smoke Group (จุดเริ่มอยู่ที่ปลายไส้เทียน y=-8) -->
-                        <g class="smoke-group" transform="translate(0, -8)">
-                            <circle cx="0" cy="0" r="3.5" fill="#e8e8e8" />
-                            <circle cx="0" cy="-7" r="5" fill="#d6d6d6" />
-                            <circle cx="0" cy="-15" r="6.5" fill="#cccccc" />
-                            <circle cx="0" cy="-25" r="8" fill="#bebebe" />
-                        </g>
+                    <!-- Pearls around bottom tier -->
+                    <g fill="#ffffff" stroke="#ffb6c1" stroke-width="1.5">
+                        <circle cx="60" cy="232" r="6" />
+                        <circle cx="75" cy="235" r="6" />
+                        <circle cx="91" cy="237" r="6" />
+                        <circle cx="108" cy="238" r="6" />
+                        <circle cx="125" cy="239" r="6" />
+                        <circle cx="143" cy="239" r="6" />
+                        <circle cx="160" cy="239" r="6" />
+                        <circle cx="177" cy="239" r="6" />
+                        <circle cx="195" cy="238" r="6" />
+                        <circle cx="212" cy="237" r="6" />
+                        <circle cx="229" cy="235" r="6" />
+                        <circle cx="244" cy="232" r="6" />
                     </g>
 
-                    <!-- Candle 2 (Right) -->
-                    <g class="candle" id="candle-2" transform="translate(185, 60)">
-                        <rect x="-4" y="0" width="8" height="50" rx="3" fill="url(#candle)" />
-                        <line x1="0" y1="0" x2="0" y2="-8" stroke="#555" stroke-width="2" />
+                    <!-- Bottom Cake Tier -->
+                    <path d="M 65 155 L 65 220 C 65 235, 255 235, 255 220 L 255 155 Z" fill="url(#cakeBase)" />
+                    <ellipse cx="160" cy="155" rx="95" ry="14" fill="#ffffff" />
+
+                    <!-- Red/Pink Scallop Border (Bottom Tier) -->
+                    <path d="M 65 155 Q 75 168 85 158 Q 95 168 105 158 Q 115 168 125 158 Q 135 168 145 158 Q 155 168 165 158 Q 175 168 185 158 Q 195 168 205 158 Q 215 168 225 158 Q 235 168 245 158 Q 250 163 255 155 L 255 150 Q 235 160 225 150 Q 215 160 205 150 Q 195 160 185 150 Q 175 160 165 150 Q 155 160 145 150 Q 135 160 125 150 Q 115 160 105 150 Q 95 160 85 150 Q 75 160 65 150 Z" fill="#ff4d6d" />
+
+                    <!-- Wings/Bow Decor on Bottom Tier -->
+                    <g transform="translate(160, 185)">
+                        <path d="M -5 -3 C -20 -18 -45 -10 -40 8 C -35 20 -10 8 -2 0 Z" fill="#ff4d6d" />
+                        <path d="M 5 -3 C 20 -18 45 -10 40 8 C 35 20 10 8 2 0 Z" fill="#ff4d6d" />
+                        <rect x="-6" y="-6" width="12" height="12" rx="3" fill="#ff4d6d" />
+                        <rect x="-3" y="-3" width="6" height="6" rx="1" fill="#ffffff" />
+                    </g>
+
+                    <!-- Top Cake Tier -->
+                    <path d="M 95 110 L 95 150 C 95 160, 225 160, 225 150 L 225 110 Z" fill="url(#cakeCream)" />
+                    <ellipse cx="160" cy="110" rx="65" ry="10" fill="#ffffff" />
+
+                    <!-- Red/Pink Scallop Border (Top Tier) -->
+                    <path d="M 95 110 Q 105 120 115 112 Q 125 120 135 112 Q 145 120 155 112 Q 165 120 175 112 Q 185 120 195 112 Q 205 120 215 112 Q 220 116 225 110 L 225 106 Q 205 114 195 106 Q 185 114 175 106 Q 165 114 155 106 Q 145 114 135 106 Q 125 114 115 106 Q 105 114 95 106 Z" fill="#ff4d6d" />
+
+                    <!-- Bear Face Decor -->
+                    <g transform="translate(160, 132)">
+                        <!-- Ears -->
+                        <circle cx="-16" cy="-14" r="8" fill="#e29555" />
+                        <circle cx="-16" cy="-14" r="4" fill="#f7cb9e" />
+                        <circle cx="16" cy="-14" r="8" fill="#e29555" />
+                        <circle cx="16" cy="-14" r="4" fill="#f7cb9e" />
+                        <!-- Head -->
+                        <ellipse cx="0" cy="-2" rx="22" ry="16" fill="#e29555" />
+                        <!-- Snout -->
+                        <ellipse cx="0" cy="2" rx="10" ry="7" fill="#ffffff" />
+                        <!-- Nose & Mouth -->
+                        <ellipse cx="0" cy="-1" rx="3" ry="2" fill="#4a2c11" />
+                        <path d="M -2 3 Q 0 5 2 3" stroke="#4a2c11" stroke-width="1.5" fill="none" stroke-linecap="round" />
+                        <!-- Eyes -->
+                        <circle cx="-10" cy="-4" r="2.2" fill="#4a2c11" />
+                        <circle cx="10" cy="-4" r="2.2" fill="#4a2c11" />
+                        <!-- Cheeks -->
+                        <ellipse cx="-13" cy="2" rx="3.5" ry="2" fill="#ff8fa3" opacity="0.6" />
+                        <ellipse cx="13" cy="2" rx="3.5" ry="2" fill="#ff8fa3" opacity="0.6" />
+                    </g>
+
+                    <!-- "18" Sign Board -->
+                    <g transform="translate(200, 85)">
+                        <line x1="-15" y1="35" x2="-28" y2="60" stroke="#cccccc" stroke-width="3" stroke-linecap="round" />
+                        <rect x="-35" y="-5" width="46" height="38" rx="18" fill="#ff758c" stroke="#ffffff" stroke-width="2" />
+                        <text x="-12" y="22" font-family="'Mali', cursive" font-size="20" font-weight="700" fill="#ffffff" text-anchor="middle">18</text>
+                    </g>
+
+                    <!-- Candle Center (1 เล่มตรงกลาง) -->
+                    <g class="candle" id="candle-1" transform="translate(160, 70)">
+                        <rect x="-4" y="0" width="8" height="38" rx="3" fill="#ff8fa3" stroke="#ffffff" stroke-width="1" />
+                        <line x1="0" y1="0" x2="0" y2="-6" stroke="#555" stroke-width="2" />
                         
                         <g class="flame-group">
-                            <ellipse cx="0" cy="-18" rx="6" ry="10" fill="#ff9f43" />
-                            <ellipse cx="0" cy="-16" rx="3" ry="6" fill="#ffdd59" />
+                            <ellipse cx="0" cy="-15" rx="5" ry="9" fill="#ff9f43" />
+                            <ellipse cx="0" cy="-13" rx="2.5" ry="5" fill="#ffdd59" />
                         </g>
 
-                        <!-- Smoke Group (จุดเริ่มอยู่ที่ปลายไส้เทียน y=-8) -->
-                        <g class="smoke-group" transform="translate(0, -8)">
-                            <circle cx="0" cy="0" r="3.5" fill="#e8e8e8" />
-                            <circle cx="0" cy="-7" r="5" fill="#d6d6d6" />
-                            <circle cx="0" cy="-15" r="6.5" fill="#cccccc" />
-                            <circle cx="0" cy="-25" r="8" fill="#bebebe" />
+                        <!-- Smoke Group (จุดเริ่มอยู่ที่ปลายไส้เทียน y=-6) -->
+                        <g class="smoke-group" transform="translate(0, -6)">
+                            <circle cx="0" cy="0" r="3" fill="#e8e8e8" />
+                            <circle cx="0" cy="-7" r="4.5" fill="#d6d6d6" />
+                            <circle cx="0" cy="-15" r="6" fill="#cccccc" />
+                            <circle cx="0" cy="-25" r="7.5" fill="#bebebe" />
                         </g>
                     </g>
                 </svg>
@@ -901,14 +928,12 @@
 
         function blowCandleStepByStep() {
             const c1 = document.getElementById('candle-1');
-            const c2 = document.getElementById('candle-2');
             const wishText = document.getElementById('wish-text');
             const blowBtn = document.getElementById('blow-btn');
             const nextBtn = document.getElementById('next-btn-page2');
 
-            if (c1 && c2 && (!c1.classList.contains('out') || !c2.classList.contains('out'))) {
+            if (c1 && !c1.classList.contains('out')) {
                 c1.classList.add('out');
-                c2.classList.add('out');
                 wishText.innerText = "เย้! เป่าเทียนดับแล้ว ขอให้คำอธิษฐานเป็นจริงนะ! ✨💖";
                 blowBtn.style.display = 'none';
                 nextBtn.style.display = 'inline-block';
