@@ -351,7 +351,7 @@
             justify-content: center;
             position: relative;
             width: 100%;
-            max-width: 320px;
+            max-width: 360px;
             min-height: 300px;
         }
 
@@ -421,17 +421,20 @@
             align-items: center;
             justify-content: center;
             z-index: 10;
+            width: 100%;
         }
 
         .bouquet-img {
-            max-width: 230px;
-            max-height: 230px;
-            width: 75vw;
+            max-width: 320px;
+            max-height: 70vh;
+            width: 85vw;
             height: auto;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            border: 4px solid #ffffff;
-            object-fit: cover;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
         }
 
         .flower-particle {
@@ -573,7 +576,7 @@
                         <circle cx="252" cy="232" r="5.5" />
                     </g>
 
-                    <!-- Bottom Cake Body (ปรับให้ล่างสุดแตะขอบจานพอดี Y=234 และเปลี่ยนเป็นสีชมพูนมครีม) -->
+                    <!-- Bottom Cake Body -->
                     <path d="M 68 152 L 68 222 C 68 238, 252 238, 252 222 L 252 152 Z" fill="#fff0f3" />
                     <ellipse cx="160" cy="152" rx="92" ry="12" fill="#ffe3e8" />
 
@@ -602,7 +605,7 @@
                              Q 239 165 248 152
                              L 252 152 Q 239 160 230 148 Q 221 160 212 148 Q 203 160 194 148 Q 185 160 176 148 Q 167 160 158 148 Q 149 160 140 148 Q 131 160 122 148 Q 113 160 104 148 Q 95 160 86 148 Q 77 160 68 148 Z" fill="#ff3366" />
 
-                    <!-- Top Cake Body (เปลี่ยนเป็นสีชมพูนมครีม) -->
+                    <!-- Top Cake Body -->
                     <path d="M 98 108 L 98 146 C 98 156, 222 156, 222 146 L 222 108 Z" fill="#fff0f3" />
                     <ellipse cx="160" cy="108" rx="62" ry="9" fill="#ffe3e8" />
 
@@ -801,7 +804,7 @@
                 </p>
                 
                 <div class="bouquet-card" id="bouquet-card">
-                    <img src="flower.jpg" alt="ช่อดอกไม้ของขวัญ" class="bouquet-img" onerror="this.src=''">
+                    <img src="flower.png" alt="ช่อดอกไม้ของขวัญ" class="bouquet-img" onerror="this.src=''">
                 </div>
             </div>
         </div>
