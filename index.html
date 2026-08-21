@@ -232,12 +232,21 @@
         h1 { color: #ff6b81; font-size: 1.5em; margin: 5px 0; }
         p { font-size: 0.9em; line-height: 1.4; color: #666; }
 
+        /* ปรับสไตล์หัวข้อตามที่ต้องการ */
+        .hbd-title {
+            color: #ff6b81;
+            font-size: 2.2em;
+            font-weight: 700;
+            margin: 5px 0 0 0;
+            text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.15);
+        }
+
         .name-title {
             color: #ff4757;
             font-weight: 700;
-            font-size: 2em;
-            margin: 5px 0;
-            text-shadow: 2px 2px 4px rgba(255, 107, 129, 0.2);
+            font-size: 1.3em;
+            margin: 2px 0 10px 0;
+            text-shadow: 1px 1px 3px rgba(255, 107, 129, 0.2);
         }
 
         .intro-box {
@@ -437,7 +446,6 @@
             filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
         }
 
-        /* กล่องข้อความสไตล์การ์ดด้านล่างรูปดอกไม้ */
         .flower-caption-box {
             background: rgba(255, 255, 255, 0.95);
             border: 2px dashed #ff80ab;
@@ -518,7 +526,7 @@
 <body>
 
     <audio id="bg-music" loop preload="auto">
-        <source src="song1.mp3" type="audio/mpeg">
+        <source src="song.mp3" type="audio/mpeg">
     </audio>
 
     <div class="music-controls" id="music-controls">
@@ -551,9 +559,9 @@
             <button class="btn" onclick="nextPage(1)">ไปต่อกันเลย 💖✨</button>
         </div>
 
-        <!-- PAGE 1 -->
+        <!-- PAGE 1 (ปรับขนาดตัวหนังสือที่นี่) -->
         <div class="page" id="page1">
-            <h1>🎁 Happy Birthday</h1>
+            <h1 class="hbd-title">🎁 Happy Birthday</h1>
             <div class="name-title">To Ploy na ka💖</div>
             <p>I have a message and a surprise for you...</p>
             <div class="page-gif-wrapper">
@@ -808,7 +816,6 @@
                 
                 <div class="bouquet-card" id="bouquet-card">
                     <img src="flower.png" alt="ช่อดอกไม้ของขวัญ" class="bouquet-img" onerror="this.src=''">
-                    <!-- เพิ่มส่วนการ์ดข้อความด้านล่างดอกไม้ -->
                     <div class="flower-caption-box">
                         <p>มอบดอกไม้สวยๆ ให้คนเก่ง ขอให้มีความสุขมากๆ ในทุกๆ วันนะคับ ✨💐💖</p>
                     </div>
